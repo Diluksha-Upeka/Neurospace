@@ -15,10 +15,10 @@ It combines:
 ## Architecture
 
 ```mermaid
-
-	U[User / Client] -->|HTTP| API[FastAPI Backend]
-	API -->|Bolt| NEO[(Neo4j)]
-	API -->|S3 API| MINIO[(MinIO)]
+graph LR
+  U[User / Client] -->|HTTP| API[FastAPI Backend]
+  API -->|Bolt| NEO[(Neo4j)]
+  API -->|S3 API| MINIO[(MinIO)]
 ```
 
 ## Prerequisites
