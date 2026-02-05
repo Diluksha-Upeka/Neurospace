@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # 1. THE GRAPH DATABASE (Neo4j)
+  # Stores nodes, relationships, and vector embeddings.
+  neo4j:
+    image: neo4j:5.15.0
+    container_name: neuro_graph
+    ports:
+      - "7474:7474" # HTTP Browser Interface
+      - "7687:7687" # Bolt Protocol (for Python code)
+    environment:
+      - NEO4J_AUTH=neo4j/password123 # (Default User/Pass)
+      - NEO4J_PLUGINS=["apoc", "graph-data-science"] # Powerful plugins
+    volumes:
+      - ./data/neo4j_data:/data # Persist data on your laptop
+
+  # 2. THE FILE STORAGE (MinIO)
+  # Stores PDFs and Videos. It acts exactly like AWS S3.
+  minio:
+    image: minio/minio
+    container_name: neuro_files
+    ports:
+      - "9000:9000" # API Port
+      - "9001:9001" # Web Console Port
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin
+    command: server /data --console-address ":9001"
+    volumes:
+      - ./data/minio_data:/data
+
+  # 3. BACKEND (Placeholder for later)
+  # We will uncomment this next week when we build the API container.
+  # backend:
+  #   build: ./backend
+  #   ports:
+  #     - "8000:8000"
+  #   depends_on:
+  #     - neo4j
+  #     - minio
+
+networks:
+  default:
+    name: neuro_network

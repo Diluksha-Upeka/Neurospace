@@ -1,0 +1,9 @@
+# Ignore DB data and Environment variables
+data/
+.env
+__pycache__/
+*.pyc
+
+# Virtual Environment
+venv/
+.venv/
