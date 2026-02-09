@@ -23,6 +23,80 @@ graph LR
   API -->|S3 API| MINIO[(MinIO)]
 ```
 
+### Diagram 1: System Overview
+
+```mermaid
+graph TD
+  subgraph Client ["🖥️ Frontend (Next.js)"]
+    UI[User Interface]
+    Upload[Upload Portal]
+    Chat[Chat Interface]
+  end
+
+  subgraph Server ["⚙️ Backend (FastAPI + Agents)"]
+    API[API Gateway]
+    Ingest[Ingestion Agent]
+    Retriever[GraphRAG Retriever]
+    LLM[LLM Reasoner]
+  end
+
+  subgraph Data ["💽 Knowledge & Storage"]
+    Neo4j[(Neo4j Graph DB)]
+    Vector[(Pinecone/Vector DB)]
+    Storage[File Storage]
+  end
+
+  %% Flows
+  UI --> API
+  Upload --> API
+  Chat --> API
+
+  API --> Ingest
+  API --> Retriever
+    
+  Ingest -->|Parse PDF/Video| LLM
+  Ingest -->|Create Nodes| Neo4j
+  Ingest -->|Embed Chunks| Vector
+    
+  Retriever -->|Hybrid Search| Neo4j
+  Retriever -->|Vector Search| Vector
+  Retriever --> LLM
+    
+  LLM -->|Synthesized Answer| API
+```
+
+### Diagram 2: The "Multi-Modal Ingestion" Flow
+
+This is the "Secret Sauce" diagram. It explains how you turn a video into a graph. This proves the complexity of your work.
+
+```mermaid
+sequenceDiagram
+  participant U as User
+  participant S as System (NeuroSpace)
+  participant AI as Vision/LLM Model
+  participant G as Graph DB
+
+  U->>S: Uploads Video Lecture (MP4)
+  S->>S: Extracts Audio (Whisper)
+  S->>S: Extracts Frames (OpenCV)
+    
+  par Parallel Processing
+    S->>AI: Transcribe Audio
+    S->>AI: Describe Key Frames
+  end
+    
+  AI-->>S: Returns Text & Descriptions
+    
+  loop Graph Construction
+    S->>AI: Identify Concepts (Nodes)
+    S->>AI: Identify Relationships (Edges)
+    S->>G: Create Node: "Concept A"
+    S->>G: Create Edge: "Concept A" -> "Timestamp 04:20"
+  end
+    
+  S-->>U: Processing Complete. Graph Ready.
+```
+
 ## Prerequisites
 
 - Docker + Docker Compose
