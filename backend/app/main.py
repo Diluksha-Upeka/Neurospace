@@ -1,7 +1,9 @@
 from contextlib import asynccontextmanager
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from .database import db
 from .services.video import video_processor
+from .services.transcription import transcriber
+from .schemas import TranscriptionResult
 import os
 
 @asynccontextmanager
@@ -33,3 +35,17 @@ def test_video_extraction(video_path: str):
         return {"status": "success", "audio_file": audio_file}
     except Exception as e:
         return {"status": "error", "message": str(e)}
+
+
+@app.post("/test-transcribe", response_model=TranscriptionResult)
+def test_transcription(audio_path: str):
+    """Temporary endpoint to test Faster-Whisper locally.
+
+    Provide an absolute path to an .mp3 file on your PC.
+    """
+
+    try:
+        return transcriber.transcribe(audio_path)
+    except Exception as e:
+        # Keep response_model contract intact by surfacing errors as HTTP errors.
+        raise HTTPException(status_code=400, detail=str(e))
