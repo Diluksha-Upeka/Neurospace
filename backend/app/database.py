@@ -1,6 +1,6 @@
 from neo4j import GraphDatabase
 
-from app.config import settings
+from .config import settings
 
 
 class GraphDB:
