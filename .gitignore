@@ -4,6 +4,9 @@ data/
 __pycache__/
 *.pyc
 
+# Generated media artifacts
+*.mp3
+
 # Virtual Environment
 venv/
 .venv/
