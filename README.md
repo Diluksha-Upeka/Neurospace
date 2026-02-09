@@ -67,7 +67,6 @@ graph TD
 
 ### Diagram 2: The "Multi-Modal Ingestion" Flow
 
-This is the "Secret Sauce" diagram. It explains how you turn a video into a graph. This proves the complexity of your work.
 
 ```mermaid
 sequenceDiagram
