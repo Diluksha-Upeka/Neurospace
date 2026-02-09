@@ -78,6 +78,10 @@ This file is a lightweight dev journal for NeuroSpace. Keep the main setup instr
 - First run downloads the Whisper model and loads it into memory; startup can take a minute.
 - If VS Code can’t see your PATH updates, prefer using the venv python to run Uvicorn (same terminal session).
 
+**Why singleton?**
+- `transcriber` is a singleton so the Whisper model loads once (loading is expensive) and every request reuses the same in-memory model.
+- `video_processor` is a singleton mostly for consistency and clean imports (it’s lightweight, but the pattern stays the same).
+
 ---
 
 ## Template
