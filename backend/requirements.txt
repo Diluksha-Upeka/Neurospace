@@ -3,3 +3,5 @@ uvicorn
 python-dotenv
 neo4j
 faster-whisper
+pypdf
+langchain-text-splitters

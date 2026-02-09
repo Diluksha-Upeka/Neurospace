@@ -3,7 +3,8 @@ from fastapi import FastAPI, HTTPException
 from .database import db
 from .services.video import video_processor
 from .services.transcription import transcriber
-from .schemas import TranscriptionResult
+from .services.pdf import pdf_processor
+from .schemas import PDFResult, TranscriptionResult
 import os
 
 @asynccontextmanager
@@ -48,4 +49,17 @@ def test_transcription(audio_path: str):
         return transcriber.transcribe(audio_path)
     except Exception as e:
         # Keep response_model contract intact by surfacing errors as HTTP errors.
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@app.post("/test-pdf", response_model=PDFResult)
+def test_pdf_processing(pdf_path: str):
+    """Temporary endpoint to test PDF extraction + chunking locally.
+
+    Provide an absolute path to a PDF file on your PC.
+    """
+
+    try:
+        return pdf_processor.process_pdf(pdf_path)
+    except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
