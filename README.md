@@ -29,6 +29,10 @@ graph LR
 - Python 3.11+
 - Git
 - FFmpeg (required for `/test-extract` audio extraction)
+- Faster-Whisper (for on-device audio transcription)
+- pypdf + langchain-text-splitters (for PDF extraction & chunking)
+
+Notes: Install Python libraries into the `backend/venv` (see Quickstart).
 
 ## Quickstart
 
@@ -78,6 +82,27 @@ Health check endpoint:
 
 - http://127.0.0.1:8000
 
+Testing endpoints (manual checks)
+
+- POST `/test-extract?video_path=...` — Extract audio from a video (requires FFmpeg). Use Swagger or:
+
+```bash
+curl -X POST "http://127.0.0.1:8000/test-extract?video_path=C:\\path\\to\\video.mp4"
+```
+
+- POST `/test-transcribe?audio_path=...` — Transcribe `.mp3` audio into time-aligned segments (Faster-Whisper). Use Swagger or:
+
+```bash
+curl -X POST "http://127.0.0.1:8000/test-transcribe?audio_path=C:\\path\\to\\audio.mp3"
+```
+
+- POST `/test-pdf?pdf_path=...` — Extract & chunk PDF text (pypdf + text splitters). Use Swagger or:
+
+```bash
+curl -X POST "http://127.0.0.1:8000/test-pdf?pdf_path=C:\\path\\to\\doc.pdf"
+```
+
+
 ## Services & Ports
 
 | Service | Container | Ports | Notes |
@@ -119,7 +144,10 @@ Notes:
 
 - Day 1: Infrastructure setup with Docker Compose (Neo4j + MinIO)
 - Day 2: Backend skeleton with FastAPI (Neo4j driver + health check)
+- Day 3: Video extraction using FFmpeg (`POST /test-extract`)
+- Day 4: Audio transcription using Faster-Whisper (`POST /test-transcribe`)
+- Day 5: PDF ingestion & chunking using `pypdf` + `langchain-text-splitters` (`POST /test-pdf`) 
 
 ## Last Updated
 
-**05th of February 2026**
+**09th of February 2026**
