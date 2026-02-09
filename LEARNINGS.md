@@ -44,6 +44,40 @@ This file is a lightweight dev journal for NeuroSpace. Keep the main setup instr
 - The endpoint returns a Python dict → FastAPI serializes it to JSON.
 - Uvicorn sends the HTTP response back → Swagger displays the result.
 
+### 4) Day 4: The Ears (Audio Transcription)
+**Goal**
+- Convert extracted audio into time-aligned text segments so we can link knowledge back to timestamps (e.g., “explained neural networks at ~00:15”).
+
+**What we added**
+- Faster-Whisper dependency in `backend/requirements.txt`.
+- Structured schema objects:
+  - `TranscriptSegment` (`start`, `end`, `text`)
+  - `TranscriptionResult` (`filename`, `segments`, `language`)
+- A singleton transcription service that loads the model once and reuses it.
+- A test endpoint: `POST /test-transcribe?audio_path=...`
+
+**Files**
+- `backend/app/schemas.py`
+- `backend/app/services/transcription.py`
+- `backend/app/main.py`
+
+**Install & run (Windows)**
+- Install deps into venv:
+  - `backend\venv\Scripts\python.exe -m pip install -r backend\requirements.txt`
+- Run API (IMPORTANT: run from `backend/` so `app.*` imports resolve):
+  - `cd backend`
+  - `.\venv\Scripts\python.exe -m uvicorn app.main:app --reload`
+
+**Test**
+- Open Swagger: `http://127.0.0.1:8000/docs`
+- Call `POST /test-transcribe` with:
+  - `audio_path=C:\full\path\to\your.mp3`
+- Expected: JSON response with `segments[]`, each containing `start`/`end` seconds + `text`.
+
+**Gotchas**
+- First run downloads the Whisper model and loads it into memory; startup can take a minute.
+- If VS Code can’t see your PATH updates, prefer using the venv python to run Uvicorn (same terminal session).
+
 ---
 
 ## Template
