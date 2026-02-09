@@ -20,7 +20,11 @@ class Transcriber:
         self.compute_type = compute_type
 
         print(f"Loading Whisper Model ({self.model_size})... this might take a minute...")
-        self.model = WhisperModel(self.model_size, device=self.device, compute_type=self.compute_type)
+        # Loads the AI model to memory. 
+        self.model = WhisperModel(
+            self.model_size, 
+            device=self.device,     # Runs on CPU
+            compute_type=self.compute_type)
         print("Whisper Model Loaded!")
 
     # Transcribe the given audio file and return structured results.
@@ -49,4 +53,7 @@ class Transcriber:
         )
 
 
-transcriber = Transcriber()
+transcriber = Transcriber()     # Singleton instance of the Transcriber class that can be imported and used throughout the application.
+
+# Audio file --> Whisper AI --> [segment1, segment2, ...] --> JSON transcript
+
