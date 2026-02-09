@@ -1,5 +1,7 @@
 # NeuroSpace
 
+Dev notes / learnings: see [LEARNINGS.md](LEARNINGS.md).
+
 NeuroSpace is a full-stack system for storing, connecting, and querying educational content:
 
 - Videos (MP4)
@@ -26,6 +28,7 @@ graph LR
 - Docker + Docker Compose
 - Python 3.11+
 - Git
+- FFmpeg (required for `/test-extract` audio extraction)
 
 ## Quickstart
 
@@ -65,6 +68,12 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
+If you prefer to run from the repository root (no `cd backend`), use:
+
+```bash
+uvicorn backend.app.main:app --reload
+```
+
 Health check endpoint:
 
 - http://127.0.0.1:8000
@@ -86,6 +95,9 @@ Create `backend/.env` (optional) with:
 NEO4J_URI=bolt://localhost:7687
 NEO4J_USER=neo4j
 NEO4J_PASSWORD=password123
+
+# Optional: if ffmpeg is not on PATH, set the full path to ffmpeg.exe
+# FFMPEG_PATH=C:\\ffmpeg\\bin\\ffmpeg.exe
 ```
 
 Notes:
