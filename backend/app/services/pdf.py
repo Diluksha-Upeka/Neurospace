@@ -8,8 +8,12 @@ from pypdf import PdfReader
 from ..schemas import DocumentChunk, PDFResult
 
 
+# Class does 2 main things:
+# 1) Extract text from each page of the PDF using PyPDF2.
+# 2) Split the extracted text into smaller chunks using LangChain's RecursiveCharacterTextSplitter.
 class PDFProcessor:
     def __init__(self):
+        # Chunk the text into manageable pieces for embedding
         self.splitter = RecursiveCharacterTextSplitter(
             chunk_size=1000,
             chunk_overlap=200,
@@ -54,4 +58,5 @@ class PDFProcessor:
         )
 
 
+# Singleton instance
 pdf_processor = PDFProcessor()

@@ -52,6 +52,7 @@ def test_transcription(audio_path: str):
         raise HTTPException(status_code=400, detail=str(e))
 
 
+
 @app.post("/test-pdf", response_model=PDFResult)
 def test_pdf_processing(pdf_path: str):
     """Temporary endpoint to test PDF extraction + chunking locally.
