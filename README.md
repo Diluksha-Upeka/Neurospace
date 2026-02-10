@@ -1,5 +1,7 @@
 # NeuroSpace
 
+![NeuroSpace Logo](assets/logo.png)
+
 Dev notes / learnings: see [LEARNINGS.md](LEARNINGS.md).
 
 NeuroSpace is a full-stack system for storing, connecting, and querying educational content:
