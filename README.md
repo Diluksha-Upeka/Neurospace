@@ -1,6 +1,6 @@
 # NeuroSpace
 
-![NeuroSpace Logo](assets/logo.png)
+<img src="assets/logo.png" alt="NeuroSpace Logo" width="300">
 
 Dev notes / learnings: see [LEARNINGS.md](LEARNINGS.md).
 
