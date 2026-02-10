@@ -1,11 +1,13 @@
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, BackgroundTasks, UploadFile, File
 from .database import db
 from .services.video import video_processor
 from .services.transcription import transcriber
 from .services.pdf import pdf_processor
 from .schemas import PDFResult, TranscriptionResult
 import os
+import shutil
+from .worker import process_file_background
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -64,3 +66,40 @@ def test_pdf_processing(pdf_path: str):
         return pdf_processor.process_pdf(pdf_path)
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+    
+
+@app.post("/ingest")
+async def ingest_file(
+    background_tasks: BackgroundTasks,
+    file: UploadFile = File(...)
+):
+    """
+    The Main Entrance.
+    1. Receives file.
+    2. Saves to temp disk.
+    3. Triggers background processing.
+    4. Returns 'Accepted' immediately.
+    """
+    # Validate file type
+    if file.content_type not in ["application/pdf", "video/mp4"]:
+        raise HTTPException(400, detail="Only .pdf and .mp4 supported for now.")
+
+    # Save to a temporary folder
+    temp_filename = f"temp_{file.filename}"
+    with open(temp_filename, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+
+    # Trigger Background Task
+    # We pass the file path, not the file object (because the request closes)
+    background_tasks.add_task(
+        process_file_background, 
+        temp_filename, 
+        file.filename, 
+        file.content_type
+    )
+
+    return {
+        "status": "accepted", 
+        "filename": file.filename, 
+        "message": "Processing started in background."
+    }
