@@ -1,6 +1,7 @@
-# NeuroSpace
-
-<img src="assets/logo.png" alt="NeuroSpace Logo" width="300">
+<div align="center">
+  <img src="assets/logo.png" alt="NeuroSpace Logo" width="150">
+  <h1>NeuroSpace</h1>
+</div>
 
 Dev notes / learnings: see [LEARNINGS.md](LEARNINGS.md).
 
