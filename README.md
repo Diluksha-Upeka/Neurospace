@@ -1,6 +1,5 @@
 <div align="center">
-  <img src="assets/logo.png" alt="NeuroSpace Logo" width="150">
-  <h1>NeuroSpace</h1>
+  <img src="assets/logo.png" alt="NeuroSpace" width="400">
 </div>
 
 Dev notes / learnings: see [LEARNINGS.md](LEARNINGS.md).
