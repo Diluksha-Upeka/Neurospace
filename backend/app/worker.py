@@ -10,6 +10,9 @@ def process_file_background(file_path: str, filename: str, content_type: str):
     This function runs in the background.
     """
     print(f"⚙️ Background Task Started for: {filename}")
+
+    uploaded_to_minio = False
+    audio_path: str | None = None
     
     try:
         # 1. Upload raw file to MinIO (Backup)
@@ -17,8 +20,9 @@ def process_file_background(file_path: str, filename: str, content_type: str):
         try:
             storage = get_storage()
             storage.upload_file(file_path, filename)
+            uploaded_to_minio = True
         except Exception as e:
-            print(f" MinIO upload skipped: {str(e)}")
+            print(f" MinIO upload failed (will retry after processing): {str(e)}")
         
         # 2. Determine Pipeline
         if "video" in content_type:
@@ -49,7 +53,19 @@ def process_file_background(file_path: str, filename: str, content_type: str):
         print(f" Background Task Failed: {str(e)}")
     
     finally:
+        # If MinIO upload failed at the start, retry once before deleting temp files.
+        if not uploaded_to_minio:
+            try:
+                if os.path.exists(file_path):
+                    storage = get_storage()
+                    storage.upload_file(file_path, filename)
+                    uploaded_to_minio = True
+            except Exception as e:
+                print(f" MinIO upload skipped: {str(e)}")
+
         # Cleanup: Remove local temp files to save space
+        if audio_path and os.path.exists(audio_path):
+            os.remove(audio_path)
         if os.path.exists(file_path):
             os.remove(file_path)
         print(" Cleanup complete.")

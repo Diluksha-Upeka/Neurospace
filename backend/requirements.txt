@@ -5,3 +5,5 @@ neo4j
 faster-whisper
 pypdf
 langchain-text-splitters
+boto3
+python-multipart
