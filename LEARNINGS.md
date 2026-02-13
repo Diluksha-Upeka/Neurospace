@@ -2,7 +2,7 @@
 
 A compact dev journal for NeuroSpace - keep operational instructions in README.md and record discoveries, decisions, and experiments here.
 
-## 2026-02-09
+## 2026-02-13
 
 ### 1) Uvicorn import path - `No module named 'app'` 
 
