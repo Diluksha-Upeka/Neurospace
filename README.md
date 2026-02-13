@@ -2,9 +2,9 @@
   <img src="assets/logo.png" alt="NeuroSpace" width="400">
 </div>
 
-# 🧠 NeuroSpace: Multi-Modal RAG Engine
+# NeuroSpace: Multi-Modal RAG Engine
 
-## 🚀 Week 1: Ingestion Pipeline
+## Ingestion Pipeline
 
 ### Features
 - **Video Processing:** Uses `FFmpeg` and `Faster-Whisper` to extract time-aligned text from MP4s.
