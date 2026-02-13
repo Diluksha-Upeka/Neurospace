@@ -2,6 +2,21 @@
   <img src="assets/logo.png" alt="NeuroSpace" width="400">
 </div>
 
+# 🧠 NeuroSpace: Multi-Modal RAG Engine
+
+## 🚀 Week 1: Ingestion Pipeline
+
+### Features
+- **Video Processing:** Uses `FFmpeg` and `Faster-Whisper` to extract time-aligned text from MP4s.
+- **Document Processing:** Uses `PyPDF` and `LangChain` to chunk PDFs recursively.
+- **Storage:** Local S3-compatible object storage using `MinIO`.
+- **API:** Asynchronous `FastAPI` endpoints with Background Tasks.
+
+### How to Run
+1. `docker-compose up -d` (Starts Neo4j & MinIO)
+2. `cd backend && uvicorn app.main:app --reload`
+3. POST file to `http://localhost:8000/ingest`
+
 Dev notes / learnings: see [LEARNINGS.md](LEARNINGS.md).
 
 NeuroSpace is a full-stack system for storing, connecting, and querying educational content:
