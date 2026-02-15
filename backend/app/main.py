@@ -4,6 +4,7 @@ from .database import db
 from .services.video import video_processor
 from .services.transcription import transcriber
 from .services.pdf import pdf_processor
+from .services.graph_setup import setup_constraints
 from .schemas import PDFResult, TranscriptionResult
 import os
 import shutil
@@ -12,6 +13,7 @@ from .worker import process_file_background
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     db.connect()
+    setup_constraints()
     yield
     db.close()
 
