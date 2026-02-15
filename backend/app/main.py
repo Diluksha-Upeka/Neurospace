@@ -5,6 +5,7 @@ from .services.video import video_processor
 from .services.transcription import transcriber
 from .services.pdf import pdf_processor
 from .services.graph_setup import setup_constraints
+from .services.llm_factory import llm_factory
 from .schemas import PDFResult, TranscriptionResult
 import os
 import shutil
@@ -14,6 +15,14 @@ from .worker import process_file_background
 async def lifespan(app: FastAPI):
     db.connect()
     setup_constraints()
+
+    # Test: Initialize LlamaIndex Storage
+    try:
+        storage = llm_factory.get_storage_context()
+        print("✅ LlamaIndex successfully connected to Neo4j!")
+    except Exception as e:
+        print(f"❌ LlamaIndex Connection Failed: {e}")
+
     yield
     db.close()
 
