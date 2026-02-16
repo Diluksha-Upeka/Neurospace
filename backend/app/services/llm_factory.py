@@ -2,7 +2,7 @@ import os
 from llama_index.core import Settings
 from llama_index.llms.openai import OpenAI
 from llama_index.embeddings.openai import OpenAIEmbedding
-from llama_index.graph_stores.neo4j import Neo4jGraphStore
+from llama_index.graph_stores.neo4j import Neo4jGraphStore, Neo4jPropertyGraphStore
 from llama_index.core import StorageContext
 from app.config import settings
 
@@ -25,6 +25,7 @@ class LLMFactory:
     def get_storage_context(self):
         """
         Connects LlamaIndex to our Neo4j Docker Container.
+        Uses Neo4jPropertyGraphStore for PropertyGraphIndex support.
         """
         graph_store = Neo4jGraphStore(
             username=settings.NEO4J_USER,
@@ -33,8 +34,18 @@ class LLMFactory:
             database="neo4j",
         )
 
+        property_graph_store = Neo4jPropertyGraphStore(
+            username=settings.NEO4J_USER,
+            password=settings.NEO4J_PASSWORD,
+            url=settings.NEO4J_URI,
+            database="neo4j",
+        )
+
         # StorageContext is the container for VectorStore, GraphStore, and DocStore
-        storage_context = StorageContext.from_defaults(graph_store=graph_store)
+        storage_context = StorageContext.from_defaults(
+            graph_store=graph_store,
+            property_graph_store=property_graph_store,
+        )
         return storage_context
 
 
