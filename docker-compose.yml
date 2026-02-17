@@ -4,7 +4,7 @@ services:
   # 1. THE GRAPH DATABASE (Neo4j)
   # Stores nodes, relationships, and vector embeddings.
   neo4j:
-    image: neo4j:5.15.0
+    image: neo4j:5.26.0
     container_name: neuro_graph
     ports:
       - "7474:7474" # HTTP Browser Interface

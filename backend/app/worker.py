@@ -9,8 +9,10 @@ from .services.graph_service import graph_service
 def process_file_background(file_path: str, filename: str, content_type: str):
     """
     This function runs in the background.
+    FastAPI runs sync background tasks in a thread pool,
+    giving LlamaIndex its own thread for async I/O.
     """
-    print(f"⚙️ Background Task Started for: {filename}")
+    print(f" Background Task Started for: {filename}")
 
     uploaded_to_minio = False
     audio_path: str | None = None
@@ -56,11 +58,11 @@ def process_file_background(file_path: str, filename: str, content_type: str):
 
         # 3. BUILD GRAPH (Entity Extraction)
         if extracted_text_chunks:
-            print(f"🚀 Sending {len(extracted_text_chunks)} chunks to Graph Engine...")
+            print(f" Sending {len(extracted_text_chunks)} chunks to Graph Engine...")
             graph_service.process_document(extracted_text_chunks, filename)
 
     except Exception as e:
-        print(f"❌ Background Task Failed: {str(e)}")
+        print(f" Background Task Failed: {str(e)}")
     
     finally:
         # If MinIO upload failed at the start, retry once before deleting temp files.

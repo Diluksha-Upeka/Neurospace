@@ -17,11 +17,14 @@ async def lifespan(app: FastAPI):
     setup_constraints()
 
     # Test: Initialize LlamaIndex Storage
-    try:
-        storage = llm_factory.get_storage_context()
-        print("✅ LlamaIndex successfully connected to Neo4j!")
-    except Exception as e:
-        print(f"❌ LlamaIndex Connection Failed: {e}")
+    if llm_factory is not None:
+        try:
+            storage = llm_factory.get_storage_context()
+            print("✅ LlamaIndex successfully connected to Neo4j!")
+        except Exception as e:
+            print(f"❌ LlamaIndex Connection Failed: {e}")
+    else:
+        print("⚠️ LLM Factory not initialized — check your API keys")
 
     yield
     db.close()

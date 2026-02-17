@@ -2,6 +2,11 @@ from llama_index.core import PropertyGraphIndex
 from llama_index.core.indices.property_graph import SimpleLLMPathExtractor
 from llama_index.core import Document
 from app.services.llm_factory import LLMFactory
+import nest_asyncio
+
+# Patch asyncio to allow nested event loops.
+# LlamaIndex internally uses async for LLM/embedding calls.
+nest_asyncio.apply()
 
 
 class GraphService:
@@ -11,7 +16,6 @@ class GraphService:
         self._extractor = None
 
         # Define what we want the AI to extract
-        # This acts as a schema for the LLM
         self.entities = ["Person", "Organization", "Event", "Concept", "Place"]
         self.relations = ["FOUNDED", "LOCATED_AT", "PART_OF", "CAUSES", "MENTIONS", "RELATED_TO"]
 
@@ -23,13 +27,10 @@ class GraphService:
         self._storage_context = self._llm_factory.get_storage_context()
 
         # Configure the Extractor
-        # This tells the LLM: "Find these entities and relations in the text"
+        # Groq is fast enough to handle higher parallelism
         self._extractor = SimpleLLMPathExtractor(
             llm=self._llm_factory.llm,
-            extract_prompt_template=None,  # Use default prompt
-            kg_entities=self.entities,
-            kg_relations=self.relations,
-            max_paths_per_chunk=10,  # Limit complexity
+            max_paths_per_chunk=10,
             num_workers=4,
         )
 
@@ -40,7 +41,7 @@ class GraphService:
         """
         self._init_components()
 
-        print(f"🕸️ Building Knowledge Graph for {filename}...")
+        print(f" Building Knowledge Graph for {filename}...")
 
         # Convert strings to LlamaIndex Document objects
         documents = [
@@ -49,7 +50,7 @@ class GraphService:
         ]
 
         # Create the Property Graph Index
-        # This step calls OpenAI to extract entities and inserts them into Neo4j
+        # Groq extracts entities, HuggingFace generates embeddings locally
         index = PropertyGraphIndex.from_documents(
             documents,
             storage_context=self._storage_context,
@@ -58,7 +59,7 @@ class GraphService:
             show_progress=True,
         )
 
-        print(f"✅ Graph built successfully for {filename}!")
+        print(f" Graph built successfully for {filename}!")
         return index
 
 
