@@ -6,6 +6,9 @@ __pycache__/
 
 # Generated media artifacts
 *.mp3
+*.wav
+*.pdf
+*.mp4
 
 # Virtual Environment
 venv/

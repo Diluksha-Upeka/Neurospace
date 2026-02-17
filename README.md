@@ -30,6 +30,8 @@ It combines:
 - **Neo4j** for graph relationships
 - **MinIO** for S3-compatible file storage
 - **FastAPI** for the backend API
+- **Groq** for fast LLM inference (Llama 3.1)
+- **HuggingFace** for local embeddings (no API calls)
     
 ## Architecture
 
@@ -54,12 +56,12 @@ graph TD
     API[API Gateway]
     Ingest[Ingestion Agent]
     Retriever[GraphRAG Retriever]
-    LLM[LLM Reasoner]
+    Groq[Groq LLM]
+    Embed[Local Embeddings]
   end
 
   subgraph Data ["💽 Knowledge & Storage"]
     Neo4j[(Neo4j Graph DB)]
-    Vector[(Pinecone/Vector DB)]
     Storage[File Storage]
   end
 
@@ -71,15 +73,15 @@ graph TD
   API --> Ingest
   API --> Retriever
     
-  Ingest -->|Parse PDF/Video| LLM
+  Ingest -->|Parse PDF/Video| Groq
   Ingest -->|Create Nodes| Neo4j
-  Ingest -->|Embed Chunks| Vector
+  Ingest -->|Embed Chunks| Embed
     
   Retriever -->|Hybrid Search| Neo4j
-  Retriever -->|Vector Search| Vector
-  Retriever --> LLM
+  Retriever -->|Vector Search| Embed
+  Retriever --> Groq
     
-  LLM -->|Synthesized Answer| API
+  Groq -->|Synthesized Answer| API
 ```
 
 ### Diagram 2: The "Multi-Modal Ingestion" Flow
@@ -121,6 +123,7 @@ sequenceDiagram
 - FFmpeg (required for `/test-extract` audio extraction)
 - Faster-Whisper (for on-device audio transcription)
 - pypdf + langchain-text-splitters (for PDF extraction & chunking)
+- **Groq API Key** (get from https://console.groq.com/)
 
 Notes: Install Python libraries into the `backend/venv` (see Quickstart).
 
@@ -161,6 +164,8 @@ source venv/bin/activate
 pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
+
+**Note:** The first time you run the backend, it will download the HuggingFace embedding model (~100MB). This may take 30-60 seconds.
 
 If you prefer to run from the repository root (no `cd backend`), use:
 
@@ -204,12 +209,16 @@ curl -X POST "http://127.0.0.1:8000/test-pdf?pdf_path=C:\\path\\to\\doc.pdf"
 
 The backend reads environment variables via `python-dotenv`.
 
-Create `backend/.env` (optional) with:
+Create `backend/.env` with:
 
 ```env
+# Neo4j Database
 NEO4J_URI=bolt://localhost:7687
 NEO4J_USER=neo4j
 NEO4J_PASSWORD=password123
+
+# Groq API (required for LLM inference)
+GROQ_API_KEY=your_groq_api_key_here
 
 # Optional: if ffmpeg is not on PATH, set the full path to ffmpeg.exe
 # FFMPEG_PATH=C:\\ffmpeg\\bin\\ffmpeg.exe
@@ -218,6 +227,7 @@ NEO4J_PASSWORD=password123
 Notes:
 
 - `NEO4J_URI` uses `bolt://` (not HTTP).
+- Get your `GROQ_API_KEY` from https://console.groq.com/
 - If you later run the backend inside Docker on the same Compose network, you’ll likely want `NEO4J_URI=bolt://neo4j:7687`.
 
 ## Common Commands
@@ -236,8 +246,14 @@ Notes:
 - Day 2: Backend skeleton with FastAPI (Neo4j driver + health check)
 - Day 3: Video extraction using FFmpeg (`POST /test-extract`)
 - Day 4: Audio transcription using Faster-Whisper (`POST /test-transcribe`)
-- Day 5: PDF ingestion & chunking using `pypdf` + `langchain-text-splitters` (`POST /test-pdf`) 
+- Day 5: PDF ingestion & chunking using `pypdf` + `langchain-text-splitters` (`POST /test-pdf`) - Day 6: **Graph knowledge extraction with Groq + local HuggingFace embeddings** (no API rate limits!)
 
+## Architecture Highlights
+
+- **Groq Llama 3.1**: Blazing fast LLM inference for entity extraction
+- **Local Embeddings**: HuggingFace `all-MiniLM-L6-v2` runs on CPU, zero API costs
+- **Neo4j 5.26**: Latest version with advanced graph capabilities
+- **Rate Limit Free**: No more API quota issues for embeddings
 ## Last Updated
 
-**13th of February 2026**
+**18th of February 2026**

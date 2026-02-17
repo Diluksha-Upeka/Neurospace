@@ -30,8 +30,8 @@ class GraphService:
         # Groq is fast enough to handle higher parallelism
         self._extractor = SimpleLLMPathExtractor(
             llm=self._llm_factory.llm,
-            max_paths_per_chunk=10,
-            num_workers=4,
+            max_paths_per_chunk=5,
+            num_workers=1,
         )
 
     def process_document(self, text_chunks: list, filename: str):
