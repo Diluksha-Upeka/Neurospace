@@ -13,7 +13,7 @@ class LLMFactory:
         # Groq is insanely fast, perfect for extraction.
         groq_key = os.getenv("GROQ_API_KEY")
         if not groq_key:
-            raise ValueError("❌ GROQ_API_KEY not found in .env file!")
+            raise ValueError("Error: GROQ_API_KEY not found in .env file!")
 
         print("⚡ Initializing Groq (Llama 3)...")
         self.llm = Groq(
@@ -25,7 +25,7 @@ class LLMFactory:
         # 2. Setup the Embedder (Local HuggingFace)
         # This runs ON YOUR CPU. No API calls. No Rate Limits.
         # 'all-MiniLM-L6-v2' is the industry standard for fast, efficient embeddings.
-        print("🧠 Initializing Local HuggingFace Embeddings...")
+        print(" Initializing Local HuggingFace Embeddings...")
         self.embed_model = HuggingFaceEmbedding(
             model_name="sentence-transformers/all-MiniLM-L6-v2"
         )
@@ -61,5 +61,5 @@ class LLMFactory:
 try:
     llm_factory = LLMFactory()
 except Exception as e:
-    print(f"⚠️ LLM Factory Init Failed: {e}")
+    print(f"Error: LLM Factory Init Failed: {e}")
     llm_factory = None

@@ -177,6 +177,10 @@ Health check endpoint:
 
 - http://127.0.0.1:8000
 
+Swagger API documentation:
+
+- http://127.0.0.1:8000/docs
+
 Testing endpoints (manual checks)
 
 - POST `/test-extract?video_path=...` — Extract audio from a video (requires FFmpeg). Use Swagger or:
@@ -241,12 +245,15 @@ Notes:
 | Run backend (from `backend/`) | `uvicorn app.main:app --reload` |
 
 ## Current Progress
-
-- Day 1: Infrastructure setup with Docker Compose (Neo4j + MinIO)
-- Day 2: Backend skeleton with FastAPI (Neo4j driver + health check)
-- Day 3: Video extraction using FFmpeg (`POST /test-extract`)
-- Day 4: Audio transcription using Faster-Whisper (`POST /test-transcribe`)
-- Day 5: PDF ingestion & chunking using `pypdf` + `langchain-text-splitters` (`POST /test-pdf`) - Day 6: **Graph knowledge extraction with Groq + local HuggingFace embeddings** (no API rate limits!)
+Features implemented so far:
+- Video audio extraction (FFmpeg)
+- Audio transcription (Faster-Whisper)
+- PDF text extraction & chunking (pypdf + LangChain)
+- Graph storage (Neo4j)
+- Local embeddings (HuggingFace `all-MiniLM-L6-v2`)
+- Fast LLM inference (Groq Llama 3.1)
+- API endpoints for testing ingestion steps
+- Basic graph queries (see `QUERIES.md`)
 
 ## Architecture Highlights
 
