@@ -6,25 +6,27 @@ sys.path.append(os.path.join(os.path.dirname(__file__), 'backend'))
 
 from app.database import db
 from app.services.query_engine import query_service
+import json
 
 def test_engine():
-    # Connect to Neo4j
     db.connect()
+    question = "Design a small pipeline using the concepts in the PDF."
     
-    # 1. Ask a question that requires the context of your uploaded documents
-    question = "Design a small pipeline using the concepts in the PDF: documents → embeddings → vector DB → retrieval → generation. Explain each step."
+    print("\n" + "="*50)
+    print(f"🗣️  USER: {question}")
     
-    # Print question
-    print(f"  USER: {question}")
+    # Now this returns a dictionary
+    result = query_service.query(question)
     
-    # 2. Get the synthesized answer from Groq
-    answer = query_service.ask(question)
+    print("\n" + "="*50)
+    print(f"🤖 NEUROSPACE (Groq): \n{result['answer']}")
+    print("-" * 50)
+    print("📚 SOURCES CITED:")
     
-    # Print answer
-    print(f" NEUROSPACE (Groq): \n{answer}")
+    # Pretty print the sources
+    print(json.dumps(result['sources'], indent=2))
+    print("="*50 + "\n")
 
-
-    # Close connection
     db.close()
 
 if __name__ == "__main__":

@@ -23,13 +23,43 @@ class QueryService:
         )
         print(" Query Engine Ready!")
 
-    def ask(self, question: str) -> str:
+    def query(self, question: str) -> dict:
         """
-        Sends the question through the Hybrid pipeline to Groq.
+        Sends the question through the Hybrid pipeline.
+        Returns the answer AND the sources used.
         """
         print(f" Thinking about: '{question}'...")
         response = self.query_engine.query(question)
-        return str(response)
+        
+        # 1. Extract the synthesized text answer
+        answer_text = str(response)
+        
+        # 2. Extract the source nodes (the chunks it used)
+        sources = []
+        if response.source_nodes:
+            for node in response.source_nodes:
+                # LlamaIndex stores metadata in node.metadata
+                meta = node.metadata
+                
+                # Build a clean source object
+                source_info = {
+                    "filename": meta.get("filename", "Unknown File"),
+                    "text_snippet": node.text[:150] + "...", # First 150 chars
+                    "score": round(node.score, 3) if node.score else None
+                }
+                
+                # Add specific metadata depending on if it's a PDF or Video
+                if "page_number" in meta:
+                    source_info["page"] = meta["page_number"]
+                if "start" in meta and "end" in meta:
+                    source_info["timestamp"] = f"{meta['start']}s - {meta['end']}s"
+                    
+                sources.append(source_info)
+                
+        return {
+            "answer": answer_text,
+            "sources": sources
+        }
 
 # Singleton instance
 query_service = QueryService()
