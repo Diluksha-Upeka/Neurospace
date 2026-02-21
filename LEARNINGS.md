@@ -158,6 +158,40 @@ FFMPEG_PATH=C:\\path\\to\\ffmpeg.exe
 
 ---
 
+## 2026-02-21
+
+### 1) Semantic Search and RAG Implementation Notes
+
+**Overview**
+- NeuroSpace implements semantic search via vector embeddings, but full RAG (Retrieval-Augmented Generation) is not yet complete—only retrieval is implemented.
+
+**Embeddings**
+- **Model**: Local HuggingFace `sentence-transformers/all-MiniLM-L6-v2` (384-dimensional vectors).
+- **Where**: Runs on CPU, no API calls required.
+- **Usage**: Converts text chunks (from PDFs/videos) and user queries into vectors for similarity comparison.
+
+**Similarities**
+- **Engine**: Neo4j database using cosine similarity.
+- **How**: Query vector sent via Cypher: `CALL db.index.vector.queryNodes('chunk_vector_index', $limit, $embedding)`.
+- **Storage**: Vectors stored as node properties in Neo4j graph database (not Pinecone or external vector DB).
+
+**RAG Status**
+- **Retrieval**: Implemented—`vector_search.search_similar_chunks()` embeds query, finds top similar chunks in Neo4j, returns with scores.
+- **Generation**: Not implemented—no LLM endpoint to generate answers from retrieved chunks.
+- **LLM Usage**: Groq (online, Llama 3.1-8B-Instant) used for entity extraction in graph building, not for query answering.
+- **Local vs Online**: Embeddings local; LLM online via API.
+
+**Test Script Fix**
+- **Symptom**: `ModuleNotFoundError: No module named 'app'` when running `test_vector.py` from repo root.
+- **Cause**: Script imports `from app.services.vector_search import vector_search`, but `app` is in `backend/app/`.
+- **Fix**: Added `sys.path.append(os.path.join(os.path.dirname(__file__), 'backend'))` to prepend `backend` to Python path.
+
+**Notes**
+- To add full RAG, implement an endpoint that retrieves chunks and sends them + query to Groq for generation.
+- Neo4j handles both graph (entities/relations) and vector storage, keeping everything local.
+
+---
+
 ## Template
 
 ### Title
