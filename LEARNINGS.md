@@ -190,6 +190,23 @@ FFMPEG_PATH=C:\\path\\to\\ffmpeg.exe
 - To add full RAG, implement an endpoint that retrieves chunks and sends them + query to Groq for generation.
 - Neo4j handles both graph (entities/relations) and vector storage, keeping everything local.
 
+### 2) Query Engine Initialization Errors
+
+**Symptom**
+- `AttributeError: 'Neo4jGraphStore' object has no attribute 'supports_vector_queries'` when initializing `QueryService`.
+
+**Cause**
+- In `query_engine.py`, `PropertyGraphIndex.from_existing` was passed `property_graph_store=self.storage_context.graph_store` (Neo4jGraphStore), but it needs `self.storage_context.property_graph_store` (Neo4jPropertyGraphStore).
+
+**Fix**
+- Changed to `property_graph_store=self.storage_context.property_graph_store`.
+- Installed missing packages: `llama-index-llms-groq`, `llama-index-embeddings-huggingface`.
+- Upgraded `llama-index-graph-stores-neo4j` to latest version.
+
+**Notes**
+- Full RAG now works: Retrieves similar chunks via vector search, generates answers using Groq LLM.
+- Updated `requirements.txt` with `pip freeze`.
+
 ---
 
 ## Template
