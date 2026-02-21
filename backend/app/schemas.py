@@ -30,3 +30,18 @@ class PDFResult(BaseModel):
     filename: str
     total_pages: int
     chunks: List[DocumentChunk] # List of text chunks extracted from the PDF, along with their page number and chunk index for reference.
+
+class ChatRequest(BaseModel):
+    message: str
+    # We will add 'chat_history' here later when we want the bot to remember context
+
+class SourceItem(BaseModel):
+    filename: str
+    text_snippet: str
+    score: float = None
+    page: int = None
+    timestamp: str = None
+
+class ChatResponse(BaseModel):
+    answer: str
+    sources: List[SourceItem]

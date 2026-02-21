@@ -10,6 +10,8 @@ from .schemas import PDFResult, TranscriptionResult
 import os
 import shutil
 from .worker import process_file_background
+from app.services.query_engine import query_service
+from app.schemas import ChatRequest, ChatResponse
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -117,3 +119,25 @@ async def ingest_file(
         "filename": file.filename, 
         "message": "Processing started in background."
     }
+
+@app.post("/chat", response_model=ChatResponse)
+async def chat_with_neurospace(request: ChatRequest):
+    """
+    The main Chat API.
+    Receives a message from the frontend, queries the GraphRAG engine,
+    and returns the synthesized answer with citations.
+    """
+    try:
+        # Pass the user's message to the engine we built yesterday
+        result = query_service.query(request.message)
+        
+        # FastAPI will automatically validate this dictionary against our ChatResponse schema
+        return result
+        
+    except Exception as e:
+        print(f"❌ Chat Error: {str(e)}")
+        # Return a friendly error if the LLM fails or rate limits hit
+        return {
+            "answer": "I'm sorry, my neural pathways are experiencing some turbulence. Please try again.",
+            "sources": []
+        }
