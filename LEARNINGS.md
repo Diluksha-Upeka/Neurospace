@@ -207,6 +207,21 @@ FFMPEG_PATH=C:\\path\\to\\ffmpeg.exe
 - Full RAG now works: Retrieves similar chunks via vector search, generates answers using Groq LLM.
 - Updated `requirements.txt` with `pip freeze`.
 
+### 3) Query Method Name Mismatch
+
+**Symptom**
+- `AttributeError: 'QueryService' object has no attribute 'query'` when running `test_query.py`.
+
+**Cause**
+- Test script calls `query_service.query(question)`, but the method was named `ask`.
+
+**Fix**
+- Renamed `ask` method to `query` in `query_engine.py` to match the test expectations.
+
+**Notes**
+- The `query` method returns a dict with 'answer' (generated text) and 'sources' (retrieved chunks with metadata).
+- RAG pipeline is now fully functional.
+
 ---
 
 ## Template
