@@ -14,16 +14,15 @@ def test_engine():
     # 1. Ask a question that requires the context of your uploaded documents
     question = "Design a small pipeline using the concepts in the PDF: documents → embeddings → vector DB → retrieval → generation. Explain each step."
     
-    print("\n" + "="*50)
+    # Print question
     print(f"  USER: {question}")
-    print("="*50 + "\n")
     
     # 2. Get the synthesized answer from Groq
     answer = query_service.ask(question)
     
-    print("\n" + "="*50)
+    # Print answer
     print(f" NEUROSPACE (Groq): \n{answer}")
-    print("="*50 + "\n")
+
 
     # Close connection
     db.close()
