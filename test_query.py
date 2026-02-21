@@ -12,20 +12,18 @@ def test_engine():
     db.connect()
     question = "Design a small pipeline using the concepts in the PDF."
     
-    print("\n" + "="*50)
-    print(f"🗣️  USER: {question}")
+    # Print the question
+    print(f"  USER: {question}")
     
     # Now this returns a dictionary
     result = query_service.query(question)
     
-    print("\n" + "="*50)
-    print(f"🤖 NEUROSPACE (Groq): \n{result['answer']}")
-    print("-" * 50)
-    print("📚 SOURCES CITED:")
+    # Print the answer and sources in a nice format
+    print(f" NEUROSPACE (Groq): \n{result['answer']}")
+    print(" SOURCES CITED:")
     
     # Pretty print the sources
     print(json.dumps(result['sources'], indent=2))
-    print("="*50 + "\n")
 
     db.close()
 
