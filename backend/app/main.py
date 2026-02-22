@@ -12,6 +12,8 @@ import shutil
 from .worker import process_file_background
 from app.services.query_engine import query_service
 from app.schemas import ChatRequest, ChatResponse
+from app.services.graph_visualizer import graph_visualizer
+from app.schemas import GraphDataResponse
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -141,3 +143,15 @@ async def chat_with_neurospace(request: ChatRequest):
             "answer": "I'm sorry, my neural pathways are experiencing some turbulence. Please try again.",
             "sources": []
         }
+
+@app.get("/graph", response_model=GraphDataResponse)
+def get_graph_data(limit: int = 150):
+    """
+    Returns the Graph data formatted strictly for React Flow.
+    """
+    try:
+        data = graph_visualizer.get_react_flow_data(limit=limit)
+        return data
+    except Exception as e:
+        print(f"❌ Graph API Error: {str(e)}")
+        return {"nodes": [], "edges": []}

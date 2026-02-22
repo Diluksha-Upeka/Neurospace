@@ -45,3 +45,18 @@ class SourceItem(BaseModel):
 class ChatResponse(BaseModel):
     answer: str
     sources: List[SourceItem]
+
+class GraphNode(BaseModel):
+    id: str
+    label: str    # What text to display inside the circle
+    group: str    # "Document", "Chunk", or "Entity" (for coloring)
+
+class GraphEdge(BaseModel):
+    id: str
+    source: str   # ID of the starting node
+    target: str   # ID of the ending node
+    label: str    # e.g., "MENTIONS"
+
+class GraphDataResponse(BaseModel):
+    nodes: List[GraphNode]
+    edges: List[GraphEdge]
