@@ -14,6 +14,10 @@ from app.services.query_engine import query_service
 from app.schemas import ChatRequest, ChatResponse
 from app.services.graph_visualizer import graph_visualizer
 from app.schemas import GraphDataResponse
+from fastapi.responses import StreamingResponse
+from fastapi import HTTPException
+from app.services.storage import get_storage
+import mimetypes
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -155,3 +159,35 @@ def get_graph_data(limit: int = 150):
     except Exception as e:
         print(f"❌ Graph API Error: {str(e)}")
         return {"nodes": [], "edges": []}
+
+@app.get("/files/{filename}")
+async def serve_file(filename: str):
+    """
+    Streams a file (PDF or MP4) directly from MinIO to the user's browser.
+    """
+    try:
+        # Get the stream and the content type from our storage service
+        file_stream, content_type = get_storage().get_file_stream(filename)
+
+        # 1. Guess the correct content type based on the file extension
+        # If it can't guess, it falls back to whatever MinIO said.
+        guessed_type, _ = mimetypes.guess_type(filename)
+        final_content_type = guessed_type or content_type or "application/octet-stream"
+
+        # 2. Tell the browser to display it INLINE, not as an attachment
+        headers = {
+            "Content-Disposition": f'inline; filename="{filename}"'
+        }
+        
+        # 'iter_chunks()' reads the file in small byte-sized pieces
+        return StreamingResponse(
+            content=file_stream.iter_chunks(), 
+            media_type=final_content_type,  # Use the guessed content type
+            headers=headers
+        )
+        
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="File not found")
+    except Exception as e:
+        print(f"❌ Streaming Error: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")

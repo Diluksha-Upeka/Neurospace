@@ -1,5 +1,7 @@
 import os
 
+import botocore
+
 # This project talks to a local MinIO instance via explicit credentials.
 # Some developer machines may have a malformed ~/.aws/config, which can cause
 # boto3 to crash on import-time client creation. Default to ignoring shared AWS
@@ -51,6 +53,26 @@ class StorageService:
     def download_file(self, object_name: str, download_path: str):
         """Downloads a file from MinIO to local disk."""
         self.s3.download_file(self.bucket, object_name, download_path)
+
+    def get_file_stream(self, object_name: str):
+        """
+        Fetches the file from MinIO as an iterable stream.
+        This is crucial for playing videos without downloading the whole file.
+        """
+        print(f" Opening stream for {object_name}...")
+        try:
+            # get_object returns a dictionary containing the 'Body' (the stream)
+            response = self.s3.get_object(Bucket=self.bucket, Key=object_name)
+            
+            # We return the stream itself and its Content-Type (e.g., 'video/mp4')
+            return response['Body'], response['ContentType']
+            
+        except botocore.exceptions.ClientError as e:
+            error_code = e.response['Error']['Code']
+            if error_code == "NoSuchKey":
+                raise FileNotFoundError(f"File {object_name} not found in MinIO.")
+            else:
+                raise e
 
 # Singleton
 _storage: StorageService | None = None
