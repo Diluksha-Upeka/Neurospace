@@ -147,6 +147,10 @@ Open dashboards:
 - Neo4j Browser: http://localhost:7474
 - MinIO Console: http://localhost:9001
 
+Swagger API documentation:
+
+- http://127.0.0.1:8000/docs
+
 Create a MinIO bucket named `raw-uploads` (via the MinIO Console).
 
 ### 3) Run the backend API (FastAPI)
@@ -177,9 +181,6 @@ Health check endpoint:
 
 - http://127.0.0.1:8000
 
-Swagger API documentation:
-
-- http://127.0.0.1:8000/docs
 
 Testing endpoints (manual checks)
 
