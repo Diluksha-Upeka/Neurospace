@@ -1,8 +1,27 @@
 
-from llama_index.core import PropertyGraphIndex
+from llama_index.core import PropertyGraphIndex, PromptTemplate
 from app.services.llm_factory import llm_factory
 from cachetools import TTLCache
 import hashlib
+ # --- 🛡️ THE NEUROSPACE PERSONA ---
+# This forces Groq to act as a strict, professional assistant.
+# {context_str} is where LlamaIndex injects the retrieved chunks.
+# {query_str} is the user's question.
+NEUROSPACE_PROMPT_TMPL = (
+    "You are the NeuroSpace Multi-Modal Assistant, an advanced AI engine.\n"
+    "Your core directive is to answer the user's question STRICTLY based on the context information provided below.\n"
+    "---------------------\n"
+    "{context_str}\n"
+    "---------------------\n"
+    "Rules:\n"
+    "1. If the answer is not contained in the context, politely state: 'I cannot answer this based on the provided documents.' Do not guess or use outside knowledge.\n"
+    "2. Be concise, professional, and directly address the query.\n"
+    "3. Do not mention that you are an AI or that you were provided with context.\n"
+    "Query: {query_str}\n"
+    "Answer: "
+)
+neurospace_prompt = PromptTemplate(NEUROSPACE_PROMPT_TMPL)
+# ---------------------------------
 
 class QueryService:
     def __init__(self):
@@ -13,15 +32,17 @@ class QueryService:
             embed_model=llm_factory.embed_model,
             llm=llm_factory.llm,
         )
+        # 💉 INJECT THE PROMPT HERE
         self.query_engine = self.index.as_query_engine(
             include_text=True, 
-            similarity_top_k=3
+            similarity_top_k=3,
+            text_qa_template=neurospace_prompt # <--- Apply the template
         )
         # 🧠 Initialize the Cache
         # maxsize=100: Remembers the last 100 questions.
         # ttl=3600: Forgets them after 1 hour (3600 seconds).
         self.cache = TTLCache(maxsize=100, ttl=3600)
-        print("✅ Query Engine Ready!")
+        print("✅ Query Engine Ready with Strict Guardrails!")
 
     def _generate_cache_key(self, text: str) -> str:
         """Converts the question into a unique hash string."""
