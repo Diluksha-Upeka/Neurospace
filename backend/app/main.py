@@ -134,8 +134,8 @@ async def chat_with_neurospace(request: ChatRequest):
     and returns the synthesized answer with citations.
     """
     try:
-        # Pass the user's message to the engine we built yesterday
-        result = query_service.query(request.message)
+        # Pass the user's message to the engine (now uses cache)
+        result = query_service.ask(request.message)
         
         # FastAPI will automatically validate this dictionary against our ChatResponse schema
         return result
