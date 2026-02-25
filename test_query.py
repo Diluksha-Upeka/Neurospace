@@ -10,13 +10,13 @@ import json
 
 def test_engine():
     db.connect()
-    question = "Design a small pipeline using the concepts in the PDF."
+    question = "What is the capital of France?"
     
     # Print the question
     print(f"  USER: {question}")
     
     # Now this returns a dictionary
-    result = query_service.query(question)
+    result = query_service.ask(question)
     
     # Print the answer and sources in a nice format
     print(f" NEUROSPACE (Groq): \n{result['answer']}")
