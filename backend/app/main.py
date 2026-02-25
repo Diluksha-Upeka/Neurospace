@@ -14,10 +14,12 @@ from app.services.query_engine import query_service
 from app.schemas import ChatRequest, ChatResponse
 from app.services.graph_visualizer import graph_visualizer
 from app.schemas import GraphDataResponse
+
 from fastapi.responses import StreamingResponse
 from fastapi import HTTPException
 from app.services.storage import get_storage
 import mimetypes
+from fastapi.middleware.cors import CORSMiddleware  # <--- NEW IMPORT
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -38,7 +40,25 @@ async def lifespan(app: FastAPI):
     db.close()
 
 
+
 app = FastAPI(title="NeuroSpace API", lifespan=lifespan)
+
+# --- 🛡️ CORS CONFIGURATION ---
+# We define exactly which domains are allowed to talk to our API.
+origins = [
+    "http://localhost:3000",      # Your local Next.js frontend
+    "http://127.0.0.1:3000",
+    "https://diluksha-upeka.me",  # Future production domain
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,        # Allowed frontend URLs
+    allow_credentials=True,       # Allow cookies/authorization headers
+    allow_methods=["*"],          # Allow all HTTP methods (GET, POST, PUT, DELETE)
+    allow_headers=["*"],          # Allow all headers
+)
+# -----------------------------
 
 
 @app.get("/")
