@@ -265,3 +265,43 @@ Features implemented so far:
 ## Last Updated
 
 **27th of February 2026**
+
+**Contributor Quickstart**
+
+- **Env file:** Copy the example and fill in real values (see [backend/.env.example](backend/.env.example)).
+
+  PowerShell (Windows):
+
+  ```powershell
+  Copy-Item backend/.env.example backend\.env
+  & .venv\Scripts\Activate.ps1
+  pip install -r backend/requirements.txt
+  ```
+
+  macOS / Linux:
+
+  ```bash
+  cp backend/.env.example backend/.env
+  python3 -m venv .venv
+  source .venv/bin/activate
+  pip install -r backend/requirements.txt
+  ```
+
+- **Start infra:** use Docker Compose to launch Neo4j and MinIO:
+
+  ```bash
+  docker compose up -d
+  ```
+
+- **Run the backend locally:** from the repo root:
+
+  ```bash
+  cd backend
+  uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+  ```
+
+- **Notes:** If you add/remove Python dependencies, update `backend/requirements.txt` with:
+
+  ```bash
+  pip freeze > backend/requirements.txt
+  ```
