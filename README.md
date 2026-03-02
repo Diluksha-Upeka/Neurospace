@@ -262,9 +262,6 @@ Features implemented so far:
 - **Local Embeddings**: HuggingFace `all-MiniLM-L6-v2` runs on CPU, zero API costs
 - **Neo4j 5.26**: Latest version with advanced graph capabilities
 - **Rate Limit Free**: No more API quota issues for embeddings
-## Last Updated
-
-**27th of February 2026**
 
 **Contributor Quickstart**
 
@@ -305,3 +302,6 @@ Features implemented so far:
   ```bash
   pip freeze > backend/requirements.txt
   ```
+## Last Updated
+
+**02nd of March 2026**
