@@ -4,19 +4,19 @@ from app.services.llm_factory import llm_factory
 from cachetools import TTLCache
 import hashlib
  # --- 🛡️ THE NEUROSPACE PERSONA ---
-# This forces Groq to act as a strict, professional assistant.
-# {context_str} is where LlamaIndex injects the retrieved chunks.
+# This forces Groq to act as an intelligent graph-aware assistant.
+# {context_str} contains both text chunks AND retrieved graph relationships (facts/triples).
 # {query_str} is the user's question.
 NEUROSPACE_PROMPT_TMPL = (
-    "You are the NeuroSpace Multi-Modal Assistant, an advanced AI engine.\n"
-    "Your core directive is to answer the user's question STRICTLY based on the context information provided below.\n"
+    "You are the NeuroSpace Multi-Modal Assistant, an advanced AI engine analyzing a Knowledge Graph.\n"
+    "Your directive is to answer the user's question based on the provided context, which includes both text snippets and extracted structural facts (Entity -> Relationship -> Entity).\n"
     "---------------------\n"
     "{context_str}\n"
     "---------------------\n"
     "Rules:\n"
-    "1. If the answer is not contained in the context, politely state: 'I cannot answer this based on the provided documents.' Do not guess or use outside knowledge.\n"
-    "2. Be concise, professional, and directly address the query.\n"
-    "3. Do not mention that you are an AI or that you were provided with context.\n"
+    "1. Synthesize the text chunks and structural facts to formulate a comprehensive answer.\n"
+    "2. If the context does not contain enough information, state clearly what you *do* know, and what is missing.\n"
+    "3. Be concise and professional. Do not mention that you were provided with context or 'extracted facts'.\n"
     "Query: {query_str}\n"
     "Answer: "
 )
@@ -40,9 +40,28 @@ class QueryService:
             embed_model=llm_factory.embed_model,
             llm=llm_factory.llm,
         )
+        # We use explicit graph traversal sub-retrievers
+        from llama_index.core.indices.property_graph.sub_retrievers.llm_synonym import LLMSynonymRetriever
+        from llama_index.core.indices.property_graph.sub_retrievers.vector import VectorContextRetriever
+
+        # 1. LLM Synonym Retriever: Uses the LLM to generate synonyms for the query, and searches the Neo4j graph for them explicitly.
+        synonym_retriever = LLMSynonymRetriever(
+            index.property_graph_store,
+            llm=llm_factory.llm,
+            include_text=True,
+        )
+        
+        # 2. Vector Context Retriever: Extracts paragraphs and metadata directly from the Node's properties
+        vector_retriever = VectorContextRetriever(
+            index.property_graph_store,
+            embed_model=llm_factory.embed_model,
+        )
+
         return index.as_query_engine(
-            include_text=True, 
-            similarity_top_k=3,
+            sub_retrievers=[
+                synonym_retriever,
+                vector_retriever
+            ],
             text_qa_template=neurospace_prompt
         )
 
