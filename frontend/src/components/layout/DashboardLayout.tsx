@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+export default function DashboardLayout({ children, chatPanel }: { children: React.ReactNode, chatPanel?: React.ReactNode }) {
   return (
     <div className="flex h-screen w-full bg-slate-50 text-slate-800 overflow-hidden font-sans">
       
@@ -28,13 +28,16 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       </main>
 
       {/* RIGHT SIDEBAR: AI Chat */}
-      <aside className="w-96 border-l border-slate-200 bg-white/80 backdrop-blur-xl flex flex-col shadow-sm z-10">
+      <aside className="w-[400px] border-l border-slate-200 bg-white/80 backdrop-blur-xl flex flex-col shadow-sm z-10">
         <header className="h-14 border-b border-slate-200 flex items-center px-4 bg-white/50">
-          <h2 className="text-sm font-semibold text-slate-700">Assistant</h2>
+          <h2 className="text-sm font-semibold text-slate-700">NeuroSpace Assistant</h2>
         </header>
-        <div className="flex-1 p-4 flex items-center justify-center text-slate-400 font-medium bg-slate-50/50">
-           {/* Chat UI will go here */}
-           Chat Interface
+        <div className="flex-1 overflow-hidden">
+           {chatPanel || (
+             <div className="h-full w-full p-4 flex items-center justify-center text-slate-400 font-medium bg-slate-50/50">
+               Chat Interface
+             </div>
+           )}
         </div>
       </aside>
 
