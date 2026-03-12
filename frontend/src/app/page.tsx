@@ -5,6 +5,7 @@ import DashboardLayout from "@/components/layout/DashboardLayout";
 import GraphViewer from "@/components/graph/GraphViewer";
 import VideoPlayer from "@/components/media/VideoPlayer";
 import PdfViewer from "@/components/media/PdfViewer";
+import ChatInterface from "@/components/chat/ChatInterface";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function Home() {
@@ -25,7 +26,7 @@ export default function Home() {
   };
 
   return (
-    <DashboardLayout>
+    <DashboardLayout chatPanel={<ChatInterface onCitationClick={handleDocumentSelect} />}>
       {/* We use value and onValueChange to control the tabs programmatically */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full h-full flex flex-col">
         
