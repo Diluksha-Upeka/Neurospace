@@ -1,4 +1,5 @@
 import React from 'react';
+import FileUploader from '@/components/upload/FileUploader';
 
 export default function DashboardLayout({ children, chatPanel }: { children: React.ReactNode, chatPanel?: React.ReactNode }) {
   return (
@@ -9,10 +10,13 @@ export default function DashboardLayout({ children, chatPanel }: { children: Rea
         <div className="font-bold text-xl mb-8 tracking-wider text-slate-900">NEURO<span className="text-blue-600">SPACE</span></div>
         <div className="flex-1">
           <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-4">Ingestion</p>
-          {/* Upload Button will go here */}
-          <div className="h-24 rounded-xl border-2 border-dashed border-slate-300 bg-slate-50 flex items-center justify-center text-slate-500 hover:border-blue-400 hover:bg-blue-50 hover:text-blue-600 transition-all cursor-pointer font-medium shadow-sm">
-            Upload File
-          </div>
+          {/* Inject the Uploader Here! */}
+          <FileUploader />
+        </div>
+        
+        {/* Branding at the bottom */}
+        <div className="mt-auto pt-4 border-t border-slate-200">
+          <p className="text-[10px] font-semibold tracking-wider text-slate-400 text-center uppercase">NeuroSpace Engine v1.0</p>
         </div>
       </aside>
 
