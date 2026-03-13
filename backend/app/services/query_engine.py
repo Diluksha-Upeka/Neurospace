@@ -25,24 +25,26 @@ neurospace_prompt = PromptTemplate(NEUROSPACE_PROMPT_TMPL)
 
 class QueryService:
     def __init__(self):
-        print("⚙️ Initializing Hybrid Query Engine...")
+        print("⚙️ Initializing Hybrid Query Engine Cache...")
         self.storage_context = llm_factory.get_storage_context()
-        self.index = PropertyGraphIndex.from_existing(
-            property_graph_store=self.storage_context.property_graph_store,
-            embed_model=llm_factory.embed_model,
-            llm=llm_factory.llm,
-        )
-        # 💉 INJECT THE PROMPT HERE
-        self.query_engine = self.index.as_query_engine(
-            include_text=True, 
-            similarity_top_k=3,
-            text_qa_template=neurospace_prompt # <--- Apply the template
-        )
         # 🧠 Initialize the Cache
         # maxsize=100: Remembers the last 100 questions.
         # ttl=3600: Forgets them after 1 hour (3600 seconds).
         self.cache = TTLCache(maxsize=100, ttl=3600)
-        print("✅ Query Engine Ready with Strict Guardrails!")
+        print("✅ Query Engine Cache Ready!")
+
+    def _get_query_engine(self):
+        """Builds the query engine dynamically to ensure it captures newly ingested files."""
+        index = PropertyGraphIndex.from_existing(
+            property_graph_store=self.storage_context.property_graph_store,
+            embed_model=llm_factory.embed_model,
+            llm=llm_factory.llm,
+        )
+        return index.as_query_engine(
+            include_text=True, 
+            similarity_top_k=3,
+            text_qa_template=neurospace_prompt
+        )
 
     def _generate_cache_key(self, text: str) -> str:
         """Converts the question into a unique hash string."""
@@ -62,9 +64,10 @@ class QueryService:
             print(f"⚡ CACHE HIT! Instant response for: '{question}'")
             return self.cache[cache_key]
 
-        # 2. Not in cache, run the heavy engine
+        # 2. Not in cache, run the heavy engine on the LIVE graph state
         print(f"🧠 Thinking deeply about: '{question}'...")
-        response = self.query_engine.query(question)
+        query_engine = self._get_query_engine()
+        response = query_engine.query(question)
         answer_text = str(response)
         sources = []
         if response.source_nodes:
