@@ -1,4 +1,4 @@
-"use client"; // This must be a client component because it uses interactivity and hooks
+"use client";
 
 import React, { useEffect, useState } from 'react';
 import {
@@ -9,39 +9,39 @@ import {
   useNodesState,
   useEdgesState,
   Node,
-  Edge
+  Edge,
+  NodeMouseHandler // <--- Import this
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
-export default function GraphViewer() {
+// Define the props we expect from the parent
+interface GraphViewerProps {
+  onDocumentSelect: (filename: string) => void;
+}
+
+export default function GraphViewer({ onDocumentSelect }: GraphViewerProps) {
   const [nodes, setNodes, onNodesChange] = useNodesState<Node>([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch data from our FastAPI backend
     const fetchGraphData = async () => {
       try {
-        const response = await fetch('http://localhost:8000/graph?limit=100');
+        const response = await fetch('http://localhost:8000/graph?limit=150');
         const data = await response.json();
 
-        // Transform Backend Nodes -> React Flow Nodes
         const flowNodes = data.nodes.map((node: any, index: number) => {
-          // React Flow requires X,Y coordinates. We don't have them in Neo4j.
-          // For today, we use a simple grid/random math to spread them out.
-          // (Tomorrow we can add a layout engine like Dagre if we want it perfect)
           const x = (index % 10) * 200; 
           const y = Math.floor(index / 10) * 150;
 
-          // Color code based on node type
-          let bgColor = '#334155'; // Default Entity
-          if (node.group === 'Document') bgColor = '#2563eb'; // Blue
-          if (node.group === 'Chunk') bgColor = '#059669'; // Green
+          let bgColor = '#334155';
+          if (node.group === 'Document') bgColor = '#2563eb';
+          if (node.group === 'Chunk') bgColor = '#059669';
 
           return {
             id: node.id,
             position: { x: x + Math.random() * 50, y: y + Math.random() * 50 },
-            data: { label: node.label },
+            data: { label: node.label, group: node.group }, // <--- Save group in data
             style: {
               background: bgColor,
               color: 'white',
@@ -50,18 +50,18 @@ export default function GraphViewer() {
               padding: '10px',
               fontSize: '12px',
               width: 150,
-              textAlign: 'center'
+              textAlign: 'center',
+              cursor: node.group === 'Document' ? 'pointer' : 'default' // Add pointer cursor
             }
           };
         });
 
-        // Transform Backend Edges -> React Flow Edges
         const flowEdges = data.edges.map((edge: any) => ({
           id: edge.id,
           source: edge.source,
           target: edge.target,
           label: edge.label,
-          animated: true, // Makes the connections look like flowing data!
+          animated: true,
           style: { stroke: '#94a3b8' },
           labelStyle: { fill: '#cbd5e1', fontWeight: 700, fontSize: 10 }
         }));
@@ -78,13 +78,16 @@ export default function GraphViewer() {
     fetchGraphData();
   }, [setNodes, setEdges]);
 
-  if (loading) {
-    return (
-      <div className="w-full h-full flex items-center justify-center text-slate-500 animate-pulse">
-        Connecting to Neo4j Brain...
-      </div>
-    );
-  }
+  // THE CLICK HANDLER
+  const handleNodeClick: NodeMouseHandler = (event, node) => {
+    // If they click a Document node, we trigger the parent function
+    if (node.data.group === 'Document') {
+      const filename = node.data.label as string;
+      onDocumentSelect(filename);
+    }
+  };
+
+  if (loading) return <div className="w-full h-full flex items-center justify-center text-slate-500 animate-pulse">Connecting to Neo4j Brain...</div>;
 
   return (
     <div style={{ width: '100%', height: '100%' }}>
@@ -93,7 +96,8 @@ export default function GraphViewer() {
         edges={edges}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
-        fitView // Automatically zooms out to fit all nodes on screen
+        onNodeClick={handleNodeClick} // <--- Attach it here
+        fitView
         colorMode="dark"
       >
         <Controls />
