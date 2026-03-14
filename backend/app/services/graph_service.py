@@ -59,6 +59,19 @@ class GraphService:
             show_progress=True,
         )
 
+        try:
+            from app.database import db
+            with db.get_session() as session:
+                session.run(
+                    "MATCH (c:Chunk) WHERE c.filename = $filename "
+                    "MERGE (d:Document {id: $filename, name: $filename}) "
+                    "MERGE (d)-[:HAS_CHUNK]->(c)",
+                    filename=filename
+                )
+            print(f" Linked chunks to Document node for {filename}")
+        except Exception as e:
+            print(f" Failed to link Document node: {e}")
+
         print(f" Graph built successfully for {filename}!")
         return index
 
