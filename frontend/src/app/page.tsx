@@ -30,14 +30,14 @@ export default function Home() {
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full h-full flex flex-col">
         
         <div className="w-full flex justify-center mb-4">
-          <TabsList className="bg-slate-900 border border-slate-800">
-            <TabsTrigger value="graph">Knowledge Graph</TabsTrigger>
-            <TabsTrigger value="video" disabled={!activeFile?.endsWith('.mp4')}>Video Player</TabsTrigger>
-            <TabsTrigger value="pdf" disabled={!activeFile?.endsWith('.pdf')}>Document Viewer</TabsTrigger>
+          <TabsList className="bg-white/80 backdrop-blur-md border border-slate-200 shadow-sm rounded-full p-1">
+            <TabsTrigger value="graph" className="rounded-full px-6 data-[state=active]:bg-blue-50 data-[state=active]:text-blue-700 data-[state=active]:shadow-sm transition-all hover:text-slate-900 text-slate-500">Knowledge Graph</TabsTrigger>
+            <TabsTrigger value="video" disabled={!activeFile?.endsWith('.mp4')} className="rounded-full px-6 data-[state=active]:bg-blue-50 data-[state=active]:text-blue-700 data-[state=active]:shadow-sm transition-all hover:text-slate-900 text-slate-500">Video Player</TabsTrigger>
+            <TabsTrigger value="pdf" disabled={!activeFile?.endsWith('.pdf')} className="rounded-full px-6 data-[state=active]:bg-blue-50 data-[state=active]:text-blue-700 data-[state=active]:shadow-sm transition-all hover:text-slate-900 text-slate-500">Document Viewer</TabsTrigger>
           </TabsList>
         </div>
 
-        <div className="flex-1 border border-slate-800 rounded-lg overflow-hidden bg-slate-950 relative">
+        <div className="flex-1 border border-slate-200 rounded-2xl overflow-hidden bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative">
           
           <TabsContent value="graph" className="w-full h-full m-0 absolute inset-0">
             <GraphViewer onDocumentSelect={handleDocumentSelect} />

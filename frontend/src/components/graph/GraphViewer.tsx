@@ -34,9 +34,11 @@ export default function GraphViewer({ onDocumentSelect }: GraphViewerProps) {
           const x = (index % 10) * 200; 
           const y = Math.floor(index / 10) * 150;
 
-          let bgColor = '#334155';
-          if (node.group === 'Document') bgColor = '#2563eb';
-          if (node.group === 'Chunk') bgColor = '#059669';
+          let bgColor = '#ffffff';
+          let borderColor = '#cbd5e1';
+          let textColor = '#334155';
+          if (node.group === 'Document') { bgColor = '#3b82f6'; textColor = '#ffffff'; borderColor = '#2563eb'; }
+          if (node.group === 'Chunk') { bgColor = '#10b981'; textColor = '#ffffff'; borderColor = '#059669'; }
 
           return {
             id: node.id,
@@ -44,11 +46,13 @@ export default function GraphViewer({ onDocumentSelect }: GraphViewerProps) {
             data: { label: node.label, group: node.group }, // <--- Save group in data
             style: {
               background: bgColor,
-              color: 'white',
-              border: '1px solid #475569',
-              borderRadius: '8px',
-              padding: '10px',
+              color: textColor,
+              border: `1px solid ${borderColor}`,
+              borderRadius: '12px',
+              padding: '12px',
               fontSize: '12px',
+              fontWeight: 500,
+              boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05)',
               width: 150,
               textAlign: 'center',
               cursor: node.group === 'Document' ? 'pointer' : 'default' // Add pointer cursor
@@ -62,8 +66,8 @@ export default function GraphViewer({ onDocumentSelect }: GraphViewerProps) {
           target: edge.target,
           label: edge.label,
           animated: true,
-          style: { stroke: '#94a3b8' },
-          labelStyle: { fill: '#cbd5e1', fontWeight: 700, fontSize: 10 }
+          style: { stroke: '#94a3b8', strokeWidth: 1.5 },
+          labelStyle: { fill: '#64748b', fontWeight: 600, fontSize: 10 }
         }));
 
         setNodes(flowNodes);
@@ -87,10 +91,10 @@ export default function GraphViewer({ onDocumentSelect }: GraphViewerProps) {
     }
   };
 
-  if (loading) return <div className="w-full h-full flex items-center justify-center text-slate-500 animate-pulse">Connecting to Neo4j Brain...</div>;
+  if (loading) return <div className="w-full h-full flex items-center justify-center text-slate-400 font-medium animate-pulse">Connecting to Neo4j Brain...</div>;
 
   return (
-    <div style={{ width: '100%', height: '100%' }}>
+    <div style={{ width: '100%', height: '100%', backgroundColor: '#f8fafc' }}>
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -98,11 +102,11 @@ export default function GraphViewer({ onDocumentSelect }: GraphViewerProps) {
         onEdgesChange={onEdgesChange}
         onNodeClick={handleNodeClick} // <--- Attach it here
         fitView
-        colorMode="dark"
+        colorMode="light"
       >
-        <Controls />
-        <MiniMap nodeStrokeWidth={3} nodeColor="#475569" maskColor="rgba(15, 23, 42, 0.8)" />
-        <Background color="#334155" gap={16} size={1} />
+        <Controls showInteractive={false} />
+        <MiniMap nodeStrokeWidth={3} nodeColor="#e2e8f0" maskColor="rgba(248, 250, 252, 0.7)" />
+        <Background color="#cbd5e1" gap={20} size={1.5} />
       </ReactFlow>
     </div>
   );

@@ -7,7 +7,7 @@ interface VideoPlayerProps {
 export default function VideoPlayer({ filename }: VideoPlayerProps) {
   if (!filename) {
     return (
-      <div className="w-full h-full flex items-center justify-center text-slate-500">
+      <div className="w-full h-full flex items-center justify-center text-slate-400 font-medium">
         <p>No video selected. Click a video node in the graph or a citation in the chat.</p>
       </div>
     );
