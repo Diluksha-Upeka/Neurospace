@@ -74,6 +74,28 @@ def list_uploaded_documents():
     files = storage.list_files()
     return {"documents": files}
 
+@app.delete("/clear")
+def clear_all_data():
+    """
+    Nuclear option: Clears ALL data from Neo4j and MinIO.
+    This resets the entire system to a clean state.
+    """
+    try:
+        # 1. Clear the Neo4j graph
+        db.clear_graph()
+
+        # 2. Clear all files from MinIO
+        storage = get_storage()
+        files_deleted = storage.clear_all_files()
+
+        return {
+            "status": "cleared",
+            "message": f"System reset complete. Deleted {files_deleted} file(s) and all graph data."
+        }
+    except Exception as e:
+        print(f"❌ Clear Error: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to clear system: {str(e)}")
+
 @app.post("/test-extract")
 def test_video_extraction(video_path: str):
     """
