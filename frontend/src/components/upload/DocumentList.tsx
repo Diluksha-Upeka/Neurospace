@@ -5,8 +5,9 @@ import React, { useEffect, useState } from 'react';
 export default function DocumentList() {
   const [documents, setDocuments] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
+  const [clearing, setClearing] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
-  // We fetch the documents when the component loads
   const fetchDocuments = async () => {
     try {
       const response = await fetch('http://localhost:8000/documents');
@@ -19,10 +20,25 @@ export default function DocumentList() {
     }
   };
 
+  const handleClear = async () => {
+    setClearing(true);
+    try {
+      const response = await fetch('http://localhost:8000/clear', { method: 'DELETE' });
+      if (response.ok) {
+        setDocuments([]);
+        setShowConfirm(false);
+        // Force a full reload so the Graph Viewer also re-fetches from empty Neo4j
+        window.location.reload();
+      }
+    } catch (error) {
+      console.error("Failed to clear system:", error);
+    } finally {
+      setClearing(false);
+    }
+  };
+
   useEffect(() => {
     fetchDocuments();
-    
-    // Optional: Refresh the list every 10 seconds to catch new uploads
     const interval = setInterval(fetchDocuments, 10000);
     return () => clearInterval(interval);
   }, []);
@@ -31,10 +47,45 @@ export default function DocumentList() {
 
   return (
     <div className="mt-6 flex-1 overflow-y-auto">
-      <h3 className="text-[11px] font-semibold text-slate-500 uppercase tracking-widest mb-3">
-        Active Library ({documents.length})
-      </h3>
-      
+      <div className="flex items-center justify-between mb-3">
+        <h3 className="text-[11px] font-semibold text-slate-500 uppercase tracking-widest">
+          Active Library ({documents.length})
+        </h3>
+        {!showConfirm && (
+          <button
+            onClick={() => setShowConfirm(true)}
+            className="text-[10px] font-medium text-red-400 hover:text-red-600 transition-colors uppercase tracking-wider"
+            title="Clear all data (files + graph)"
+          >
+            Clear All
+          </button>
+        )}
+      </div>
+
+      {/* Confirmation dialog */}
+      {showConfirm && (
+        <div className="mb-3 p-3 rounded-lg border border-red-200 bg-red-50">
+          <p className="text-[11px] text-red-700 font-medium mb-2">
+            Delete all files & graph data?
+          </p>
+          <div className="flex gap-2">
+            <button
+              onClick={handleClear}
+              disabled={clearing}
+              className="flex-1 text-[11px] font-semibold px-3 py-1.5 rounded-md bg-red-500 text-white hover:bg-red-600 transition-colors disabled:opacity-50"
+            >
+              {clearing ? 'Clearing...' : 'Yes, Clear'}
+            </button>
+            <button
+              onClick={() => setShowConfirm(false)}
+              className="flex-1 text-[11px] font-semibold px-3 py-1.5 rounded-md border border-slate-200 text-slate-600 hover:bg-slate-100 transition-colors"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+
       {documents.length === 0 ? (
         <p className="text-[11px] text-slate-400">No documents uploaded yet.</p>
       ) : (
