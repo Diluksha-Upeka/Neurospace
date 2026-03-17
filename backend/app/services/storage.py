@@ -74,6 +74,18 @@ class StorageService:
             else:
                 raise e
 
+    def clear_all_files(self):
+        """Deletes ALL files from the MinIO bucket."""
+        try:
+            files = self.list_files()
+            for filename in files:
+                self.s3.delete_object(Bucket=self.bucket, Key=filename)
+            print(f"🗑️ Cleared {len(files)} file(s) from MinIO bucket '{self.bucket}'.")
+            return len(files)
+        except Exception as e:
+            print(f"❌ Error clearing files: {e}")
+            raise e
+
     def list_files(self) -> list:
         """
         Returns a list of all filenames currently stored in the MinIO bucket.
