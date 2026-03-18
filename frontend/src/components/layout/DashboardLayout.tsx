@@ -4,71 +4,73 @@ import FileUploader from '@/components/upload/FileUploader';
 
 export default function DashboardLayout({ children, chatPanel }: { children: React.ReactNode, chatPanel?: React.ReactNode }) {
   return (
-    <div className="flex h-screen w-full bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-indigo-50 via-slate-50 to-white text-slate-800 overflow-hidden font-sans">
+    <div className="flex h-screen w-full bg-[#FAFAFA] text-slate-900 overflow-hidden font-sans selection:bg-blue-100">
       
       {/* LEFT SIDEBAR: Uploads & Controls */}
-      <div className="h-full p-4 pr-0 z-10 w-[300px] flex-shrink-0">
-        <aside className="h-full w-full bg-white/60 backdrop-blur-2xl border border-white shadow-xl shadow-slate-200/40 rounded-[2rem] p-6 flex flex-col relative overflow-hidden">
-          {/* subtle glow inside sidebar */}
-          <div className="absolute -top-24 -left-24 w-64 h-64 bg-blue-400/20 rounded-full blur-[3rem]"></div>
-          
-          <div className="mb-10 relative z-10 px-2 flex justify-center drop-shadow-sm">
-            <Image src="/logo ne.png" alt="Neurospace Logo" width={400} height={100} className="w-40 h-auto object-contain" priority />
+      <aside className="w-[280px] bg-[#FAFAFA] border-r border-[#EAEAEA] flex flex-col flex-shrink-0 z-10 transition-all">
+        {/* Header / Main Logo Area */}
+        <div className="h-14 border-b border-[#EAEAEA] flex items-center px-5 shrink-0">
+          <Image src="/logo ne.png" alt="Neurospace Logo" width={400} height={100} className="h-6 w-auto object-contain" priority />
+        </div>
+        
+        <div className="flex-1 overflow-y-auto p-4">
+          <div className="mb-2 px-1 flex items-center justify-between">
+            <p className="text-[11px] font-semibold text-slate-500 uppercase tracking-widest">Ingestion Pipeline</p>
           </div>
-          
-          <div className="flex-1 relative z-10">
-            <div className="flex items-center gap-3 mb-6 opacity-80">
-              <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Ingestion Phase</p>
-              <div className="h-px bg-slate-200 flex-1"></div>
-            </div>
-            {/* Inject the Uploader Here! */}
+          {/* Inject the Uploader Here! */}
+          <div className="mt-3">
             <FileUploader />
           </div>
-          
-          {/* Branding at the bottom */}
-          <div className="mt-auto pt-6 flex flex-col items-center justify-center gap-4 relative z-10">
-            <div className="p-3 bg-white/80 rounded-2xl shadow-sm border border-white backdrop-blur-md">
-              <Image src="/logo only.png" alt="Neurospace Icon" width={64} height={64} className="w-10 h-10 object-contain drop-shadow-sm" priority />
-            </div>
-            <p className="text-[9px] font-bold tracking-[0.25em] text-slate-400 text-center uppercase">NeuroSpace Engine v1.0</p>
+        </div>
+        
+        {/* Branding & Status at the bottom */}
+        <div className="mt-auto h-14 border-t border-[#EAEAEA] flex items-center justify-between px-5 bg-[#FAFAFA] shrink-0">
+          <div className="flex items-center gap-2.5">
+            <Image src="/logo only.png" alt="Icon" width={24} height={24} className="w-4 h-4 object-contain grayscale opacity-60" priority />
+            <span className="text-[11px] font-medium text-slate-500 hidden xl:inline-block">NeuroSpace Engine</span>
           </div>
-        </aside>
-      </div>
+          <div className="flex items-center gap-2">
+            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 ring-4 ring-emerald-500/20"></div>
+            <span className="text-[10px] font-medium text-emerald-600 uppercase tracking-wider">Online</span>
+          </div>
+        </div>
+      </aside>
 
       {/* MAIN CONTENT AREA: Graph & Media Viewer */}
-      <main className="flex-1 flex flex-col relative z-0 p-4 pl-6 pr-6 min-w-0">
-        <header className="h-16 flex items-center justify-between mb-2">
-          <h1 className="text-xl font-semibold text-slate-800 tracking-tight">Knowledge Graph Workspace</h1>
+      <main className="flex-1 flex flex-col bg-white relative z-0 min-w-0 shadow-[0_0_40px_-15px_rgba(0,0,0,0.05)]">
+        <header className="h-14 border-b border-[#EAEAEA] flex items-center px-6 bg-white shrink-0">
+          <div className="flex items-center gap-3">
+            <div className="p-1.5 bg-slate-100 rounded-md">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-slate-600"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line></svg>
+            </div>
+            <h1 className="text-[13px] font-medium text-slate-800 tracking-tight">Knowledge Graph Workspace</h1>
+          </div>
         </header>
-        <div className="flex-1 relative">
-           <div className="absolute inset-0 bg-white/50 backdrop-blur-md border border-white rounded-[2rem] shadow-xl shadow-slate-200/30 overflow-hidden flex flex-col">
-             {children}
-           </div>
+        <div className="flex-1 relative overflow-hidden flex flex-col">
+           {children}
         </div>
       </main>
 
       {/* RIGHT SIDEBAR: AI Chat */}
-      <div className="h-full p-4 pl-0 z-10 w-[420px] flex-shrink-0">
-        <aside className="h-full w-full bg-white/60 backdrop-blur-2xl border border-white shadow-xl shadow-slate-200/40 rounded-[2rem] flex flex-col relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-purple-400/10 rounded-full blur-[3rem] -translate-y-1/2 translate-x-1/4"></div>
-          
-          <header className="h-20 border-b border-slate-200/50 flex items-center px-8 relative z-10 bg-white/40">
-            <div className="relative flex h-3 w-3 mr-4">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
-            </div>
-            <h2 className="text-sm font-bold text-slate-800 tracking-wide uppercase">NeuroSpace Assistant</h2>
-          </header>
-          
-          <div className="flex-1 overflow-hidden relative z-10">
-             {chatPanel || (
-               <div className="h-full w-full p-4 flex items-center justify-center text-slate-400 font-medium bg-transparent">
-                 Chat Interface
-               </div>
-             )}
+      <aside className="w-[360px] bg-[#FAFAFA] border-l border-[#EAEAEA] flex flex-col flex-shrink-0 z-10">
+        <header className="h-14 border-b border-[#EAEAEA] flex items-center justify-between px-5 bg-[#FAFAFA] shrink-0">
+          <div className="flex items-center gap-2.5">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-blue-600"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            <h2 className="text-[13px] font-semibold text-slate-800 tracking-tight">NeuroSpace Assistant</h2>
           </div>
-        </aside>
-      </div>
+          <button className="p-1.5 hover:bg-[#EAEAEA] rounded-md transition-colors text-slate-400">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+          </button>
+        </header>
+        
+        <div className="flex-1 overflow-hidden relative z-10 bg-white">
+           {chatPanel || (
+             <div className="h-full w-full p-4 flex items-center justify-center text-[13px] text-slate-400 font-medium">
+               Select or initialize a chat session
+             </div>
+           )}
+        </div>
+      </aside>
 
     </div>
   );
