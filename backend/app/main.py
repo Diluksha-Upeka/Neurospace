@@ -65,6 +65,15 @@ app.add_middleware(
 def health_check():
     return {"status": "active", "system": "NeuroSpace Graph Engine"}
 
+@app.get("/documents")
+def list_uploaded_documents():
+    """
+    Returns a list of all files available in the system.
+    """
+    storage = get_storage()
+    files = storage.list_files()
+    return {"documents": files}
+
 @app.post("/test-extract")
 def test_video_extraction(video_path: str):
     """
