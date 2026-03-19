@@ -79,7 +79,7 @@ class StorageService:
         Returns a list of all filenames currently stored in the MinIO bucket.
         """
         try:
-            print("🗂️ Fetching document list from MinIO...")
+            print("Fetching document list from MinIO...")
             response = self.s3.list_objects_v2(Bucket=self.bucket)
             
             if 'Contents' in response:
@@ -88,7 +88,7 @@ class StorageService:
                 return sorted(files)
             return []
         except Exception as e:
-            print(f"❌ Error listing files: {e}")
+            print(f" Error listing files: {e}")
             return []
 
 # Singleton
