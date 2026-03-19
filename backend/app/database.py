@@ -24,6 +24,12 @@ class GraphDB:
     def get_session(self):
         return self.driver.session()
 
+    def clear_graph(self):
+        """Deletes ALL nodes and relationships from the Neo4j database."""
+        with self.driver.session() as session:
+            session.run("MATCH (n) DETACH DELETE n")
+            print("🗑️ Neo4j graph cleared — all nodes and relationships deleted.")
+
 
 # Singleton instance
 db = GraphDB()
