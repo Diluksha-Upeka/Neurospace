@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import FileUploader from '@/components/upload/FileUploader';
+import DocumentList from '@/components/upload/DocumentList';
 
 export default function DashboardLayout({ children, chatPanel }: { children: React.ReactNode, chatPanel?: React.ReactNode }) {
   return (
@@ -21,6 +22,9 @@ export default function DashboardLayout({ children, chatPanel }: { children: Rea
           <div className="mt-3">
             <FileUploader />
           </div>
+
+          {/* Document Library */}
+          <DocumentList />
         </div>
         
         {/* Branding & Status at the bottom */}
