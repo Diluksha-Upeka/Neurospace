@@ -1,4 +1,5 @@
 import React from 'react';
+import { apiUrl } from '@/lib/api';
 
 interface VideoPlayerProps {
   filename: string | null;
@@ -18,7 +19,7 @@ export default function VideoPlayer({ filename }: VideoPlayerProps) {
       <video 
         controls 
         className="w-full h-auto max-h-full"
-        src={`http://localhost:8000/files/${filename}`}
+        src={apiUrl(`/files/${encodeURIComponent(filename)}`)}
       >
         Your browser does not support the video tag.
       </video>

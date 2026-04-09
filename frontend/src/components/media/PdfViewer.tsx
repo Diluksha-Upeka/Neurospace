@@ -1,4 +1,5 @@
 import React from 'react';
+import { apiUrl } from '@/lib/api';
 
 interface PdfViewerProps {
   filename: string | null;
@@ -16,7 +17,7 @@ export default function PdfViewer({ filename }: PdfViewerProps) {
   return (
     <div className="w-full h-full rounded-2xl overflow-hidden bg-white shadow-inner">
       <iframe 
-        src={`http://localhost:8000/files/${filename}`} 
+        src={apiUrl(`/files/${encodeURIComponent(filename)}`)}
         className="w-full h-full border-none"
         title="PDF Viewer"
       />

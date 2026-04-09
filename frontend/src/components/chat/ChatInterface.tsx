@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
+import { apiUrl } from '@/lib/api';
 
 // Define the shape of our messages based on the backend schema
 interface SourceItem {
@@ -38,7 +39,7 @@ export default function ChatInterface({ onCitationClick }: ChatInterfaceProps) {
 
     try {
       // Hit your FastAPI backend
-      const response = await fetch('http://localhost:8000/chat', {
+      const response = await fetch(apiUrl('/chat'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: userMsg })

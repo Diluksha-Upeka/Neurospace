@@ -1,108 +1,171 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from "react";
 import {
-  ReactFlow,
-  MiniMap,
-  Controls,
   Background,
-  useNodesState,
+  Controls,
+  MiniMap,
+  ReactFlow,
   useEdgesState,
-  Node,
-  Edge,
-  NodeMouseHandler // <--- Import this
-} from '@xyflow/react';
-import '@xyflow/react/dist/style.css';
+  useNodesState,
+  type Edge,
+  type Node,
+} from "@xyflow/react";
+import "@xyflow/react/dist/style.css";
+import { apiUrl } from "@/lib/api";
 
-// Define the props we expect from the parent
-interface GraphViewerProps {
-  onDocumentSelect: (filename: string) => void;
+type ApiGraphNode = {
+  id: string;
+  label: string;
+  group: string;
+};
+
+type ApiGraphEdge = {
+  id: string;
+  source: string;
+  target: string;
+  label: string;
+};
+
+type ApiGraphPayload = {
+  nodes: ApiGraphNode[];
+  edges: ApiGraphEdge[];
+};
+
+const groupStyles: Record<string, { bg: string; border: string; color: string }> = {
+  Document: { bg: "#2563eb", border: "#1d4ed8", color: "#ffffff" },
+  Chunk: { bg: "#059669", border: "#047857", color: "#ffffff" },
+};
+
+async function fetchWithTimeout(url: string, timeoutMs: number): Promise<Response> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    return await fetch(url, { signal: controller.signal });
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
-export default function GraphViewer({ onDocumentSelect }: GraphViewerProps) {
+export default function GraphViewer() {
   const [nodes, setNodes, onNodesChange] = useNodesState<Node>([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const loadGraph = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetchWithTimeout(apiUrl("/graph?limit=150"), 15000);
+
+      if (!response.ok) {
+        throw new Error(`Graph API returned ${response.status}`);
+      }
+
+      const payload = (await response.json()) as ApiGraphPayload;
+
+      const flowNodes: Node[] = payload.nodes.map((node, index) => {
+        const x = (index % 8) * 220;
+        const y = Math.floor(index / 8) * 150;
+        const style = groupStyles[node.group] ?? {
+          bg: "#ffffff",
+          border: "#cbd5e1",
+          color: "#334155",
+        };
+
+        return {
+          id: node.id,
+          position: { x, y },
+          data: { label: node.label, group: node.group },
+          style: {
+            background: style.bg,
+            color: style.color,
+            border: `1px solid ${style.border}`,
+            borderRadius: "12px",
+            padding: "10px",
+            fontSize: "12px",
+            fontWeight: 600,
+            width: 165,
+            textAlign: "center",
+            boxShadow: "0 3px 8px rgba(15, 23, 42, 0.08)",
+          },
+        };
+      });
+
+      const flowEdges: Edge[] = payload.edges.map((edge) => ({
+        id: edge.id,
+        source: edge.source,
+        target: edge.target,
+        label: edge.label,
+        animated: false,
+        style: { stroke: "#94a3b8", strokeWidth: 1.5 },
+        labelStyle: { fill: "#64748b", fontSize: 10, fontWeight: 600 },
+      }));
+
+      setNodes(flowNodes);
+      setEdges(flowEdges);
+    } catch (err) {
+      const timedOut = err instanceof DOMException && err.name === "AbortError";
+      setError(
+        timedOut
+          ? "Graph request timed out. The backend may still be starting."
+          : "Could not load graph data from backend."
+      );
+      setNodes([]);
+      setEdges([]);
+    } finally {
+      setLoading(false);
+    }
+  }, [setEdges, setNodes]);
 
   useEffect(() => {
-    const fetchGraphData = async () => {
-      try {
-        const response = await fetch('http://localhost:8000/graph?limit=150');
-        const data = await response.json();
+    loadGraph();
+  }, [loadGraph]);
 
-        const flowNodes = data.nodes.map((node: any, index: number) => {
-          const x = (index % 10) * 200; 
-          const y = Math.floor(index / 10) * 150;
+  if (loading) {
+    return (
+      <div className="w-full h-full flex items-center justify-center text-slate-400">
+        <p className="animate-pulse text-sm font-medium">Synthesizing Neo4j Brain...</p>
+      </div>
+    );
+  }
 
-          let bgColor = '#ffffff';
-          let borderColor = '#cbd5e1';
-          let textColor = '#334155';
-          if (node.group === 'Document') { bgColor = '#3b82f6'; textColor = '#ffffff'; borderColor = '#2563eb'; }
-          if (node.group === 'Chunk') { bgColor = '#10b981'; textColor = '#ffffff'; borderColor = '#059669'; }
+  if (error) {
+    return (
+      <div className="w-full h-full flex items-center justify-center p-6">
+        <div className="max-w-md w-full rounded-xl border border-red-200 bg-red-50 p-4 text-center">
+          <p className="text-sm font-semibold text-red-700">Graph Load Failed</p>
+          <p className="text-xs text-red-600 mt-1">{error}</p>
+          <button
+            onClick={loadGraph}
+            className="mt-3 px-3 py-1.5 text-xs font-semibold rounded-md bg-red-600 text-white hover:bg-red-700 transition-colors"
+          >
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
 
-          return {
-            id: node.id,
-            position: { x: x + Math.random() * 50, y: y + Math.random() * 50 },
-            data: { label: node.label, group: node.group }, // <--- Save group in data
-            style: {
-              background: bgColor,
-              color: textColor,
-              border: `1px solid ${borderColor}`,
-              borderRadius: '12px',
-              padding: '12px',
-              fontSize: '12px',
-              fontWeight: 500,
-              boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05)',
-              width: 150,
-              textAlign: 'center',
-              cursor: node.group === 'Document' ? 'pointer' : 'default' // Add pointer cursor
-            }
-          };
-        });
-
-        const flowEdges = data.edges.map((edge: any) => ({
-          id: edge.id,
-          source: edge.source,
-          target: edge.target,
-          label: edge.label,
-          animated: true,
-          style: { stroke: '#94a3b8', strokeWidth: 1.5 },
-          labelStyle: { fill: '#64748b', fontWeight: 600, fontSize: 10 }
-        }));
-
-        setNodes(flowNodes);
-        setEdges(flowEdges);
-        setLoading(false);
-      } catch (error) {
-        console.error("Failed to fetch graph data:", error);
-        setLoading(false);
-      }
-    };
-
-    fetchGraphData();
-  }, [setNodes, setEdges]);
-
-  // THE CLICK HANDLER
-  const handleNodeClick: NodeMouseHandler = (event, node) => {
-    // If they click a Document node, we trigger the parent function
-    if (node.data.group === 'Document') {
-      const filename = node.data.label as string;
-      onDocumentSelect(filename);
-    }
-  };
-
-  if (loading) return <div className="w-full h-full flex items-center justify-center text-slate-400 font-medium animate-pulse">Connecting to Neo4j Brain...</div>;
+  if (nodes.length === 0) {
+    return (
+      <div className="w-full h-full flex items-center justify-center text-slate-400">
+        <p className="text-sm font-medium">No graph nodes yet. Upload a PDF or MP4 to build your graph.</p>
+      </div>
+    );
+  }
 
   return (
-    <div style={{ width: '100%', height: '100%', backgroundColor: '#f8fafc' }}>
+    <div className="w-full h-full bg-slate-50">
       <ReactFlow
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
-        onNodeClick={handleNodeClick} // <--- Attach it here
         fitView
-        colorMode="light"
       >
         <Controls showInteractive={false} />
         <MiniMap nodeStrokeWidth={3} nodeColor="#e2e8f0" maskColor="rgba(248, 250, 252, 0.7)" />
