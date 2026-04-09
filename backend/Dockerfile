@@ -9,7 +9,14 @@ RUN apt-get update && apt-get install -y ffmpeg libsm6 libxext6 && rm -rf /var/l
 
 # Copy the requirements file and install dependencies
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Install uv for ultra-fast dependency resolution (stops pip from getting stuck)
+RUN pip install --no-cache-dir uv
+
+# Install CPU-only PyTorch first
+RUN uv pip install --system --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
+
+# Install the rest of the requirements using uv
+RUN uv pip install --system --no-cache-dir -r requirements.txt
 
 # Copy the rest of your backend code
 COPY . .

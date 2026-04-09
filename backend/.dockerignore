@@ -1,0 +1,19 @@
+# Python virtual environments
+venv/
+.venv/
+__pycache__/
+
+# Temp files from ingestion
+temp_*
+*.mp3
+*.mp4
+
+# IDE / OS
+.env
+.git
+.idea/
+.vscode/
+*.pyc
+
+# Test files
+test_files/
