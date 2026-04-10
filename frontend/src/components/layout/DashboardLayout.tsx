@@ -3,7 +3,14 @@ import Image from 'next/image';
 import FileUploader from '@/components/upload/FileUploader';
 import DocumentList from '@/components/upload/DocumentList';
 
-export default function DashboardLayout({ children, chatPanel }: { children: React.ReactNode, chatPanel?: React.ReactNode }) {
+type DashboardLayoutProps = {
+  children: React.ReactNode;
+  chatPanel?: React.ReactNode;
+  onFileUploaded?: (filename: string) => void;
+  onDocumentSelect?: (filename: string) => void;
+};
+
+export default function DashboardLayout({ children, chatPanel, onFileUploaded, onDocumentSelect }: DashboardLayoutProps) {
   return (
     <div className="flex h-screen w-full bg-[#FAFAFA] text-slate-900 overflow-hidden font-sans selection:bg-blue-100">
       
@@ -20,11 +27,11 @@ export default function DashboardLayout({ children, chatPanel }: { children: Rea
           </div>
           {/* Inject the Uploader Here! */}
           <div className="mt-3">
-            <FileUploader />
+            <FileUploader onUploadSuccess={onFileUploaded} />
           </div>
 
           {/* Document Library */}
-          <DocumentList />
+          <DocumentList onDocumentSelect={onDocumentSelect} />
         </div>
         
         {/* Branding & Status at the bottom */}

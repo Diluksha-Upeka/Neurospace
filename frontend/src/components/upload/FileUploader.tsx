@@ -1,8 +1,13 @@
 "use client";
 
 import React, { useState, useRef } from 'react';
+import { apiUrl } from '@/lib/api';
 
-export default function FileUploader() {
+interface FileUploaderProps {
+  onUploadSuccess?: (filename: string) => void;
+}
+
+export default function FileUploader({ onUploadSuccess }: FileUploaderProps) {
   const [file, setFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
@@ -26,18 +31,26 @@ export default function FileUploader() {
     formData.append('file', file);
 
     try {
-      const response = await fetch('http://localhost:8000/ingest', {
+      const response = await fetch(apiUrl('/ingest'), {
         method: 'POST',
         body: formData,
       });
 
+      let responseData: { filename?: string; detail?: string } | null = null;
+      try {
+        responseData = await response.json();
+      } catch {
+        responseData = null;
+      }
+
       if (response.ok) {
         setStatusMessage("Success: Graph is building in the background.");
+        const uploadedFilename = responseData?.filename || file.name;
+        onUploadSuccess?.(uploadedFilename);
         setFile(null); // Reset the selection
         if (fileInputRef.current) fileInputRef.current.value = ''; // Reset the input
       } else {
-        const errorData = await response.json();
-        setStatusMessage(`Error: ${errorData.detail || 'Upload failed'}`);
+        setStatusMessage(`Error: ${responseData?.detail || 'Upload failed'}`);
       }
     } catch (error) {
       console.error("Upload failed:", error);

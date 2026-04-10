@@ -1,8 +1,13 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
+import { apiUrl } from '@/lib/api';
 
-export default function DocumentList() {
+interface DocumentListProps {
+  onDocumentSelect?: (filename: string) => void;
+}
+
+export default function DocumentList({ onDocumentSelect }: DocumentListProps) {
   const [documents, setDocuments] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [clearing, setClearing] = useState(false);
@@ -10,7 +15,7 @@ export default function DocumentList() {
 
   const fetchDocuments = async () => {
     try {
-      const response = await fetch('http://localhost:8000/documents');
+      const response = await fetch(apiUrl('/documents'));
       const data = await response.json();
       setDocuments(data.documents);
     } catch (error) {
@@ -23,7 +28,7 @@ export default function DocumentList() {
   const handleClear = async () => {
     setClearing(true);
     try {
-      const response = await fetch('http://localhost:8000/clear', { method: 'DELETE' });
+      const response = await fetch(apiUrl('/clear'), { method: 'DELETE' });
       if (response.ok) {
         setDocuments([]);
         setShowConfirm(false);
@@ -90,12 +95,18 @@ export default function DocumentList() {
         <p className="text-[11px] text-slate-400">No documents uploaded yet.</p>
       ) : (
         <ul className="space-y-1.5">
-          {documents.map((doc, idx) => (
-            <li key={idx} className="flex items-center gap-2.5 text-[12px] text-slate-700 bg-white p-2.5 rounded-lg border border-[#EAEAEA] hover:border-blue-200 hover:bg-blue-50/30 transition-all cursor-default group">
-              <span className="text-sm shrink-0">
-                {doc.endsWith('.mp4') ? '🎬' : '📄'}
-              </span>
-              <span className="truncate" title={doc}>{doc}</span>
+          {documents.map((doc) => (
+            <li key={doc}>
+              <button
+                type="button"
+                onClick={() => onDocumentSelect?.(doc)}
+                className="w-full text-left flex items-center gap-2.5 text-[12px] text-slate-700 bg-white p-2.5 rounded-lg border border-[#EAEAEA] hover:border-blue-200 hover:bg-blue-50/30 transition-all cursor-pointer group"
+              >
+                <span className="text-sm shrink-0">
+                  {doc.endsWith('.mp4') ? '🎬' : '📄'}
+                </span>
+                <span className="truncate" title={doc}>{doc}</span>
+              </button>
             </li>
           ))}
         </ul>
