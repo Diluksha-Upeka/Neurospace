@@ -32,19 +32,19 @@ export default function Home() {
       onFileUploaded={handleDocumentSelect}
       onDocumentSelect={handleDocumentSelect}
     >
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full h-full flex flex-col">
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full h-full flex flex-col pt-2">
         
         {/* THE TAB BUTTONS */}
-        <div className="w-full flex justify-center mb-4">
-          <TabsList className="bg-slate-900 border border-slate-800">
-            <TabsTrigger value="graph">Knowledge Graph</TabsTrigger>
-            <TabsTrigger value="video" disabled={!activeFile?.toLowerCase().endsWith('.mp4')}>Video Player</TabsTrigger>
-            <TabsTrigger value="pdf" disabled={!activeFile?.toLowerCase().endsWith('.pdf')}>Document Viewer</TabsTrigger>
+        <div className="w-full flex justify-center mb-6">
+          <TabsList className="bg-white/60 backdrop-blur-md border border-slate-200/60 p-1.5 rounded-2xl shadow-sm">
+            <TabsTrigger value="graph" className="rounded-xl data-[state=active]:bg-white data-[state=active]:shadow-sm data-[state=active]:text-indigo-600 transition-all duration-300">Knowledge Graph</TabsTrigger>
+            <TabsTrigger value="video" disabled={!activeFile?.toLowerCase().endsWith('.mp4')} className="rounded-xl data-[state=active]:bg-white data-[state=active]:shadow-sm data-[state=active]:text-indigo-600 transition-all duration-300">Video Player</TabsTrigger>
+            <TabsTrigger value="pdf" disabled={!activeFile?.toLowerCase().endsWith('.pdf')} className="rounded-xl data-[state=active]:bg-white data-[state=active]:shadow-sm data-[state=active]:text-indigo-600 transition-all duration-300">Document Viewer</TabsTrigger>
           </TabsList>
         </div>
 
         {/* THE CONTENT PANELS */}
-        <div className="flex-1 border border-slate-800 rounded-lg overflow-hidden bg-slate-950 relative">
+        <div className="flex-1 border border-slate-200/50 rounded-3xl overflow-hidden bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative ring-1 ring-black/[0.01]">
           
           <TabsContent value="graph" className="w-full h-full m-0 absolute inset-0">
             <GraphViewer />
