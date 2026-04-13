@@ -58,6 +58,16 @@ def process_file_background(file_path: str, filename: str, content_type: str):
 
         # 3. BUILD GRAPH (Entity Extraction)
         if extracted_text_chunks:
+            # --- RATE LIMIT SAFEGUARD ---
+            # Groq's free tier (llama-3.1-8b) has strict limits (e.g., 30 Requests/Min, 6000 Tokens/Min)
+            # Sending 120 chunks at once causes the LLM integration to hit a 429 error and silently hang 
+            # while it infinitely retries with exponential backoff.
+            # For demonstration, we cap the chunks. In a production app, you would queue these chunks with time.sleep()
+            MAX_CHUNKS = 5
+            if len(extracted_text_chunks) > MAX_CHUNKS:
+                print(f" ⚠️ Document has {len(extracted_text_chunks)} chunks. Limiting to first {MAX_CHUNKS} to prevent Groq API rate limit hangs.")
+                extracted_text_chunks = extracted_text_chunks[:MAX_CHUNKS]
+
             print(f" Sending {len(extracted_text_chunks)} chunks to Graph Engine...")
             graph_service.process_document(extracted_text_chunks, filename)
 
