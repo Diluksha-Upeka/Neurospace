@@ -40,8 +40,8 @@ def process_file_background(file_path: str, filename: str, content_type: str):
             # B. Transcribe
             result = transcriber.transcribe(audio_path)
             
-            # Extract just the text from the segments
-            extracted_text_chunks = [seg.text for seg in result.segments]
+            # Extract the text and timestamps from the video segments
+            extracted_text_chunks = [{"text": seg.text, "start": round(seg.start, 2), "end": round(seg.end, 2)} for seg in result.segments]
             print(f" Video Processed! Found {len(result.segments)} segments.")
             
         elif "pdf" in content_type:
@@ -49,8 +49,8 @@ def process_file_background(file_path: str, filename: str, content_type: str):
             print(" Running PDF Pipeline...")
             result = pdf_processor.process_pdf(file_path)
             
-            # Extract just the text from the chunks
-            extracted_text_chunks = [chunk.text for chunk in result.chunks]
+            # Extract the text and page numbers from the PDF chunks
+            extracted_text_chunks = [{"text": chunk.text, "page_number": chunk.page_number} for chunk in result.chunks]
             print(f" PDF Processed! Found {len(result.chunks)} chunks.")
             
         else:
@@ -58,16 +58,6 @@ def process_file_background(file_path: str, filename: str, content_type: str):
 
         # 3. BUILD GRAPH (Entity Extraction)
         if extracted_text_chunks:
-            # --- RATE LIMIT SAFEGUARD ---
-            # Groq's free tier (llama-3.1-8b) has strict limits (e.g., 30 Requests/Min, 6000 Tokens/Min)
-            # Sending 120 chunks at once causes the LLM integration to hit a 429 error and silently hang 
-            # while it infinitely retries with exponential backoff.
-            # For demonstration, we cap the chunks. In a production app, you would queue these chunks with time.sleep()
-            MAX_CHUNKS = 5
-            if len(extracted_text_chunks) > MAX_CHUNKS:
-                print(f" ⚠️ Document has {len(extracted_text_chunks)} chunks. Limiting to first {MAX_CHUNKS} to prevent Groq API rate limit hangs.")
-                extracted_text_chunks = extracted_text_chunks[:MAX_CHUNKS]
-
             print(f" Sending {len(extracted_text_chunks)} chunks to Graph Engine...")
             graph_service.process_document(extracted_text_chunks, filename)
 

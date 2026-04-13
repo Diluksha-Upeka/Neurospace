@@ -43,21 +43,42 @@ class GraphService:
 
         print(f" Building Knowledge Graph for {filename}...")
 
-        # Convert strings to LlamaIndex Document objects
-        documents = [
-            Document(text=chunk, metadata={"filename": filename})
-            for chunk in text_chunks
-        ]
+        # Convert the incoming data to LlamaIndex Document objects
+        documents = []
+        for chunk in text_chunks:
+            if isinstance(chunk, dict):
+                # If it's a dict, it contains metadata!
+                text = chunk.pop("text", "") # Extract text, leave the rest as metadata
+                chunk["filename"] = filename # Add filename
+                documents.append(Document(text=text, metadata=chunk))
+            else:
+                # Backwards compatible for plain string chunks
+                documents.append(Document(text=chunk, metadata={"filename": filename}))
 
-        # Create the Property Graph Index
-        # Groq extracts entities, HuggingFace generates embeddings locally
+        import time
+
+        # Create the Property Graph Index with an empty document list first
+        print(f" Initializing empty graph index...")
         index = PropertyGraphIndex.from_documents(
-            documents,
+            [],
             storage_context=self._storage_context,
             kg_extractors=[self._extractor],
             embed_model=self._llm_factory.embed_model,
-            show_progress=True,
         )
+        
+        # Option A: Intelligent Batching to prevent Groq API 6000 TPM Rate Limit
+        print(f" Start extraction sequence for {len(documents)} chunks (Token Rate-Limit Safe)...")
+        for i, doc in enumerate(documents):
+            print(f" [Option A] Extracting Graph from Chunk {i+1}/{len(documents)}...")
+            try:
+                index.insert(doc)
+                # A chunk + extraction prompt is ~1500 tokens. 
+                # 6000 TPM Limit / 1500 tokens = 4 chunks per minute.
+                # 60 seconds / 4 chunks = 15 seconds sleep per chunk.
+                time.sleep(15)
+            except Exception as e:
+                print(f" ⚠️ Chunk {i+1} extraction failed (likely rate limits): {e}")
+                time.sleep(30) # Back-off if we hit a hard 429 Error
 
         try:
             from app.database import db
