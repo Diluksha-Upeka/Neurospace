@@ -17,9 +17,9 @@ export default function DashboardLayout({ children, chatPanel, onFileUploaded, o
       {/* LEFT SIDEBAR: Uploads & Controls */}
       <aside className="w-[280px] bg-white border-r border-slate-200/60 flex flex-col flex-shrink-0 z-10 transition-all shadow-[1px_0_40px_-20px_rgba(0,0,0,0.05)]">
         {/* Header / Main Logo Area */}
-        <div className="py-5 border-b border-slate-200/60 flex items-center justify-center px-6 shrink-0 min-h-[5rem]">
-          <Image src="/logo ne.png" alt="Neurospace Logo" width={600} height={150} className="w-full max-w-[220px] h-auto object-contain z-10 drop-shadow-sm hover:scale-105 transition-transform duration-300 mix-blend-multiply" priority />
-        </div>
+        <header className="w-full border-b border-slate-200/60 flex items-center justify-center shrink-0 bg-white overflow-hidden">
+          <Image src="/logo ne.png" alt="Neurospace Logo" width={600} height={150} className="w-full h-auto object-contain z-10 mix-blend-multiply hover:opacity-80 transition-opacity" priority />
+        </header>
         
         <div className="flex-1 overflow-y-auto p-5 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:bg-slate-200/50 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent">
           <div className="mb-3 px-1 flex items-center justify-between">
@@ -55,16 +55,19 @@ export default function DashboardLayout({ children, chatPanel, onFileUploaded, o
       </aside>
 
       {/* MAIN CONTENT AREA: Graph & Media Viewer */}
-      <main className="flex-1 flex flex-col bg-[#F9FAFB] relative z-0 min-w-0">
-        <header className="h-16 border-b border-slate-200/60 flex items-center px-8 bg-white/70 backdrop-blur-md shrink-0 shadow-[0_1px_4px_-1px_rgba(0,0,0,0.02)]">
+      <main className="flex-1 flex flex-col bg-slate-50 relative z-0 min-w-0">
+        <header className="h-[72px] border-b border-slate-200/60 flex items-center px-6 bg-white shrink-0 shadow-sm z-10">
           <div className="flex items-center gap-3.5">
-            <div className="p-2 border border-slate-200/60 bg-gradient-to-b from-white to-slate-50 rounded-xl shadow-sm">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-slate-600"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line></svg>
+            <div className="p-2.5 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-[14px] shadow-sm shadow-indigo-200 border border-indigo-400/50">
+              <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line></svg>
             </div>
-            <h1 className="text-[14px] font-semibold text-slate-700 tracking-tight">Knowledge Graph Workspace</h1>
+            <div className="flex flex-col">
+              <h1 className="text-[16px] font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-slate-700 to-slate-500 tracking-tight">Knowledge Graph Workspace</h1>
+              <p className="text-[12px] font-medium text-slate-400 mt-0.5">Explore relationships and semantic chunks</p>
+            </div>
           </div>
         </header>
-        <div className="flex-1 relative overflow-hidden flex flex-col p-4 sm:p-6 lg:p-8">
+        <div className="flex-1 relative overflow-hidden flex flex-col p-3">
            {children}
         </div>
       </main>
