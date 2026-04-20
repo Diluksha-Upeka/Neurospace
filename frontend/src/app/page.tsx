@@ -36,34 +36,28 @@ export default function Home() {
         
         {/* THE TAB BUTTONS */}
         <div className="w-full flex items-center justify-center mb-3 z-10 relative">
-          <TabsList className="bg-white border border-slate-200/80 p-1.5 rounded-2xl shadow-sm flex items-center gap-1.5 w-fit relative z-10">
-            <TabsTrigger value="graph" className="rounded-xl px-5 py-2.5 data-[state=active]:bg-indigo-50 data-[state=active]:text-indigo-600 data-[state=active]:font-semibold data-[state=active]:shadow-none font-medium text-[13px] text-slate-500 hover:text-slate-700 transition-all duration-300 flex items-center">
+          <TabsList className="bg-white border border-slate-900 p-1 flex items-center gap-1 w-fit relative z-10">
+            <TabsTrigger value="graph" className="px-5 py-2 data-[state=active]:bg-slate-900 data-[state=active]:text-white data-[state=active]:font-semibold data-[state=active]:shadow-none font-medium text-[13px] text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-all duration-150 flex items-center">
               <svg className="w-4 h-4 mr-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"></path></svg>
               Semantic Graph
             </TabsTrigger>
-            <TabsTrigger value="video" disabled={!activeFile?.toLowerCase().endsWith('.mp4')} className="rounded-xl px-5 py-2.5 data-[state=active]:bg-indigo-50 data-[state=active]:text-indigo-600 data-[state=active]:font-semibold data-[state=active]:shadow-none font-medium text-[13px] text-slate-500 hover:text-slate-700 transition-all duration-300 flex items-center">
+            <TabsTrigger value="video" disabled={!activeFile?.toLowerCase().endsWith('.mp4')} className="px-5 py-2 data-[state=active]:bg-slate-900 data-[state=active]:text-white data-[state=active]:font-semibold data-[state=active]:shadow-none font-medium text-[13px] text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-all duration-150 flex items-center disabled:opacity-30 disabled:cursor-not-allowed">
               <svg className="w-4 h-4 mr-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
               Video Player
             </TabsTrigger>
-            <TabsTrigger value="pdf" disabled={!activeFile?.toLowerCase().endsWith('.pdf')} className="rounded-xl px-5 py-2.5 data-[state=active]:bg-indigo-50 data-[state=active]:text-indigo-600 data-[state=active]:font-semibold data-[state=active]:shadow-none font-medium text-[13px] text-slate-500 hover:text-slate-700 transition-all duration-300 flex items-center">
+            <TabsTrigger value="pdf" disabled={!activeFile?.toLowerCase().endsWith('.pdf')} className="px-5 py-2 data-[state=active]:bg-slate-900 data-[state=active]:text-white data-[state=active]:font-semibold data-[state=active]:shadow-none font-medium text-[13px] text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-all duration-150 flex items-center disabled:opacity-30 disabled:cursor-not-allowed">
                <svg className="w-4 h-4 mr-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                Document Viewer
             </TabsTrigger>
           </TabsList>
-          
-          {activeFile && (
-             <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center text-slate-500 bg-white/80 backdrop-blur-md border border-slate-200/80 px-4 py-2 rounded-[14px] shadow-sm z-0">
-               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-2.5 animate-pulse"></span>
-               <span className="text-[12px]">Focus: <strong className="font-semibold text-slate-700 ml-0.5">{activeFile}</strong></span>
-             </div>
-          )}
+
         </div>
 
         {/* THE CONTENT PANELS */}
         <div className="flex-1 relative w-full h-full">
           
           <TabsContent value="graph" className="w-full h-full m-0 absolute inset-0">
-            <GraphViewer />
+            <GraphViewer onNodeClick={handleDocumentSelect} />
           </TabsContent>
           
           <TabsContent value="video" className="w-full h-full m-0 absolute inset-0">
