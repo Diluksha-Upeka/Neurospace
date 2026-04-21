@@ -42,9 +42,9 @@ const CustomNode = ({ data }: NodeProps) => {
   const isDoc = data.group === 'Document' || (typeof data.label === 'string' && (data.label.toLowerCase().endsWith('.pdf') || data.label.toLowerCase().endsWith('.mp4')));
   
   return (
-    <div className={`px-4 py-3 rounded-2xl border backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-all hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 ${isDoc ? 'bg-indigo-600 border-indigo-700 text-white' : 'bg-white/95 border-emerald-100 text-slate-700'}`}>
-       <div className="flex items-center gap-3">
-         <div className={`w-9 h-9 rounded-full flex items-center justify-center border shadow-sm shrink-0 ${isDoc ? 'bg-indigo-500 border-indigo-400 text-white' : 'bg-emerald-50 border-emerald-100/50 text-emerald-500'}`}>
+    <div className={`px-4 py-3 border transition-all hover:-translate-y-0.5 ${isDoc ? 'bg-slate-900 border-slate-900 text-white' : 'bg-white border-slate-900 text-slate-800'}`}>
+       <div className="flex items-start gap-3">
+         <div className={`w-8 h-8 mt-0.5 flex items-center justify-center border shrink-0 ${isDoc ? 'bg-slate-700 border-slate-600 text-white' : 'bg-slate-50 border-slate-900 text-slate-600'}`}>
            {isDoc ? (
              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
            ) : (
@@ -52,8 +52,8 @@ const CustomNode = ({ data }: NodeProps) => {
            )}
          </div>
          <div>
-           <div className={`text-[9.5px] font-bold uppercase tracking-widest ${isDoc ? 'text-indigo-200' : 'text-emerald-400'}`}>{data.group as string}</div>
-           <div className={`text-[12px] font-semibold w-[180px] mt-1 leading-relaxed ${isDoc ? 'text-white truncate' : 'text-slate-700 line-clamp-4'}`} title={data.label as string}>
+           <div className={`text-[9px] font-bold uppercase tracking-widest ${isDoc ? 'text-slate-400' : 'text-slate-400'}`}>{data.group as string}</div>
+           <div className={`text-[18px] w-[200px] mt-1 leading-relaxed ${isDoc ? 'font-semibold text-white truncate' : 'font-medium text-slate-700 line-clamp-5'}`} title={data.label as string}>
              {data.label as string}
            </div>
          </div>
@@ -93,7 +93,11 @@ async function fetchWithTimeout(url: string, timeoutMs: number): Promise<Respons
   }
 }
 
-export default function GraphViewer() {
+export type GraphViewerProps = {
+  onNodeClick?: (filename: string) => void;
+};
+
+export default function GraphViewer({ onNodeClick }: GraphViewerProps) {
   const [nodes, setNodes, onNodesChange] = useNodesState<Node>([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
   const [loading, setLoading] = useState(true);
@@ -104,7 +108,7 @@ export default function GraphViewer() {
     setError(null);
 
     try {
-      const response = await fetchWithTimeout(apiUrl("/graph?limit=150"), 15000);
+      const response = await fetchWithTimeout(apiUrl("/graph?limit=800"), 30000);
 
       if (!response.ok) {
         throw new Error(`Graph API returned ${response.status}`);
@@ -148,27 +152,28 @@ export default function GraphViewer() {
         });
       }
 
-      // Distribute remaining nodes in concentric circles radially
-      let radius = 350;
-      let circleCapacity = 10;
+      // Distribute remaining nodes in dense concentric circles
+      let currentRadius = 300;
       let currentInCircle = 0;
+      // Calculate capacity based on circumference so nodes fit snugly (approx 250px spacing)
+      let capacityForRadius = Math.max(8, Math.floor((2 * Math.PI * currentRadius) / 250));
 
       otherNodes.forEach((node) => {
-          if (currentInCircle >= circleCapacity) {
-              radius += 350; // Expand to next ring
-              circleCapacity = Math.floor(circleCapacity * 1.5);
+          if (currentInCircle >= capacityForRadius) {
+              currentRadius += 180; // Tighter rings
+              capacityForRadius = Math.floor((2 * Math.PI * currentRadius) / 250);
               currentInCircle = 0;
           }
           // Offset the starting angle slightly for each ring to create a spiral effect
-          const angleOffset = (radius / 350) * 0.5;
-          const angle = angleOffset + (currentInCircle / circleCapacity) * Math.PI * 2;
+          const angleOffset = (currentRadius / 180) * 0.3;
+          const angle = angleOffset + (currentInCircle / capacityForRadius) * Math.PI * 2;
           
           flowNodes.push({
               id: node.id,
               type: 'custom',
               position: {
-                 x: Math.cos(angle) * radius,
-                 y: Math.sin(angle) * radius
+                 x: Math.cos(angle) * currentRadius,
+                 y: Math.sin(angle) * currentRadius
               },
               data: { label: node.label, group: node.group }
           });
@@ -201,13 +206,13 @@ export default function GraphViewer() {
             target: edge.target,
             sourceHandle,
             targetHandle,
-            animated: true, // Keep crawling effect
-            type: 'default', // Smooth curved sweeps
-            style: { stroke: "#94a3b8", strokeWidth: 1.5, opacity: 0.2 }, // Severely reduce opacity to unclutter the background
+            animated: true,
+            type: 'straight',
+            style: { stroke: "#94a3b8", strokeWidth: 1.5, opacity: 0.7 },
             markerEnd: {
               type: MarkerType.ArrowClosed,
-              width: 16,
-              height: 16,
+              width: 14,
+              height: 14,
               color: '#94a3b8',
             },
             // Edge labels explicitly removed to prevent chaotic "MENTIONS" overlap spaghetti
@@ -283,28 +288,26 @@ export default function GraphViewer() {
   }
 
   return (
-    <div className="w-full h-full bg-slate-50/30 rounded-3xl overflow-hidden border border-slate-200 relative z-0 shadow-sm">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(241,245,249,0.8)_0%,rgba(255,255,255,1)_100%)] pointer-events-none z-[-1]"></div>
+    <div className="w-full h-full bg-[#fafafa] overflow-hidden border border-slate-200 relative z-0">
       
       {/* Network Stats HUD */}
-      <div className="absolute top-6 left-6 z-10 pointer-events-none">
-        <div className="bg-white/80 backdrop-blur-2xl border border-slate-200/60 shadow-[0_8px_30px_rgba(0,0,0,0.04)] rounded-2xl p-5 flex flex-col gap-1 w-56">
-           <div className="flex items-center gap-2 mb-3">
-             <div className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+      <div className="absolute top-4 left-4 z-10 pointer-events-none">
+        <div className="bg-white border border-slate-900 py-2 px-3 flex items-center gap-3">
+           <div className="flex items-center gap-1.5 border-r border-slate-900 pr-3">
+             <div className="relative flex h-1.5 w-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
              </div>
-             <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Live Network</span>
+             <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider">Live</span>
            </div>
-           <div className="flex justify-between items-end">
-             <div className="flex flex-col">
-               <span className="text-3xl font-light text-slate-800 tracking-tighter">{nodes.length}</span>
-               <span className="text-[11px] font-semibold text-slate-400 mt-1">Total Nodes</span>
+           <div className="flex items-center gap-3">
+             <div className="flex items-baseline gap-1">
+               <span className="text-[9px] font-semibold text-slate-400 uppercase tracking-wider">Nodes</span>
+               <span className="text-[12px] font-bold text-slate-900">{nodes.length}</span>
              </div>
-             <div className="w-[1px] h-10 bg-slate-200 mb-1"></div>
-             <div className="flex flex-col items-end">
-               <span className="text-3xl font-light text-slate-800 tracking-tighter">{edges.length}</span>
-               <span className="text-[11px] font-semibold text-slate-400 mt-1">Total Edges</span>
+             <div className="flex items-baseline gap-1">
+               <span className="text-[9px] font-semibold text-slate-400 uppercase tracking-wider">Edges</span>
+               <span className="text-[12px] font-bold text-slate-900">{edges.length}</span>
              </div>
            </div>
         </div>
@@ -316,11 +319,20 @@ export default function GraphViewer() {
         nodeTypes={nodeTypes}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
+        onNodeClick={(_, node) => {
+          if (onNodeClick && typeof node.data.label === 'string') {
+            const lowerLabel = node.data.label.toLowerCase();
+            if (node.data.group === 'Document' || lowerLabel.endsWith('.pdf') || lowerLabel.endsWith('.mp4')) {
+               onNodeClick(node.data.label);
+            }
+          }
+        }}
         fitView
         className="[&_.react-flow\_\_controls]:bg-white/90 [&_.react-flow\_\_controls]:backdrop-blur-xl [&_.react-flow\_\_controls]:border-slate-200 [&_.react-flow\_\_controls]:shadow-sm [&_.react-flow\_\_controls_button]:border-b-slate-100 [&_.react-flow\_\_controls_button]:fill-slate-600 [&_.react-flow\_\_controls_button:hover]:bg-slate-50 [&_.react-flow\_\_minimap]:bg-white/90 [&_.react-flow\_\_minimap]:backdrop-blur-xl [&_.react-flow\_\_minimap]:border-slate-200 [&_.react-flow\_\_minimap]:shadow-sm"
       >
         <Controls showInteractive={false} position="bottom-right" />
         <MiniMap 
+          style={{ height: 120, width: 160 }}
           nodeStrokeWidth={2} 
           nodeColor={(n) => {
             const isDocumentNode = n.data?.group === 'Document' || (typeof n.data?.label === 'string' && (n.data?.label.toLowerCase().endsWith('.pdf') || n.data?.label.toLowerCase().endsWith('.mp4')));
