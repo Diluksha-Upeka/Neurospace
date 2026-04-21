@@ -1,4 +1,4 @@
-"use client";
+x"use client";
 
 import { useState } from "react";
 import DashboardLayout from "@/components/layout/DashboardLayout";
@@ -44,7 +44,7 @@ export default function Home() {
         </div>
 
         {/* THE CONTENT PANELS */}
-        <div className="flex-1 border border-slate-200/50 rounded-3xl overflow-hidden bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative ring-1 ring-black/[0.01]">
+        <div className="flex-1 relative w-full h-full mb-4">
           
           <TabsContent value="graph" className="w-full h-full m-0 absolute inset-0">
             <GraphViewer />
