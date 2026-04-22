@@ -9,17 +9,16 @@ type DashboardLayoutProps = {
   onFileUploaded?: (filename: string) => void;
   onDocumentSelect?: (filename: string) => void;
 };
-
+  
 export default function DashboardLayout({ children, chatPanel, onFileUploaded, onDocumentSelect }: DashboardLayoutProps) {
   return (
     <div className="flex h-screen w-full bg-slate-50 text-slate-900 overflow-hidden font-sans selection:bg-indigo-100">
       
       {/* LEFT SIDEBAR: Uploads & Controls */}
-      <aside className="w-[280px] bg-white/60 backdrop-blur-xl border-r border-slate-200/60 flex flex-col flex-shrink-0 z-10 transition-all shadow-[1px_0_40px_-20px_rgba(0,0,0,0.05)]">
+      <aside className="w-[280px] bg-white border-r border-slate-200/60 flex flex-col flex-shrink-0 z-10 transition-all shadow-[1px_0_40px_-20px_rgba(0,0,0,0.05)]">
         {/* Header / Main Logo Area */}
-        <div className="h-16 border-b border-slate-200/60 flex items-center px-6 shrink-0 relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none"></div>
-          <Image src="/logo ne.png" alt="Neurospace Logo" width={400} height={100} className="h-6 w-auto object-contain relative z-10" priority />
+        <div className="py-5 border-b border-slate-200/60 flex items-center justify-center px-6 shrink-0 min-h-[5rem]">
+          <Image src="/logo ne.png" alt="Neurospace Logo" width={600} height={150} className="w-full max-w-[220px] h-auto object-contain z-10 drop-shadow-sm hover:scale-105 transition-transform duration-300 mix-blend-multiply" priority />
         </div>
         
         <div className="flex-1 overflow-y-auto p-5 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:bg-slate-200/50 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent">
@@ -71,8 +70,8 @@ export default function DashboardLayout({ children, chatPanel, onFileUploaded, o
       </main>
 
       {/* RIGHT SIDEBAR: AI Chat */}
-      <aside className="w-[380px] bg-white/60 backdrop-blur-xl border-l border-slate-200/60 flex flex-col flex-shrink-0 z-10 shadow-[-1px_0_40px_-20px_rgba(0,0,0,0.05)]">
-        <header className="h-16 border-b border-slate-200/60 flex items-center justify-between px-6 bg-white/40 shrink-0">
+      <aside className="w-[380px] bg-white border-l border-slate-200/60 flex flex-col flex-shrink-0 z-10 shadow-[-1px_0_40px_-20px_rgba(0,0,0,0.05)]">
+        <header className="h-16 border-b border-slate-200/60 flex items-center justify-between px-6 bg-slate-50/50 shrink-0">
           <div className="flex items-center gap-3">
             <div className="p-1.5 rounded-lg bg-indigo-50 border border-indigo-100/50 text-indigo-500">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
