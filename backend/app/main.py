@@ -221,24 +221,46 @@ async def serve_file(filename: str):
         file_stream, content_type = get_storage().get_file_stream(filename)
 
         # 1. Guess the correct content type based on the file extension
-        # If it can't guess, it falls back to whatever MinIO said.
         guessed_type, _ = mimetypes.guess_type(filename)
         final_content_type = guessed_type or content_type or "application/octet-stream"
 
-        # 2. Tell the browser to display it INLINE, not as an attachment
+        # 2. Tell the browser to display it INLINE
         headers = {
             "Content-Disposition": f'inline; filename="{filename}"'
         }
         
-        # 'iter_chunks()' reads the file in small byte-sized pieces
         return StreamingResponse(
             content=file_stream.iter_chunks(), 
-            media_type=final_content_type,  # Use the guessed content type
+            media_type=final_content_type,
             headers=headers
         )
         
     except FileNotFoundError:
+        # Fallback: Make file serving case-insensitive.
+        # The AI extraction sometimes lowercases text, creating graph nodes like "simple rag.pdf" 
+        # instead of the exact original case "Simple RAG.pdf" in MinIO.
+        try:
+            all_files = get_storage().list_files()
+            for true_filename in all_files:
+                if true_filename.lower() == filename.lower():
+                    # Found a case-insensitive match! Reroute immediately:
+                    file_stream, content_type = get_storage().get_file_stream(true_filename)
+                    guessed_type, _ = mimetypes.guess_type(true_filename)
+                    final_content_type = guessed_type or content_type or "application/octet-stream"
+                    headers = {
+                        "Content-Disposition": f'inline; filename="{true_filename}"'
+                    }
+                    return StreamingResponse(
+                        content=file_stream.iter_chunks(), 
+                        media_type=final_content_type,
+                        headers=headers
+                    )
+        except Exception as fallback_err:
+            print(f"Fallback fetch failed: {fallback_err}")
+            
+        # If fallback also fails or finds no match
         raise HTTPException(status_code=404, detail="File not found")
+        
     except Exception as e:
         print(f"❌ Streaming Error: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal server error")
