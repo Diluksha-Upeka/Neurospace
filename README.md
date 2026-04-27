@@ -22,6 +22,7 @@ By combining the lightning-fast inference of **Groq (Llama 3.1)** with the struc
 
 - **🎥 Multi-Modal Ingestion:** Process PDFs into recursive text chunks and MP4 videos into time-aligned, transcribed graphs.
 - **🧠 GraphRAG Architecture:** Blends Vector Similarity Search with structural Graph relationships for pinpoint and context-aware LLM generation.
+- **🖥️ Full-Screen Graph Exploration:** Click the **Nodes** or **Edges** counters in the graph HUD to open the full graph in a dedicated full-screen tab.
 - **⚡ Blazing Fast AI:** Utilizes Groq’s Llama 3.1 models for instant inference and zero-cost local HuggingFace embeddings (`all-MiniLM-L6-v2`).
 - **📦 Fully Containerized:** One command sets up the entire pipeline—Frontend, Backend API, MinIO Storage, and Neo4j Database.
 
@@ -66,13 +67,16 @@ GROQ_API_KEY=your_groq_api_key_here
 ### 3. Launch the Application
 Run the master compose file to build and network all four containers (Frontend, Backend, Database, and Object Storage):
 ```bash
-docker-compose up --build -d
+docker compose up --build -d
 ```
+If your environment still uses the legacy plugin, `docker-compose up --build -d` works as well.
+
 *(Note: Initial startup may take a few minutes as Docker downloads models and OS packages).*
 
 ### 4. Access the Ports
 Once started, everything is seamlessly routed:
 - **🎛️ Neurospace Web UI:** [http://localhost:3000](http://localhost:3000)
+- **🧭 Full-Screen Graph View:** [http://localhost:3000/graph/fullscreen](http://localhost:3000/graph/fullscreen)
 - **🔌 Backend API (Swagger):** [http://localhost:8000/docs](http://localhost:8000/docs)
 - **🕸️ Neo4j Graph Browser:** [http://localhost:7474](http://localhost:7474) *(auth: neo4j/password123)*
 - **📦 MinIO Storage Console:** [http://localhost:9001](http://localhost:9001) *(auth: minioadmin/minioadmin)*
@@ -141,7 +145,13 @@ If you wish to develop components outside of Docker natively on your OS:
 ```bash
 cd backend
 python -m venv venv
-source venv/Scripts/activate  # (Windows: venv\Scripts\activate)
+
+# macOS / Linux
+source venv/bin/activate
+
+# Windows PowerShell
+.\venv\Scripts\Activate.ps1
+
 pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
@@ -157,6 +167,5 @@ npm run dev
 ---
 
 <div align="center">
-  <sub>Built with ❤️ for AI Engineers and Educators.</sub><br>
-  <sub>Last Updated: March 2026</sub>
+  <sub>Last Updated: April 2026</sub>
 </div>
