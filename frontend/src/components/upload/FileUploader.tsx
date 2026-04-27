@@ -63,7 +63,7 @@ export default function FileUploader({ onUploadSuccess }: FileUploaderProps) {
   return (
     <div className="flex flex-col gap-3">
       <div 
-        className="relative group border border-slate-200/60 hover:border-indigo-300 bg-white/50 hover:bg-white rounded-2xl p-6 text-center cursor-pointer transition-all duration-300 flex flex-col items-center justify-center min-h-[110px] shadow-sm hover:shadow-md ring-1 ring-black/[0.01]"
+        className="relative group border border-slate-200 hover:border-slate-400 bg-[#fafafa] hover:bg-white p-6 text-center cursor-pointer transition-all duration-200 flex flex-col items-center justify-center min-h-[110px]"
         onClick={() => fileInputRef.current?.click()}
       >
         <input 
@@ -74,19 +74,19 @@ export default function FileUploader({ onUploadSuccess }: FileUploaderProps) {
           className="hidden"
         />
         {file ? (
-          <div className="flex flex-col items-center gap-2 text-slate-700 animate-in fade-in zoom-in-95 duration-200">
-            <div className="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center mb-1 text-indigo-500 border border-indigo-100/50">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-indigo-500"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          <div className="flex flex-col items-center gap-2 text-slate-700">
+            <div className="w-9 h-9 bg-white flex items-center justify-center mb-1 text-slate-600 border border-slate-200">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
             </div>
             <p className="text-[13px] font-medium truncate max-w-[190px]">{file.name}</p>
             <p className="text-[10px] text-slate-400">Click to change</p>
           </div>
         ) : (
-          <div className="text-slate-500 flex flex-col items-center gap-2 transition-transform duration-300 group-hover:-translate-y-0.5">
-            <div className="w-10 h-10 bg-slate-50 group-hover:bg-indigo-50 rounded-xl flex items-center justify-center mb-1 text-slate-400 group-hover:text-indigo-500 border border-slate-200/60 group-hover:border-indigo-100/50 transition-colors">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+          <div className="text-slate-500 flex flex-col items-center gap-2">
+            <div className="w-9 h-9 flex items-center justify-center mb-1 text-slate-400 border border-slate-200 bg-white transition-colors group-hover:border-slate-400 group-hover:text-slate-600">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
             </div>
-            <p className="text-[13px] font-medium text-slate-700 group-hover:text-slate-900 transition-colors">Select file to ingest</p>
+            <p className="text-[13px] font-medium text-slate-600 group-hover:text-slate-900 transition-colors">Select file to ingest</p>
             <p className="text-[11px] text-slate-400">PDF or MP4 files allowed</p>
           </div>
         )}
@@ -95,7 +95,7 @@ export default function FileUploader({ onUploadSuccess }: FileUploaderProps) {
       <button
         onClick={handleUpload}
         disabled={!file || isUploading}
-        className="w-full bg-slate-900 hover:bg-slate-800 disabled:bg-slate-100 disabled:text-slate-400 disabled:border overflow-hidden disabled:border-slate-200/60 text-white font-medium py-3 rounded-xl transition-all duration-300 text-[13px] flex items-center justify-center gap-2.5 shadow-sm disabled:shadow-none relative group h-11"
+        className="w-full bg-slate-900 hover:bg-slate-800 disabled:bg-slate-100 disabled:text-slate-400 disabled:border disabled:border-slate-200 text-white font-medium py-2.5 transition-all duration-150 text-[13px] flex items-center justify-center gap-2.5 disabled:shadow-none relative group h-11"
       >
         {isUploading ? (
           <>
@@ -111,12 +111,12 @@ export default function FileUploader({ onUploadSuccess }: FileUploaderProps) {
       </button>
 
       {statusMessage && (
-        <div className={`text-[12px] font-medium p-3 rounded-xl flex items-start gap-2 border shadow-sm animate-in fade-in slide-in-from-top-1 duration-200 ${
+        <div className={`text-[12px] font-medium p-3 flex items-start gap-2.5 border-l-2 bg-slate-50 border border-slate-100 ${
           statusMessage.startsWith('Success') 
-            ? 'bg-emerald-50/80 text-emerald-800 border-emerald-200/60' 
+            ? 'border-l-emerald-500 text-emerald-800' 
             : statusMessage.startsWith('Error')
-            ? 'bg-rose-50/80 text-rose-800 border-rose-200/60'
-            : 'bg-indigo-50/80 text-indigo-800 border-indigo-200/60'
+            ? 'border-l-rose-500 text-rose-800'
+            : 'border-l-slate-400 text-slate-700'
         }`}>
           <div className="mt-0.5 shrink-0">
             {statusMessage.startsWith('Success') ? (
@@ -124,7 +124,7 @@ export default function FileUploader({ onUploadSuccess }: FileUploaderProps) {
             ) : statusMessage.startsWith('Error') ? (
                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="w-3.5 h-3.5 text-rose-600"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             ) : (
-               <div className="w-3.5 h-3.5 rounded-full border-2 border-indigo-300 border-t-indigo-600 animate-spin"></div>
+               <div className="w-3.5 h-3.5 rounded-full border-2 border-slate-300 border-t-slate-600 animate-spin"></div>
             )}
           </div>
           <span className="leading-snug">{statusMessage}</span>
