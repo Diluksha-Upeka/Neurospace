@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useState, useMemo } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Background,
   Controls,
@@ -95,9 +95,10 @@ async function fetchWithTimeout(url: string, timeoutMs: number): Promise<Respons
 
 export type GraphViewerProps = {
   onNodeClick?: (filename: string) => void;
+  onGraphStatsClick?: () => void;
 };
 
-export default function GraphViewer({ onNodeClick }: GraphViewerProps) {
+export default function GraphViewer({ onNodeClick, onGraphStatsClick }: GraphViewerProps) {
   const [nodes, setNodes, onNodesChange] = useNodesState<Node>([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
   const [loading, setLoading] = useState(true);
@@ -291,7 +292,7 @@ export default function GraphViewer({ onNodeClick }: GraphViewerProps) {
     <div className="w-full h-full bg-[#fafafa] overflow-hidden border border-slate-200 relative z-0">
       
       {/* Network Stats HUD */}
-      <div className="absolute top-4 left-4 z-10 pointer-events-none">
+      <div className="absolute top-4 left-4 z-10">
         <div className="bg-white border border-slate-900 py-2 px-3 flex items-center gap-3">
            <div className="flex items-center gap-1.5 border-r border-slate-900 pr-3">
              <div className="relative flex h-1.5 w-1.5">
@@ -300,15 +301,27 @@ export default function GraphViewer({ onNodeClick }: GraphViewerProps) {
              </div>
              <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider">Live</span>
            </div>
-           <div className="flex items-center gap-3">
-             <div className="flex items-baseline gap-1">
+           <div className="flex items-center gap-2">
+             <button
+               type="button"
+               onClick={onGraphStatsClick}
+               disabled={!onGraphStatsClick}
+               className="flex items-baseline gap-1 px-2 py-1 border border-transparent hover:border-slate-900 transition-colors disabled:hover:border-transparent disabled:cursor-default"
+               aria-label="Open full-screen graph from node count"
+             >
                <span className="text-[9px] font-semibold text-slate-400 uppercase tracking-wider">Nodes</span>
                <span className="text-[12px] font-bold text-slate-900">{nodes.length}</span>
-             </div>
-             <div className="flex items-baseline gap-1">
+             </button>
+             <button
+               type="button"
+               onClick={onGraphStatsClick}
+               disabled={!onGraphStatsClick}
+               className="flex items-baseline gap-1 px-2 py-1 border border-transparent hover:border-slate-900 transition-colors disabled:hover:border-transparent disabled:cursor-default"
+               aria-label="Open full-screen graph from edge count"
+             >
                <span className="text-[9px] font-semibold text-slate-400 uppercase tracking-wider">Edges</span>
                <span className="text-[12px] font-bold text-slate-900">{edges.length}</span>
-             </div>
+             </button>
            </div>
         </div>
       </div>

@@ -12,6 +12,10 @@ export default function Home() {
   const [activeFile, setActiveFile] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<string>("graph");
 
+  const openGraphFullscreen = () => {
+    window.open("/graph/fullscreen", "_blank", "noopener,noreferrer");
+  };
+
   const handleDocumentSelect = (filename: string) => {
     setActiveFile(filename);
     const lower = filename.toLowerCase();
@@ -57,7 +61,10 @@ export default function Home() {
         <div className="flex-1 relative w-full h-full">
           
           <TabsContent value="graph" className="w-full h-full m-0 absolute inset-0">
-            <GraphViewer onNodeClick={handleDocumentSelect} />
+            <GraphViewer
+              onNodeClick={handleDocumentSelect}
+              onGraphStatsClick={openGraphFullscreen}
+            />
           </TabsContent>
           
           <TabsContent value="video" className="w-full h-full m-0 absolute inset-0">
