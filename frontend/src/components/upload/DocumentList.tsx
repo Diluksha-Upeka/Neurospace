@@ -62,7 +62,7 @@ export default function DocumentList({ onDocumentSelect }: DocumentListProps) {
         {!showConfirm && (
           <button
             onClick={() => setShowConfirm(true)}
-            className="text-[10px] font-bold text-rose-400/80 hover:text-rose-500 transition-colors uppercase tracking-widest bg-rose-50/50 hover:bg-rose-50 px-2 py-1 rounded-md"
+            className="text-[10px] font-bold text-rose-400 hover:text-rose-600 transition-colors uppercase tracking-widest"
             title="Clear all data (files + graph)"
           >
             Clear All
@@ -72,21 +72,21 @@ export default function DocumentList({ onDocumentSelect }: DocumentListProps) {
 
       {/* Confirmation dialog */}
       {showConfirm && (
-        <div className="mb-4 p-4 rounded-2xl border border-rose-200/60 bg-rose-50/50 backdrop-blur-sm animate-in fade-in zoom-in-95 duration-200">
-          <p className="text-[12px] text-rose-700 font-semibold mb-3 tracking-tight">
+        <div className="mb-4 p-4 border border-rose-200 bg-rose-50/50 border-l-2 border-l-rose-500">
+          <p className="text-[12px] text-rose-700 font-semibold mb-3">
             Permanently delete all files & knowledge graph?
           </p>
           <div className="flex gap-2">
             <button
               onClick={handleClear}
               disabled={clearing}
-              className="flex-1 text-[12px] font-semibold px-3 py-2 rounded-xl bg-rose-500 text-white hover:bg-rose-600 transition-all disabled:opacity-50 shadow-sm"
+              className="flex-1 text-[12px] font-semibold px-3 py-2 bg-rose-500 text-white hover:bg-rose-600 transition-all disabled:opacity-50"
             >
               {clearing ? 'Clearing...' : 'Yes, Delete All'}
             </button>
             <button
               onClick={() => setShowConfirm(false)}
-              className="flex-1 text-[12px] font-semibold px-3 py-2 rounded-xl border border-slate-200/80 bg-white text-slate-600 hover:bg-slate-50 transition-all shadow-sm"
+              className="flex-1 text-[12px] font-semibold px-3 py-2 border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 transition-all"
             >
               Cancel
             </button>
@@ -95,24 +95,24 @@ export default function DocumentList({ onDocumentSelect }: DocumentListProps) {
       )}
 
       {documents.length === 0 ? (
-        <div className="flex flex-col items-center justify-center p-6 border border-dashed border-slate-200/60 rounded-2xl bg-slate-50/50">
+        <div className="flex flex-col items-center justify-center p-6 border border-dashed border-slate-200 bg-[#fafafa]">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-6 h-6 text-slate-300 mb-2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
           <p className="text-[12px] text-slate-400 font-medium">Empty repository</p>
         </div>
       ) : (
-        <ul className="space-y-2">
+        <ul className="space-y-1.5">
           {documents.map((doc) => (
-            <li key={doc} className="group animate-in fade-in slide-in-from-left-2 duration-300">
+            <li key={doc} className="group">
               <button
                 type="button"
                 onClick={() => onDocumentSelect?.(doc)}
-                className="w-full text-left flex items-center gap-3 text-[13px] font-medium text-slate-700 bg-white/60 backdrop-blur-sm p-3 rounded-xl border border-slate-200/60 hover:border-indigo-200 hover:bg-white hover:shadow-[0_4px_12px_-4px_rgba(0,0,0,0.05)] hover:text-indigo-900 transition-all cursor-pointer ring-1 ring-black/[0.01]"
+                className="w-full text-left flex items-center gap-3 text-[13px] font-medium text-slate-600 bg-white p-2.5 border border-slate-200 hover:border-slate-400 hover:text-slate-900 hover:bg-[#fafafa] transition-all cursor-pointer"
               >
-                <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100/80 group-hover:bg-indigo-50 text-slate-500 group-hover:text-indigo-500 transition-colors shrink-0">
+                <span className="flex items-center justify-center w-7 h-7 bg-slate-50 border border-slate-200 text-slate-400 group-hover:text-slate-600 transition-colors shrink-0">
                   {doc.endsWith('.mp4') ? (
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3.5 h-3.5"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
                   ) : (
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3.5 h-3.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                   )}
                 </span>
                 <span className="truncate tracking-tight" title={doc}>{doc}</span>
