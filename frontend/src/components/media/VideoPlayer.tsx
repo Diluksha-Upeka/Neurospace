@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { apiUrl } from '@/lib/api';
 
 interface VideoPlayerProps {
   filename: string | null;
+  timestamp?: string;
 }
 
-export default function VideoPlayer({ filename }: VideoPlayerProps) {
+export default function VideoPlayer({ filename, timestamp }: VideoPlayerProps) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (timestamp && videoRef.current) {
+      const match = timestamp.match(/([\d\.]+)s/);
+      if (match) {
+        const startTime = parseFloat(match[1]);
+        videoRef.current.currentTime = startTime;
+        videoRef.current.play().catch(e => console.error("Autoplay prevented:", e));
+      }
+    }
+  }, [timestamp, filename]);
   if (!filename) {
     return (
       <div className="w-full h-full flex flex-col items-center justify-center bg-slate-50/50">
@@ -22,6 +35,7 @@ export default function VideoPlayer({ filename }: VideoPlayerProps) {
     <div className="w-full h-full flex items-center justify-center bg-slate-900 rounded-2xl overflow-hidden relative group">
       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
       <video 
+        ref={videoRef}
         controls 
         className="w-full h-auto max-h-full aspect-video z-10"
         src={apiUrl(`/files/${encodeURIComponent(filename)}`)}
