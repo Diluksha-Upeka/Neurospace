@@ -3,9 +3,10 @@ import { apiUrl } from '@/lib/api';
 
 interface PdfViewerProps {
   filename: string | null;
+  page?: number;
 }
 
-export default function PdfViewer({ filename }: PdfViewerProps) {
+export default function PdfViewer({ filename, page }: PdfViewerProps) {
   if (!filename) {
     return (
       <div className="w-full h-full flex flex-col items-center justify-center bg-slate-50/50">
@@ -18,10 +19,12 @@ export default function PdfViewer({ filename }: PdfViewerProps) {
     );
   }
 
+  const url = apiUrl(`/files/${encodeURIComponent(filename)}`) + (page ? `#page=${page}` : '');
+
   return (
     <div className="w-full h-full rounded-2xl overflow-hidden bg-slate-50/50">
       <iframe 
-        src={apiUrl(`/files/${encodeURIComponent(filename)}`)}
+        src={url}
         className="w-full h-full border-none"
         title="PDF Viewer"
       />
