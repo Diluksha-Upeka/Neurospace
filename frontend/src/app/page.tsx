@@ -11,13 +11,17 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 export default function Home() {
   const [activeFile, setActiveFile] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<string>("graph");
+  const [activePage, setActivePage] = useState<number | undefined>(undefined);
+  const [activeTimestamp, setActiveTimestamp] = useState<string | undefined>(undefined);
 
   const openGraphFullscreen = () => {
     window.open("/graph/fullscreen", "_blank", "noopener,noreferrer");
   };
 
-  const handleDocumentSelect = (filename: string) => {
+  const handleDocumentSelect = (filename: string, page?: number, timestamp?: string) => {
     setActiveFile(filename);
+    setActivePage(page);
+    setActiveTimestamp(timestamp);
     const lower = filename.toLowerCase();
 
     if (lower.endsWith(".mp4")) {
@@ -68,11 +72,17 @@ export default function Home() {
           </TabsContent>
           
           <TabsContent value="video" className="w-full h-full m-0 absolute inset-0">
-            <VideoPlayer filename={activeFile?.toLowerCase().endsWith('.mp4') ? activeFile : null} />
+            <VideoPlayer 
+              filename={activeFile?.toLowerCase().endsWith('.mp4') ? activeFile : null} 
+              timestamp={activeTimestamp}
+            />
           </TabsContent>
           
           <TabsContent value="pdf" className="w-full h-full m-0 absolute inset-0">
-            <PdfViewer filename={activeFile?.toLowerCase().endsWith('.pdf') ? activeFile : null} />
+            <PdfViewer 
+              filename={activeFile?.toLowerCase().endsWith('.pdf') ? activeFile : null} 
+              page={activePage}
+            />
           </TabsContent>
 
         </div>
