@@ -23,7 +23,12 @@ export default function DashboardLayout({ children, chatPanel, onFileUploaded, o
   }, [isSleek]);
 
   return (
-    <div className="flex h-screen w-full bg-white text-slate-900 overflow-hidden font-sans selection:bg-indigo-100">
+    <div className="flex h-screen w-full bg-slate-50 relative text-slate-900 overflow-hidden font-sans selection:bg-indigo-100">
+
+      {/* Ambient Glow Background */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center">
+        <div className="w-[60vw] h-[60vw] bg-indigo-500/10 dark:bg-indigo-600/5 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '8s' }} />
+      </div>
 
       {/* LEFT SIDEBAR: Uploads & Controls */}
       <aside className="w-[280px] bg-white border-r border-slate-900 flex flex-col flex-shrink-0 z-10">
