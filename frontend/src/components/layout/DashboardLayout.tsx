@@ -31,9 +31,9 @@ export default function DashboardLayout({ children, chatPanel, onFileUploaded, o
       </div>
 
       {/* LEFT SIDEBAR: Uploads & Controls */}
-      <aside className="w-[280px] bg-white border-r border-slate-900 flex flex-col flex-shrink-0 z-10">
+      <aside className="w-[280px] bg-white/70 backdrop-blur-2xl border-r border-slate-900 flex flex-col flex-shrink-0 z-20">
         {/* Header / Main Logo Area */}
-        <header className="w-full border-b border-slate-900 flex items-center justify-center shrink-0 bg-white overflow-hidden">
+        <header className="w-full border-b border-slate-900 flex items-center justify-center shrink-0 bg-transparent overflow-hidden">
           <Image src="/logo ne.png" alt="Neurospace Logo" width={600} height={150} className="w-full h-auto object-contain z-10 mix-blend-multiply hover:opacity-80 transition-opacity" priority />
         </header>
 
@@ -53,9 +53,9 @@ export default function DashboardLayout({ children, chatPanel, onFileUploaded, o
         </div>
 
         {/* Branding & Status at the bottom */}
-        <div className="mt-auto h-16 border-t border-slate-900 flex items-center justify-between px-6 bg-white shrink-0">
+        <div className="mt-auto h-16 border-t border-slate-900 flex items-center justify-between px-6 bg-transparent shrink-0">
           <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center w-6 h-6 bg-white border border-slate-900">
+            <div className="flex items-center justify-center w-6 h-6 bg-white/50 border border-slate-900">
               <Image src="/logo only.png" alt="Icon" width={24} height={24} className="w-3.5 h-3.5 object-contain grayscale opacity-70 mix-blend-multiply" priority />
             </div>
             <span className="text-[12px] font-medium text-slate-500 hidden xl:inline-block tracking-tight">NeuroSpace Engine</span>
@@ -78,8 +78,8 @@ export default function DashboardLayout({ children, chatPanel, onFileUploaded, o
       </aside>
 
       {/* MAIN CONTENT AREA: Graph & Media Viewer */}
-      <main className="flex-1 flex flex-col bg-white relative z-0 min-w-0">
-        <header className="h-[72px] border-b border-slate-900 flex items-center px-6 bg-white shrink-0 z-10">
+      <main className="flex-1 flex flex-col relative z-10 min-w-0">
+        <header className="h-[72px] border-b border-slate-900 flex items-center px-6 bg-white/70 backdrop-blur-2xl shrink-0 z-20">
           <div className="flex items-center gap-3.5">
             <div className="flex flex-col justify-center">
               <div className="flex items-center gap-2">
@@ -95,8 +95,8 @@ export default function DashboardLayout({ children, chatPanel, onFileUploaded, o
       </main>
 
       {/* RIGHT SIDEBAR: AI Chat */}
-      <aside className="w-[380px] bg-white border-l border-slate-900 flex flex-col flex-shrink-0 z-10">
-        <header className="h-16 border-b border-slate-900 flex items-center justify-between px-6 bg-white shrink-0">
+      <aside className="w-[380px] bg-white/70 backdrop-blur-2xl border-l border-slate-900 flex flex-col flex-shrink-0 z-20">
+        <header className="h-16 border-b border-slate-900 flex items-center justify-between px-6 bg-transparent shrink-0">
           <div className="flex items-center gap-3">
             <div className="p-1.5 border border-slate-900 text-slate-700">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
