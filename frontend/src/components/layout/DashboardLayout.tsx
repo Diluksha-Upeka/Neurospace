@@ -37,7 +37,7 @@ export default function DashboardLayout({ children, chatPanel, onFileUploaded, o
           <Image src="/logo ne.png" alt="Neurospace Logo" width={600} height={150} className="w-full h-auto object-contain z-10 mix-blend-multiply hover:opacity-80 transition-opacity" priority />
         </header>
 
-        <div className="flex-1 overflow-y-auto p-5 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:bg-slate-200 [&::-webkit-scrollbar-thumb]:rounded-none [&::-webkit-scrollbar-track]:bg-transparent">
+        <div className="flex-1 overflow-y-auto p-5 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:bg-slate-200/0 hover:[&::-webkit-scrollbar-thumb]:bg-slate-300/80 transition-all [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent">
           <div className="mb-3 px-1 flex items-center justify-between">
             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Ingestion Pipeline</p>
           </div>
