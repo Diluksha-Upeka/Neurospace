@@ -63,7 +63,7 @@ export default function DashboardLayout({ children, chatPanel, onFileUploaded, o
           <div className="flex items-center gap-2.5">
             <button 
               onClick={() => setIsSleek(!isSleek)}
-              className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider bg-slate-100 hover:bg-slate-200 text-slate-600 rounded transition-colors mr-2 inline-flex items-center gap-1"
+              className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider bg-slate-100 hover:bg-slate-200 text-slate-600 rounded transition-all duration-200 ease-out active:scale-[0.95] mr-2 inline-flex items-center gap-1"
               title="Toggle Sleek Theme"
             >
               2026 Trend
@@ -103,7 +103,7 @@ export default function DashboardLayout({ children, chatPanel, onFileUploaded, o
             </div>
             <h2 className="text-[14px] font-semibold text-slate-900 tracking-tight">NeuroSpace Assistant</h2>
           </div>
-          <button className="p-1.5 hover:bg-slate-100 transition-all text-slate-400 hover:text-slate-600 border border-transparent hover:border-slate-900">
+          <button className="p-1.5 hover:bg-slate-100 transition-all duration-200 ease-out active:scale-[0.90] text-slate-400 hover:text-slate-600 border border-transparent hover:border-slate-900">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
           </button>
         </header>
