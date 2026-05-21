@@ -25,7 +25,7 @@ export default function DashboardLayout({ children, chatPanel, onFileUploaded, o
   return (
     <div className="flex h-screen w-full bg-slate-50 relative text-slate-900 overflow-hidden font-sans selection:bg-indigo-100">
 
-      {/* Ambient Glow Background */}
+      {/* Ambient Glow Background - Tweak 5 */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center">
         <div className="w-[60vw] h-[60vw] bg-indigo-500/10 dark:bg-indigo-600/5 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '8s' }} />
       </div>
@@ -39,7 +39,7 @@ export default function DashboardLayout({ children, chatPanel, onFileUploaded, o
 
         <div className="flex-1 overflow-y-auto p-5 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:bg-slate-200/0 hover:[&::-webkit-scrollbar-thumb]:bg-slate-300/80 transition-all [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent">
           <div className="mb-3 px-1 flex items-center justify-between">
-            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Ingestion Pipeline</p>
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Ingestion Pipeline</p>
           </div>
           {/* Inject the Uploader Here! */}
           <div className="mt-4">
@@ -63,7 +63,7 @@ export default function DashboardLayout({ children, chatPanel, onFileUploaded, o
           <div className="flex items-center gap-2.5">
             <button 
               onClick={() => setIsSleek(!isSleek)}
-              className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider bg-slate-100 hover:bg-slate-200 text-slate-600 rounded transition-all duration-200 ease-out active:scale-[0.95] mr-2 inline-flex items-center gap-1"
+              className="px-2 py-1 text-[10px] font-bold uppercase tracking-widest bg-slate-100 hover:bg-slate-200 text-slate-600 rounded transition-all duration-200 ease-out active:scale-[0.95] mr-2 inline-flex items-center gap-1"
               title="Toggle Sleek Theme"
             >
               2026 Trend
