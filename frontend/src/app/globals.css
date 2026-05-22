@@ -186,3 +186,8 @@
   color: var(--primary-foreground) !important;
 }
 
+
+.theme-sleek .bg-white\/70, .theme-sleek .bg-white\/50 {
+  background-color: var(--card) !important;
+}
+
