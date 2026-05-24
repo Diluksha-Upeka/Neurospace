@@ -1,4 +1,5 @@
-import React from 'react';
+"use client";
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import FileUploader from '@/components/upload/FileUploader';
 import DocumentList from '@/components/upload/DocumentList';
@@ -9,18 +10,28 @@ type DashboardLayoutProps = {
   onFileUploaded?: (filename: string) => void;
   onDocumentSelect?: (filename: string) => void;
 };
-  
+
 export default function DashboardLayout({ children, chatPanel, onFileUploaded, onDocumentSelect }: DashboardLayoutProps) {
+  const [isSleek, setIsSleek] = useState(false);
+
+  useEffect(() => {
+    if (isSleek) {
+      document.body.classList.add('theme-sleek');
+    } else {
+      document.body.classList.remove('theme-sleek');
+    }
+  }, [isSleek]);
+
   return (
     <div className="flex h-screen w-full bg-white text-slate-900 overflow-hidden font-sans selection:bg-indigo-100">
-      
+
       {/* LEFT SIDEBAR: Uploads & Controls */}
       <aside className="w-[280px] bg-white border-r border-slate-900 flex flex-col flex-shrink-0 z-10">
         {/* Header / Main Logo Area */}
         <header className="w-full border-b border-slate-900 flex items-center justify-center shrink-0 bg-white overflow-hidden">
           <Image src="/logo ne.png" alt="Neurospace Logo" width={600} height={150} className="w-full h-auto object-contain z-10 mix-blend-multiply hover:opacity-80 transition-opacity" priority />
         </header>
-        
+
         <div className="flex-1 overflow-y-auto p-5 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:bg-slate-200 [&::-webkit-scrollbar-thumb]:rounded-none [&::-webkit-scrollbar-track]:bg-transparent">
           <div className="mb-3 px-1 flex items-center justify-between">
             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Ingestion Pipeline</p>
@@ -35,7 +46,7 @@ export default function DashboardLayout({ children, chatPanel, onFileUploaded, o
             <DocumentList onDocumentSelect={onDocumentSelect} />
           </div>
         </div>
-        
+
         {/* Branding & Status at the bottom */}
         <div className="mt-auto h-16 border-t border-slate-900 flex items-center justify-between px-6 bg-white shrink-0">
           <div className="flex items-center gap-3">
@@ -45,6 +56,13 @@ export default function DashboardLayout({ children, chatPanel, onFileUploaded, o
             <span className="text-[12px] font-medium text-slate-500 hidden xl:inline-block tracking-tight">NeuroSpace Engine</span>
           </div>
           <div className="flex items-center gap-2.5">
+            <button 
+              onClick={() => setIsSleek(!isSleek)}
+              className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider bg-slate-100 hover:bg-slate-200 text-slate-600 rounded transition-colors mr-2 inline-flex items-center gap-1"
+              title="Toggle Sleek Theme"
+            >
+              2026 Trend
+            </button>
             <div className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -67,7 +85,7 @@ export default function DashboardLayout({ children, chatPanel, onFileUploaded, o
           </div>
         </header>
         <div className="flex-1 relative overflow-hidden flex flex-col p-3">
-           {children}
+          {children}
         </div>
       </main>
 
@@ -84,13 +102,13 @@ export default function DashboardLayout({ children, chatPanel, onFileUploaded, o
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
           </button>
         </header>
-        
+
         <div className="flex-1 overflow-hidden relative z-10 bg-transparent">
-           {chatPanel || (
-             <div className="h-full w-full p-4 flex items-center justify-center text-[13px] text-slate-400 font-medium">
-               Select or initialize a chat session
-             </div>
-           )}
+          {chatPanel || (
+            <div className="h-full w-full p-4 flex items-center justify-center text-[13px] text-slate-400 font-medium">
+              Select or initialize a chat session
+            </div>
+          )}
         </div>
       </aside>
 
