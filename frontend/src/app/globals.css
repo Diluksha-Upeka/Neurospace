@@ -49,30 +49,43 @@
 
 :root {
   --radius: 0.75rem;
-  --background: oklch(0.985 0.005 250); /* Sleek cool off-white */
-  --foreground: oklch(0.25 0.02 250); /* Deep slate for readable text */
-  --card: oklch(1 0 0); /* Pure white cards */
+  --background: oklch(0.985 0.005 250);
+  /* Sleek cool off-white */
+  --foreground: oklch(0.25 0.02 250);
+  /* Deep slate for readable text */
+  --card: oklch(1 0 0);
+  /* Pure white cards */
   --card-foreground: oklch(0.20 0.02 250);
-  --popover: oklch(1 0 0 / 80%); /* Translucent white popovers for glassmorphism */
+  --popover: oklch(1 0 0 / 80%);
+  /* Translucent white popovers for glassmorphism */
   --popover-foreground: oklch(0.20 0.02 250);
-  --primary: oklch(0.55 0.20 260); /* Vibrant Modern Indigo/Blue */
+  --primary: oklch(0.55 0.20 260);
+  /* Vibrant Modern Indigo/Blue */
   --primary-foreground: oklch(0.98 0.01 260);
-  --secondary: oklch(0.95 0.02 250); /* Soft gray blue */
+  --secondary: oklch(0.95 0.02 250);
+  /* Soft gray blue */
   --secondary-foreground: oklch(0.35 0.04 250);
   --muted: oklch(0.96 0.01 250);
   --muted-foreground: oklch(0.55 0.02 250);
   --accent: oklch(0.93 0.04 250);
   --accent-foreground: oklch(0.30 0.03 250);
   --destructive: oklch(0.60 0.20 25);
-  --border: oklch(0.92 0.01 250); /* Very subtle borders */
+  --border: oklch(0.92 0.01 250);
+  /* Very subtle borders */
   --input: oklch(0.94 0.01 250);
   --ring: oklch(0.55 0.20 260);
-  --chart-1: oklch(0.60 0.20 260); /* Indigo */
-  --chart-2: oklch(0.65 0.15 190); /* Teal */
-  --chart-3: oklch(0.55 0.18 320); /* Purple */
-  --chart-4: oklch(0.70 0.16 70);  /* Amber */
-  --chart-5: oklch(0.65 0.15 20);  /* Coral/Ruby */
-  --sidebar: oklch(1 0 0 / 60%); /* Glassmorphic sidebar base */
+  --chart-1: oklch(0.60 0.20 260);
+  /* Indigo */
+  --chart-2: oklch(0.65 0.15 190);
+  /* Teal */
+  --chart-3: oklch(0.55 0.18 320);
+  /* Purple */
+  --chart-4: oklch(0.70 0.16 70);
+  /* Amber */
+  --chart-5: oklch(0.65 0.15 20);
+  /* Coral/Ruby */
+  --sidebar: oklch(1 0 0 / 60%);
+  /* Glassmorphic sidebar base */
   --sidebar-foreground: oklch(0.30 0.02 250);
   --sidebar-primary: oklch(0.55 0.20 260);
   --sidebar-primary-foreground: oklch(1 0 0);
@@ -120,7 +133,56 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
+/* 2026 Trending Sleek Theme (Apple Pro Mode) */
+.theme-sleek {
+  --background: oklch(0.14 0 0); /* OLED/Pro deep grey-black */
+  --foreground: oklch(0.98 0 0);
+  --card: oklch(0.18 0 0); /* Slightly elevated frosted panel */
+  --card-foreground: oklch(0.98 0 0);
+  --border: oklch(0.24 0 0); /* Very subtle hairline bounds */
+  --primary: oklch(0.98 0 0); /* Crisp high-contrast white */
+  --primary-foreground: oklch(0.14 0 0);
+  --muted: oklch(0.22 0 0); /* Secondary backgrounds */
+  --muted-foreground: oklch(0.65 0 0); /* Soft secondary text */
+  --ring: oklch(0.98 0 0 / 0.3);
+}
+
+.theme-sleek .bg-white {
+  background-color: var(--background) !important;
+}
+.theme-sleek .bg-slate-50, .theme-sleek .bg-slate-100 {
+  background-color: var(--card) !important;
+}
+.theme-sleek .bg-slate-900 {
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+}
+.theme-sleek .text-slate-900 {
+  color: var(--foreground) !important;
+}
+.theme-sleek .text-slate-700, .theme-sleek .text-slate-800 {
+  color: oklch(0.85 0 0) !important;
+}
+.theme-sleek .text-slate-500, .theme-sleek .text-slate-400 {
+  color: var(--muted-foreground) !important;
+}
+.theme-sleek .border-slate-900, .theme-sleek .border-slate-800, .theme-sleek .border-slate-200 {
+  border-color: var(--border) !important;
+}
+.theme-sleek .border-transparent {
+  border-color: transparent !important;
+}
+.theme-sleek img.mix-blend-multiply {
+  mix-blend-mode: normal !important;
+  filter: invert(1) hue-rotate(180deg) brightness(2) !important;
+}
+.theme-sleek .data-\[state\=active\]\:bg-slate-900[data-state=active] {
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+}
+
