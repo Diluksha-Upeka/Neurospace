@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { apiUrl } from '@/lib/api';
 
@@ -27,6 +27,15 @@ export default function ChatInterface({ onCitationClick }: ChatInterfaceProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isLoading]);
 
   const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -136,6 +145,7 @@ export default function ChatInterface({ onCitationClick }: ChatInterfaceProps) {
              </div>
           </div>
         )}
+        <div ref={messagesEndRef} />
       </div>
 
       {/* INPUT AREA */}
