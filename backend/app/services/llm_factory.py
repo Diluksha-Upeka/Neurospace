@@ -17,7 +17,7 @@ class LLMFactory:
 
         print("⚡ Initializing Groq (Llama 3)...")
         self.llm = Groq(
-            model="llama-3.1-8b-instant",
+            model="llama-3.3-70b-versatile",
             api_key=groq_key,
             temperature=0
         )
@@ -33,7 +33,7 @@ class LLMFactory:
         # 3. Apply to Global Settings
         Settings.llm = self.llm
         Settings.embed_model = self.embed_model
-        Settings.chunk_size = 512
+        Settings.chunk_size = 1024  # Must be >= pdf.py's chunk_size (1000) to prevent re-chunking
 
     def get_storage_context(self):
         graph_store = Neo4jGraphStore(

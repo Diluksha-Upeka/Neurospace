@@ -20,7 +20,7 @@ def setup_constraints():
         CREATE VECTOR INDEX chunk_vector_index IF NOT EXISTS
         FOR (c:Chunk) ON (c.embedding)
         OPTIONS {indexConfig: {
-         `vector.dimensions`: 1536,
+         `vector.dimensions`: 384,
          `vector.similarity_function`: 'cosine'
         }}
         """,

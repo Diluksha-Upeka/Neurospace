@@ -53,7 +53,7 @@ class Transcriber:
         )
 
 
-transcriber = Transcriber()     # Singleton instance of the Transcriber class that can be imported and used throughout the application.
+transcriber = Transcriber(model_size="small")     # Singleton instance of the Transcriber class that can be imported and used throughout the application.
 
 # Audio file --> Whisper AI --> [segment1, segment2, ...] --> JSON transcript
 
