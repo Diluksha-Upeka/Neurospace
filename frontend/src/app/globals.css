@@ -152,42 +152,7 @@
   --ring: oklch(0.98 0 0 / 0.3);
 }
 
-.theme-sleek .bg-white {
-  background-color: var(--background) !important;
-}
-.theme-sleek .bg-slate-50, .theme-sleek .bg-slate-100 {
-  background-color: var(--card) !important;
-}
-.theme-sleek .bg-slate-900 {
-  background-color: var(--primary) !important;
-  color: var(--primary-foreground) !important;
-}
-.theme-sleek .text-slate-900 {
-  color: var(--foreground) !important;
-}
-.theme-sleek .text-slate-700, .theme-sleek .text-slate-800 {
-  color: oklch(0.85 0 0) !important;
-}
-.theme-sleek .text-slate-500, .theme-sleek .text-slate-400 {
-  color: var(--muted-foreground) !important;
-}
-.theme-sleek .border-slate-900, .theme-sleek .border-slate-800, .theme-sleek .border-slate-200 {
-  border-color: var(--border) !important;
-}
-.theme-sleek .border-transparent {
-  border-color: transparent !important;
-}
 .theme-sleek img.mix-blend-multiply {
   mix-blend-mode: normal !important;
   filter: invert(1) hue-rotate(180deg) brightness(2) !important;
 }
-.theme-sleek .data-\[state\=active\]\:bg-slate-900[data-state=active] {
-  background-color: var(--primary) !important;
-  color: var(--primary-foreground) !important;
-}
-
-
-.theme-sleek .bg-white\/70, .theme-sleek .bg-white\/50 {
-  background-color: var(--card) !important;
-}
-
