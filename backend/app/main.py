@@ -199,6 +199,12 @@ async def chat_with_neurospace(request: ChatRequest):
             "sources": []
         }
 
+@app.delete("/clear-cache")
+def clear_query_cache():
+    """Flushes the in-memory query cache so new prompts/settings take effect immediately."""
+    query_service.cache.clear()
+    return {"status": "cleared", "message": "Query cache flushed."}
+
 @app.get("/graph", response_model=GraphDataResponse)
 def get_graph_data(limit: int = 150):
     """

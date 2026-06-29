@@ -3,20 +3,27 @@ from llama_index.core import PropertyGraphIndex, PromptTemplate
 from app.services.llm_factory import llm_factory
 from cachetools import TTLCache
 import hashlib
- # --- 🛡️ THE NEUROSPACE PERSONA ---
-# This forces Groq to act as an intelligent graph-aware assistant.
-# {context_str} contains both text chunks AND retrieved graph relationships (facts/triples).
+import re
+
+# --- 🛡️ THE NEUROSPACE ANTI-HALLUCINATION PROMPT ---
+# This forces the LLM to ONLY use provided context and cite exact sources.
+# {context_str} contains text chunks AND retrieved graph relationships.
 # {query_str} is the user's question.
 NEUROSPACE_PROMPT_TMPL = (
-    "You are the NeuroSpace Multi-Modal Assistant, an advanced AI engine analyzing a Knowledge Graph.\n"
-    "Your directive is to answer the user's question based on the provided context, which includes both text snippets and extracted structural facts (Entity -> Relationship -> Entity).\n"
+    "You are the NeuroSpace Assistant. You answer questions using ONLY the context provided below.\n"
+    "The context contains text chunks from uploaded documents. Each chunk has metadata including filename, page number (for PDFs), or timestamp (for videos).\n"
     "---------------------\n"
     "{context_str}\n"
     "---------------------\n"
-    "Rules:\n"
-    "1. Synthesize the text chunks and structural facts to formulate a comprehensive answer.\n"
-    "2. If the context does not contain enough information, state clearly what you *do* know, and what is missing.\n"
-    "3. Be concise and professional. Do not mention that you were provided with context or 'extracted facts'.\n"
+    "STRICT RULES — FOLLOW EVERY ONE:\n"
+    "1. Answer ONLY using information found in the context above. NEVER use your own knowledge or training data.\n"
+    "2. For EVERY factual claim in your answer, cite the source inline: [filename, page X] for PDFs or [filename, Xs-Ys] for videos.\n"
+    "3. If the context does not contain the answer, respond ONLY with: 'The uploaded documents do not contain information about this topic.'\n"
+    "4. NEVER fabricate, guess, or infer information that is not explicitly stated in the context.\n"
+    "5. If multiple sources discuss the same topic, present information from each source with its own citation.\n"
+    "6. When quoting specific facts (numbers, dates, names), use the EXACT wording from the context.\n"
+    "7. Be concise and factual. Do not add disclaimers or preambles.\n"
+    "\n"
     "Query: {query_str}\n"
     "Answer: "
 )
@@ -50,11 +57,14 @@ class QueryService:
             llm=llm_factory.llm,
             include_text=True,
         )
-        
+
         # 2. Vector Context Retriever: Extracts paragraphs and metadata directly from the Node's properties
+        # Higher similarity_top_k = more chunks = better coverage for citations
         vector_retriever = VectorContextRetriever(
             index.property_graph_store,
             embed_model=llm_factory.embed_model,
+            include_text=True,
+            similarity_top_k=5,
         )
 
         return index.as_query_engine(
@@ -70,6 +80,79 @@ class QueryService:
         # Convert to lowercase and strip whitespace so "What is RAG?" and "what is rag? " match
         normalized_text = text.lower().strip()
         return hashlib.md5(normalized_text.encode('utf-8')).hexdigest()
+
+    def _filter_cited_sources(self, answer_text: str, all_sources: list) -> list:
+        """
+        Parses the LLM answer for inline citations like [filename, page X] or [filename, Xs-Ys]
+        and returns ONLY the sources the LLM actually referenced.
+        If no citations are found in the text, returns all sources as fallback.
+        """
+        # Extract all citation patterns from the answer:
+        #   [filename, page X]  or  [filename, Xs-Ys]  or  [filename]
+        citation_patterns = re.findall(r'\[([^\]]+)\]', answer_text)
+
+        if not citation_patterns:
+            # LLM didn't use inline citations — return all sources as fallback
+            print("  ⚠️ No inline citations found in answer, returning all sources")
+            return all_sources
+
+        # Build a set of (filename_lower, page_or_none) from the citations
+        cited_refs = set()
+        for citation in citation_patterns:
+            citation = citation.strip()
+            # Try to parse "filename, page X"
+            page_match = re.match(r'(.+?),\s*page\s+(\d+)', citation, re.IGNORECASE)
+            if page_match:
+                fname = page_match.group(1).strip().lower()
+                page = int(page_match.group(2))
+                cited_refs.add((fname, page, None))
+                continue
+
+            # Try to parse "filename, Xs-Ys" (timestamp)
+            ts_match = re.match(r'(.+?),\s*([\d.]+)s?\s*-\s*([\d.]+)s?', citation, re.IGNORECASE)
+            if ts_match:
+                fname = ts_match.group(1).strip().lower()
+                cited_refs.add((fname, None, "timestamp"))
+                continue
+
+            # Just a filename reference like [filename]
+            cited_refs.add((citation.strip().lower(), None, None))
+
+        print(f"  🔍 Citations found in answer: {cited_refs}")
+
+        # Filter sources to only those cited
+        cited_sources = []
+        for source in all_sources:
+            source_fname = source["filename"].lower()
+            source_page = source.get("page")
+            source_ts = source.get("timestamp")
+
+            # Check if this source matches any citation
+            is_cited = False
+            for (cited_fname, cited_page, cited_type) in cited_refs:
+                # Filename match (fuzzy — handles slight variations)
+                if cited_fname in source_fname or source_fname in cited_fname:
+                    if cited_page is not None and source_page == cited_page:
+                        is_cited = True
+                        break
+                    elif cited_type == "timestamp" and source_ts:
+                        is_cited = True
+                        break
+                    elif cited_page is None and cited_type is None:
+                        # Generic filename-only citation
+                        is_cited = True
+                        break
+
+            if is_cited:
+                cited_sources.append(source)
+
+        # If filtering removed everything (parsing mismatch), return all as fallback
+        if not cited_sources:
+            print("  ⚠️ Citation filtering matched nothing, returning all sources")
+            return all_sources
+
+        print(f"  ✅ Filtered {len(all_sources)} sources down to {len(cited_sources)} cited sources")
+        return cited_sources
 
 
     def ask(self, question: str) -> dict:
@@ -88,25 +171,72 @@ class QueryService:
         query_engine = self._get_query_engine()
         response = query_engine.query(question)
         answer_text = str(response)
-        sources = []
+        all_sources = []
+        seen_sources = set()  # Deduplicate citations
+
         if response.source_nodes:
             for node in response.source_nodes:
                 meta = node.metadata
+                # Debug: log exactly what metadata comes back from Neo4j
+                print(f"  📋 Source node metadata keys: {list(meta.keys())}")
+                print(f"  📋 Source node metadata: {meta}")
+
+                # Try multiple key variants for filename
+                # LlamaIndex may store as file_name, we store as filename
+                filename = (
+                    meta.get("filename")
+                    or meta.get("file_name")
+                    or meta.get("source")
+                    or "Unknown File"
+                )
+
+                # Try multiple key variants for page number
+                page = meta.get("page_number") or meta.get("page_label")
+                if page is not None:
+                    try:
+                        page = int(page)
+                    except (ValueError, TypeError):
+                        page = None
+
+                # Try multiple key variants for timestamps (video)
+                start = meta.get("start")
+                end = meta.get("end")
+                timestamp = None
+                if start is not None and end is not None:
+                    timestamp = f"{start}s - {end}s"
+
+                # Deduplicate by (filename, page, timestamp)
+                dedup_key = (filename, page, timestamp)
+                if dedup_key in seen_sources:
+                    continue
+                seen_sources.add(dedup_key)
+
+                # Build text snippet — node.text can sometimes be None for graph nodes
+                node_text = node.text or node.node.get_content() if hasattr(node, 'node') else node.text
+                node_text = node_text or ""
+                text_snippet = node_text[:200] + "..." if len(node_text) > 200 else node_text
+                if not text_snippet:
+                    text_snippet = "(Graph relationship node)"
+
                 source_info = {
-                    "filename": meta.get("filename", "Unknown File"),
-                    "text_snippet": node.text[:150] + "...",
-                    "score": round(node.score, 3) if node.score else None
+                    "filename": filename,
+                    "text_snippet": text_snippet,
+                    "score": round(node.score, 3) if node.score is not None else None
                 }
-                if "page_number" in meta:
-                    source_info["page"] = meta["page_number"]
-                if "start" in meta and "end" in meta:
-                    source_info["timestamp"] = f"{meta['start']}s - {meta['end']}s"
-                sources.append(source_info)
+                if page is not None:
+                    source_info["page"] = page
+                if timestamp:
+                    source_info["timestamp"] = timestamp
+                all_sources.append(source_info)
+
+        # 3. Filter to only sources the LLM actually cited in its answer
+        cited_sources = self._filter_cited_sources(answer_text, all_sources)
+
         final_result = {
             "answer": answer_text,
-            "sources": sources
+            "sources": cited_sources
         }
-        # 3. Save to Cache for next time
+        # 4. Save to Cache for next time
         self.cache[cache_key] = final_result
         return final_result
 
