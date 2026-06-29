@@ -44,16 +44,16 @@ export default function Home() {
         
         {/* THE TAB BUTTONS */}
         <div className="w-full flex items-center justify-center mb-3 z-10 relative">
-          <TabsList className="bg-white/70 backdrop-blur-2xl border border-slate-900 p-1 flex items-center gap-1 w-fit relative z-10">
-            <TabsTrigger value="graph" className="px-5 py-2 data-[state=active]:bg-slate-900 data-[state=active]:text-white data-[state=active]:font-semibold data-[state=active]:shadow-none font-medium text-[13px] text-slate-500 hover:text-slate-800 hover:bg-slate-100 active:scale-[0.98] transition-all duration-200 ease-out flex items-center">
+          <TabsList className="bg-card/70 backdrop-blur-2xl border border-border p-1 flex items-center gap-1 w-fit relative z-10">
+            <TabsTrigger value="graph" className="px-5 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:font-semibold data-[state=active]:shadow-none font-medium text-[13px] text-muted-foreground hover:text-foreground hover:bg-muted active:scale-[0.98] transition-all duration-200 ease-out flex items-center">
               <svg className="w-4 h-4 mr-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"></path></svg>
               Semantic Graph
             </TabsTrigger>
-            <TabsTrigger value="video" disabled={!activeFile?.toLowerCase().endsWith('.mp4')} className="px-5 py-2 data-[state=active]:bg-slate-900 data-[state=active]:text-white data-[state=active]:font-semibold data-[state=active]:shadow-none font-medium text-[13px] text-slate-500 hover:text-slate-800 hover:bg-slate-100 active:scale-[0.98] transition-all duration-200 ease-out flex items-center disabled:opacity-30 disabled:cursor-not-allowed">
+            <TabsTrigger value="video" disabled={!activeFile?.toLowerCase().endsWith('.mp4')} className="px-5 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:font-semibold data-[state=active]:shadow-none font-medium text-[13px] text-muted-foreground hover:text-foreground hover:bg-muted active:scale-[0.98] transition-all duration-200 ease-out flex items-center disabled:opacity-30 disabled:cursor-not-allowed">
               <svg className="w-4 h-4 mr-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
               Video Player
             </TabsTrigger>
-            <TabsTrigger value="pdf" disabled={!activeFile?.toLowerCase().endsWith('.pdf')} className="px-5 py-2 data-[state=active]:bg-slate-900 data-[state=active]:text-white data-[state=active]:font-semibold data-[state=active]:shadow-none font-medium text-[13px] text-slate-500 hover:text-slate-800 hover:bg-slate-100 active:scale-[0.98] transition-all duration-200 ease-out flex items-center disabled:opacity-30 disabled:cursor-not-allowed">
+            <TabsTrigger value="pdf" disabled={!activeFile?.toLowerCase().endsWith('.pdf')} className="px-5 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:font-semibold data-[state=active]:shadow-none font-medium text-[13px] text-muted-foreground hover:text-foreground hover:bg-muted active:scale-[0.98] transition-all duration-200 ease-out flex items-center disabled:opacity-30 disabled:cursor-not-allowed">
                <svg className="w-4 h-4 mr-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                Document Viewer
             </TabsTrigger>
