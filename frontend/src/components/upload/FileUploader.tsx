@@ -115,14 +115,14 @@ export default function FileUploader({ onUploadSuccess }: FileUploaderProps) {
           statusMessage.startsWith('Success') 
             ? 'border-l-emerald-500 text-emerald-500' 
             : statusMessage.startsWith('Error')
-            ? 'border-l-rose-500 text-rose-500'
+            ? 'border-l-destructive text-destructive'
             : 'border-l-border text-foreground'
         }`}>
           <div className="mt-0.5 shrink-0">
             {statusMessage.startsWith('Success') ? (
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="w-3.5 h-3.5 text-emerald-500"><polyline points="20 6 9 17 4 12"></polyline></svg>
             ) : statusMessage.startsWith('Error') ? (
-               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="w-3.5 h-3.5 text-rose-500"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="w-3.5 h-3.5 text-destructive"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             ) : (
                <div className="w-3.5 h-3.5 rounded-full border-2 border-border border-t-foreground animate-spin"></div>
             )}

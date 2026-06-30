@@ -72,15 +72,15 @@ export default function DocumentList({ onDocumentSelect }: DocumentListProps) {
 
       {/* Confirmation dialog */}
       {showConfirm && (
-        <div className="mb-4 p-4 border border-rose-200 bg-rose-50/50 border-l-2 border-l-rose-500">
-          <p className="text-[12px] text-rose-700 font-semibold mb-3">
+        <div className="mb-4 p-4 border border-destructive/30 bg-destructive/5 border-l-2 border-l-destructive">
+          <p className="text-[12px] text-destructive font-semibold mb-3">
             Permanently delete all files & knowledge graph?
           </p>
           <div className="flex gap-2">
             <button
               onClick={handleClear}
               disabled={clearing}
-              className="flex-1 text-[12px] font-semibold px-3 py-2 bg-rose-500 text-white hover:bg-rose-600 transition-all disabled:opacity-50"
+              className="flex-1 text-[12px] font-semibold px-3 py-2 bg-destructive text-white hover:bg-destructive/90 transition-all disabled:opacity-50"
             >
               {clearing ? 'Clearing...' : 'Yes, Delete All'}
             </button>
