@@ -33,6 +33,7 @@ class PDFResult(BaseModel):
 
 class ChatRequest(BaseModel):
     message: str
+    mode: str = "hybrid"  # Retrieval mode: "hybrid", "vector_only", or "synonym_only"
     # We will add 'chat_history' here later when we want the bot to remember context
 
 class SourceItem(BaseModel):
@@ -42,9 +43,12 @@ class SourceItem(BaseModel):
     page: int = None
     timestamp: str = None
 
+from typing import List, Optional
+
 class ChatResponse(BaseModel):
     answer: str
     sources: List[SourceItem]
+    latency_ms: Optional[float] = None
 
 class GraphNode(BaseModel):
     id: str
