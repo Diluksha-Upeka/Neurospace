@@ -15,9 +15,9 @@ class LLMFactory:
         if not groq_key:
             raise ValueError("Error: GROQ_API_KEY not found in .env file!")
 
-        print("⚡ Initializing Groq (Llama 3)...")
+        print("⚡ Initializing Groq (Llama 3.1 8B)...")
         self.llm = Groq(
-            model="llama-3.3-70b-versatile",
+            model="llama-3.1-8b-instant",
             api_key=groq_key,
             temperature=0
         )
