@@ -4,6 +4,7 @@ from app.services.llm_factory import llm_factory
 from cachetools import TTLCache
 import hashlib
 import re
+import time
 
 # --- 🛡️ THE NEUROSPACE ANTI-HALLUCINATION PROMPT ---
 # This forces the LLM to ONLY use provided context and cite exact sources.
@@ -30,6 +31,9 @@ NEUROSPACE_PROMPT_TMPL = (
 neurospace_prompt = PromptTemplate(NEUROSPACE_PROMPT_TMPL)
 # ---------------------------------
 
+# Valid retrieval modes
+VALID_MODES = ("hybrid", "vector_only", "synonym_only")
+
 class QueryService:
     def __init__(self):
         print("⚙️ Initializing Hybrid Query Engine Cache...")
@@ -40,8 +44,15 @@ class QueryService:
         self.cache = TTLCache(maxsize=100, ttl=3600)
         print("✅ Query Engine Cache Ready!")
 
-    def _get_query_engine(self):
-        """Builds the query engine dynamically to ensure it captures newly ingested files."""
+    def _get_query_engine(self, mode: str = "hybrid"):
+        """
+        Builds the query engine dynamically to ensure it captures newly ingested files.
+
+        Modes:
+            - "hybrid": Uses both LLM Synonym + Vector retrievers (default)
+            - "vector_only": Uses only the Vector Context Retriever
+            - "synonym_only": Uses only the LLM Synonym Retriever
+        """
         index = PropertyGraphIndex.from_existing(
             property_graph_store=self.storage_context.property_graph_store,
             embed_model=llm_factory.embed_model,
@@ -67,18 +78,23 @@ class QueryService:
             similarity_top_k=5,
         )
 
+        # Select sub-retrievers based on mode
+        if mode == "vector_only":
+            sub_retrievers = [vector_retriever]
+        elif mode == "synonym_only":
+            sub_retrievers = [synonym_retriever]
+        else:  # "hybrid" — default
+            sub_retrievers = [synonym_retriever, vector_retriever]
+
         return index.as_query_engine(
-            sub_retrievers=[
-                synonym_retriever,
-                vector_retriever
-            ],
+            sub_retrievers=sub_retrievers,
             text_qa_template=neurospace_prompt
         )
 
-    def _generate_cache_key(self, text: str) -> str:
-        """Converts the question into a unique hash string."""
-        # Convert to lowercase and strip whitespace so "What is RAG?" and "what is rag? " match
-        normalized_text = text.lower().strip()
+    def _generate_cache_key(self, text: str, mode: str = "hybrid") -> str:
+        """Converts the question + mode into a unique hash string."""
+        # Include mode in the cache key so different modes don't share cached results
+        normalized_text = f"{mode}:{text.lower().strip()}"
         return hashlib.md5(normalized_text.encode('utf-8')).hexdigest()
 
     def _filter_cited_sources(self, answer_text: str, all_sources: list) -> list:
@@ -155,21 +171,36 @@ class QueryService:
         return cited_sources
 
 
-    def ask(self, question: str) -> dict:
+    def ask(self, question: str, mode: str = "hybrid") -> dict:
         """
-        Sends the question through the Hybrid pipeline.
+        Sends the question through the retrieval pipeline.
         Checks the cache first for instant responses.
+
+        Args:
+            question: The user's question
+            mode: Retrieval mode — "hybrid" (default), "vector_only", or "synonym_only"
         """
+        # Validate mode
+        if mode not in VALID_MODES:
+            mode = "hybrid"
+
         # 1. Check Cache
-        cache_key = self._generate_cache_key(question)
+        cache_key = self._generate_cache_key(question, mode)
         if cache_key in self.cache:
-            print(f"⚡ CACHE HIT! Instant response for: '{question}'")
-            return self.cache[cache_key]
+            print(f"⚡ CACHE HIT! Instant response for: '{question}' (mode={mode})")
+            cached = self.cache[cache_key]
+            cached["latency_ms"] = 0.0  # Instant from cache
+            return cached
 
         # 2. Not in cache, run the heavy engine on the LIVE graph state
-        print(f"🧠 Thinking deeply about: '{question}'...")
-        query_engine = self._get_query_engine()
+        print(f"🧠 Thinking deeply about: '{question}' (mode={mode})...")
+        start_time = time.perf_counter()
+
+        query_engine = self._get_query_engine(mode=mode)
         response = query_engine.query(question)
+
+        elapsed_ms = (time.perf_counter() - start_time) * 1000
+
         answer_text = str(response)
         all_sources = []
         seen_sources = set()  # Deduplicate citations
@@ -232,9 +263,12 @@ class QueryService:
         # 3. Filter to only sources the LLM actually cited in its answer
         cited_sources = self._filter_cited_sources(answer_text, all_sources)
 
+        print(f"  ⏱️ Query completed in {elapsed_ms:.0f}ms (mode={mode})")
+
         final_result = {
             "answer": answer_text,
-            "sources": cited_sources
+            "sources": cited_sources,
+            "latency_ms": round(elapsed_ms, 1),
         }
         # 4. Save to Cache for next time
         self.cache[cache_key] = final_result
