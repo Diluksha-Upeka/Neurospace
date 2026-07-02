@@ -1,25 +1,21 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException, BackgroundTasks, UploadFile, File
+from fastapi.responses import StreamingResponse
+from fastapi.middleware.cors import CORSMiddleware
 from .database import db
 from .services.video import video_processor
 from .services.transcription import transcriber
 from .services.pdf import pdf_processor
 from .services.graph_setup import setup_constraints
 from .services.llm_factory import llm_factory
-from .schemas import PDFResult, TranscriptionResult
+from .schemas import PDFResult, TranscriptionResult, ChatRequest, ChatResponse, GraphDataResponse
 import os
 import shutil
+import mimetypes
 from .worker import process_file_background
 from app.services.query_engine import query_service
-from app.schemas import ChatRequest, ChatResponse
 from app.services.graph_visualizer import graph_visualizer
-from app.schemas import GraphDataResponse
-
-from fastapi.responses import StreamingResponse
-from fastapi import HTTPException
 from app.services.storage import get_storage
-import mimetypes
-from fastapi.middleware.cors import CORSMiddleware  # <--- NEW IMPORT
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -183,10 +179,11 @@ async def chat_with_neurospace(request: ChatRequest):
     The main Chat API.
     Receives a message from the frontend, queries the GraphRAG engine,
     and returns the synthesized answer with citations.
+    Supports retrieval modes: 'hybrid' (default), 'vector_only', 'synonym_only'.
     """
     try:
-        # Pass the user's message to the engine (now uses cache)
-        result = query_service.ask(request.message)
+        # Pass the user's message and retrieval mode to the engine
+        result = query_service.ask(request.message, mode=request.mode)
         
         # FastAPI will automatically validate this dictionary against our ChatResponse schema
         return result
@@ -196,7 +193,8 @@ async def chat_with_neurospace(request: ChatRequest):
         # Return a friendly error if the LLM fails or rate limits hit
         return {
             "answer": "I'm sorry, my neural pathways are experiencing some turbulence. Please try again.",
-            "sources": []
+            "sources": [],
+            "latency_ms": None
         }
 
 @app.delete("/clear-cache")
@@ -204,6 +202,19 @@ def clear_query_cache():
     """Flushes the in-memory query cache so new prompts/settings take effect immediately."""
     query_service.cache.clear()
     return {"status": "cleared", "message": "Query cache flushed."}
+
+@app.get("/stats")
+def get_graph_stats():
+    """
+    Returns comprehensive statistics about the current knowledge graph.
+    Node counts, relationship counts, entity types, documents ingested, etc.
+    """
+    try:
+        stats = db.get_graph_stats()
+        return stats
+    except Exception as e:
+        print(f"❌ Stats Error: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to get graph stats: {str(e)}")
 
 @app.get("/graph", response_model=GraphDataResponse)
 def get_graph_data(limit: int = 150):
