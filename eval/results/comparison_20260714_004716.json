@@ -1,0 +1,804 @@
+{
+  "timestamp": "2026-07-14T00:47:16.706967",
+  "vector_only": {
+    "groundedness": {
+      "groundedness_pct": 100.0,
+      "grounded_count": 40,
+      "total_answerable": 40
+    },
+    "hallucination": {
+      "hallucination_rate_pct": 0.0,
+      "hallucinated_count": 0,
+      "total_unanswerable": 10,
+      "correctly_refused": 10,
+      "hallucination_details": []
+    },
+    "source_precision": {
+      "source_precision_pct": 86.2,
+      "correctly_cited": 69,
+      "total_cited": 80
+    },
+    "source_recall": {
+      "source_recall_pct": 75.5,
+      "sources_found": 40,
+      "total_expected": 53
+    },
+    "keyword_coverage": {
+      "keyword_coverage_pct": 60.8,
+      "found_keywords": 87,
+      "total_keywords": 143,
+      "per_question": [
+        {
+          "question_id": 1,
+          "coverage_pct": 100.0,
+          "found": 5,
+          "total": 5,
+          "missing": []
+        },
+        {
+          "question_id": 2,
+          "coverage_pct": 100.0,
+          "found": 3,
+          "total": 3,
+          "missing": []
+        },
+        {
+          "question_id": 3,
+          "coverage_pct": 100.0,
+          "found": 3,
+          "total": 3,
+          "missing": []
+        },
+        {
+          "question_id": 4,
+          "coverage_pct": 100.0,
+          "found": 1,
+          "total": 1,
+          "missing": []
+        },
+        {
+          "question_id": 5,
+          "coverage_pct": 100.0,
+          "found": 2,
+          "total": 2,
+          "missing": []
+        },
+        {
+          "question_id": 6,
+          "coverage_pct": 80.0,
+          "found": 4,
+          "total": 5,
+          "missing": [
+            "LlamaIndex"
+          ]
+        },
+        {
+          "question_id": 7,
+          "coverage_pct": 100.0,
+          "found": 3,
+          "total": 3,
+          "missing": []
+        },
+        {
+          "question_id": 8,
+          "coverage_pct": 100.0,
+          "found": 3,
+          "total": 3,
+          "missing": []
+        },
+        {
+          "question_id": 9,
+          "coverage_pct": 100.0,
+          "found": 2,
+          "total": 2,
+          "missing": []
+        },
+        {
+          "question_id": 10,
+          "coverage_pct": 0.0,
+          "found": 0,
+          "total": 5,
+          "missing": [
+            "Geoffrey Hinton",
+            "Yann LeCun",
+            "Yoshua Bengio",
+            "Turing Award",
+            "2018"
+          ]
+        },
+        {
+          "question_id": 11,
+          "coverage_pct": 50.0,
+          "found": 1,
+          "total": 2,
+          "missing": [
+            "activation"
+          ]
+        },
+        {
+          "question_id": 12,
+          "coverage_pct": 0.0,
+          "found": 0,
+          "total": 3,
+          "missing": [
+            "forward pass",
+            "loss computation",
+            "backpropagation"
+          ]
+        },
+        {
+          "question_id": 13,
+          "coverage_pct": 100.0,
+          "found": 3,
+          "total": 3,
+          "missing": []
+        },
+        {
+          "question_id": 14,
+          "coverage_pct": 25.0,
+          "found": 1,
+          "total": 4,
+          "missing": [
+            "gradually increases",
+            "preventing",
+            "divergence"
+          ]
+        },
+        {
+          "question_id": 15,
+          "coverage_pct": 100.0,
+          "found": 3,
+          "total": 3,
+          "missing": []
+        },
+        {
+          "question_id": 16,
+          "coverage_pct": 100.0,
+          "found": 4,
+          "total": 4,
+          "missing": []
+        },
+        {
+          "question_id": 17,
+          "coverage_pct": 100.0,
+          "found": 1,
+          "total": 1,
+          "missing": []
+        },
+        {
+          "question_id": 18,
+          "coverage_pct": 100.0,
+          "found": 1,
+          "total": 1,
+          "missing": []
+        },
+        {
+          "question_id": 19,
+          "coverage_pct": 100.0,
+          "found": 4,
+          "total": 4,
+          "missing": []
+        },
+        {
+          "question_id": 20,
+          "coverage_pct": 100.0,
+          "found": 1,
+          "total": 1,
+          "missing": []
+        },
+        {
+          "question_id": 21,
+          "coverage_pct": 0.0,
+          "found": 0,
+          "total": 5,
+          "missing": [
+            "key-value properties",
+            "nodes",
+            "edges",
+            "Neo4j",
+            "Cypher"
+          ]
+        },
+        {
+          "question_id": 22,
+          "coverage_pct": 100.0,
+          "found": 1,
+          "total": 1,
+          "missing": []
+        },
+        {
+          "question_id": 23,
+          "coverage_pct": 0.0,
+          "found": 0,
+          "total": 1,
+          "missing": [
+            "create-if-not-exists"
+          ]
+        },
+        {
+          "question_id": 24,
+          "coverage_pct": 60.0,
+          "found": 3,
+          "total": 5,
+          "missing": [
+            "prompts",
+            "text chunk"
+          ]
+        },
+        {
+          "question_id": 25,
+          "coverage_pct": 100.0,
+          "found": 1,
+          "total": 1,
+          "missing": []
+        },
+        {
+          "question_id": 26,
+          "coverage_pct": 75.0,
+          "found": 3,
+          "total": 4,
+          "missing": [
+            "knowledge graph"
+          ]
+        },
+        {
+          "question_id": 27,
+          "coverage_pct": 0.0,
+          "found": 0,
+          "total": 5,
+          "missing": [
+            "all-MiniLM-L6-v2",
+            "384",
+            "chunks",
+            "vector embeddings",
+            "cosine similarity"
+          ]
+        },
+        {
+          "question_id": 28,
+          "coverage_pct": 100.0,
+          "found": 3,
+          "total": 3,
+          "missing": []
+        },
+        {
+          "question_id": 29,
+          "coverage_pct": 40.0,
+          "found": 2,
+          "total": 5,
+          "missing": [
+            "vanishing gradient",
+            "self-attention",
+            "parallel"
+          ]
+        },
+        {
+          "question_id": 30,
+          "coverage_pct": 25.0,
+          "found": 1,
+          "total": 4,
+          "missing": [
+            "AdamW",
+            "Loshchilov",
+            "Hutter"
+          ]
+        },
+        {
+          "question_id": 31,
+          "coverage_pct": 50.0,
+          "found": 2,
+          "total": 4,
+          "missing": [
+            "graph traversal",
+            "single database"
+          ]
+        },
+        {
+          "question_id": 32,
+          "coverage_pct": 50.0,
+          "found": 3,
+          "total": 6,
+          "missing": [
+            "training data",
+            "model size",
+            "tokens"
+          ]
+        },
+        {
+          "question_id": 33,
+          "coverage_pct": 75.0,
+          "found": 3,
+          "total": 4,
+          "missing": [
+            "graph traversal"
+          ]
+        },
+        {
+          "question_id": 34,
+          "coverage_pct": 20.0,
+          "found": 1,
+          "total": 5,
+          "missing": [
+            "relationships",
+            "tokens",
+            "entities",
+            "edges"
+          ]
+        },
+        {
+          "question_id": 35,
+          "coverage_pct": 80.0,
+          "found": 4,
+          "total": 5,
+          "missing": [
+            "batch normalization"
+          ]
+        },
+        {
+          "question_id": 36,
+          "coverage_pct": 100.0,
+          "found": 6,
+          "total": 6,
+          "missing": []
+        },
+        {
+          "question_id": 37,
+          "coverage_pct": 33.3,
+          "found": 2,
+          "total": 6,
+          "missing": [
+            "chunking",
+            "embedding",
+            "entity extraction",
+            "knowledge graph"
+          ]
+        },
+        {
+          "question_id": 38,
+          "coverage_pct": 33.3,
+          "found": 2,
+          "total": 6,
+          "missing": [
+            "backpropagation",
+            "CNN",
+            "RNN",
+            "Transformer"
+          ]
+        },
+        {
+          "question_id": 39,
+          "coverage_pct": 0.0,
+          "found": 0,
+          "total": 4,
+          "missing": [
+            "Flash Attention",
+            "quantization",
+            "MoE",
+            "dropout"
+          ]
+        },
+        {
+          "question_id": 40,
+          "coverage_pct": 100.0,
+          "found": 5,
+          "total": 5,
+          "missing": []
+        }
+      ]
+    },
+    "latency": {
+      "p50_ms": 3627.6,
+      "p95_ms": 9423.2,
+      "mean_ms": 5010.3,
+      "min_ms": 2747.4,
+      "max_ms": 28055.3,
+      "total_queries": 50
+    },
+    "total_questions": 50,
+    "answerable_questions": 40,
+    "unanswerable_questions": 10
+  },
+  "hybrid": {
+    "groundedness": {
+      "groundedness_pct": 100.0,
+      "grounded_count": 40,
+      "total_answerable": 40
+    },
+    "hallucination": {
+      "hallucination_rate_pct": 0.0,
+      "hallucinated_count": 0,
+      "total_unanswerable": 10,
+      "correctly_refused": 10,
+      "hallucination_details": []
+    },
+    "source_precision": {
+      "source_precision_pct": 91.8,
+      "correctly_cited": 78,
+      "total_cited": 85
+    },
+    "source_recall": {
+      "source_recall_pct": 77.4,
+      "sources_found": 41,
+      "total_expected": 53
+    },
+    "keyword_coverage": {
+      "keyword_coverage_pct": 59.4,
+      "found_keywords": 85,
+      "total_keywords": 143,
+      "per_question": [
+        {
+          "question_id": 1,
+          "coverage_pct": 100.0,
+          "found": 5,
+          "total": 5,
+          "missing": []
+        },
+        {
+          "question_id": 2,
+          "coverage_pct": 100.0,
+          "found": 3,
+          "total": 3,
+          "missing": []
+        },
+        {
+          "question_id": 3,
+          "coverage_pct": 100.0,
+          "found": 3,
+          "total": 3,
+          "missing": []
+        },
+        {
+          "question_id": 4,
+          "coverage_pct": 100.0,
+          "found": 1,
+          "total": 1,
+          "missing": []
+        },
+        {
+          "question_id": 5,
+          "coverage_pct": 100.0,
+          "found": 2,
+          "total": 2,
+          "missing": []
+        },
+        {
+          "question_id": 6,
+          "coverage_pct": 80.0,
+          "found": 4,
+          "total": 5,
+          "missing": [
+            "LlamaIndex"
+          ]
+        },
+        {
+          "question_id": 7,
+          "coverage_pct": 100.0,
+          "found": 3,
+          "total": 3,
+          "missing": []
+        },
+        {
+          "question_id": 8,
+          "coverage_pct": 100.0,
+          "found": 3,
+          "total": 3,
+          "missing": []
+        },
+        {
+          "question_id": 9,
+          "coverage_pct": 100.0,
+          "found": 2,
+          "total": 2,
+          "missing": []
+        },
+        {
+          "question_id": 10,
+          "coverage_pct": 0.0,
+          "found": 0,
+          "total": 5,
+          "missing": [
+            "Geoffrey Hinton",
+            "Yann LeCun",
+            "Yoshua Bengio",
+            "Turing Award",
+            "2018"
+          ]
+        },
+        {
+          "question_id": 11,
+          "coverage_pct": 50.0,
+          "found": 1,
+          "total": 2,
+          "missing": [
+            "activation"
+          ]
+        },
+        {
+          "question_id": 12,
+          "coverage_pct": 0.0,
+          "found": 0,
+          "total": 3,
+          "missing": [
+            "forward pass",
+            "loss computation",
+            "backpropagation"
+          ]
+        },
+        {
+          "question_id": 13,
+          "coverage_pct": 100.0,
+          "found": 3,
+          "total": 3,
+          "missing": []
+        },
+        {
+          "question_id": 14,
+          "coverage_pct": 25.0,
+          "found": 1,
+          "total": 4,
+          "missing": [
+            "gradually increases",
+            "preventing",
+            "divergence"
+          ]
+        },
+        {
+          "question_id": 15,
+          "coverage_pct": 100.0,
+          "found": 3,
+          "total": 3,
+          "missing": []
+        },
+        {
+          "question_id": 16,
+          "coverage_pct": 100.0,
+          "found": 4,
+          "total": 4,
+          "missing": []
+        },
+        {
+          "question_id": 17,
+          "coverage_pct": 100.0,
+          "found": 1,
+          "total": 1,
+          "missing": []
+        },
+        {
+          "question_id": 18,
+          "coverage_pct": 100.0,
+          "found": 1,
+          "total": 1,
+          "missing": []
+        },
+        {
+          "question_id": 19,
+          "coverage_pct": 25.0,
+          "found": 1,
+          "total": 4,
+          "missing": [
+            "reorders",
+            "attention computation",
+            "memory reads/writes"
+          ]
+        },
+        {
+          "question_id": 20,
+          "coverage_pct": 100.0,
+          "found": 1,
+          "total": 1,
+          "missing": []
+        },
+        {
+          "question_id": 21,
+          "coverage_pct": 0.0,
+          "found": 0,
+          "total": 5,
+          "missing": [
+            "key-value properties",
+            "nodes",
+            "edges",
+            "Neo4j",
+            "Cypher"
+          ]
+        },
+        {
+          "question_id": 22,
+          "coverage_pct": 100.0,
+          "found": 1,
+          "total": 1,
+          "missing": []
+        },
+        {
+          "question_id": 23,
+          "coverage_pct": 0.0,
+          "found": 0,
+          "total": 1,
+          "missing": [
+            "create-if-not-exists"
+          ]
+        },
+        {
+          "question_id": 24,
+          "coverage_pct": 80.0,
+          "found": 4,
+          "total": 5,
+          "missing": [
+            "prompts"
+          ]
+        },
+        {
+          "question_id": 25,
+          "coverage_pct": 100.0,
+          "found": 1,
+          "total": 1,
+          "missing": []
+        },
+        {
+          "question_id": 26,
+          "coverage_pct": 75.0,
+          "found": 3,
+          "total": 4,
+          "missing": [
+            "knowledge graph"
+          ]
+        },
+        {
+          "question_id": 27,
+          "coverage_pct": 0.0,
+          "found": 0,
+          "total": 5,
+          "missing": [
+            "all-MiniLM-L6-v2",
+            "384",
+            "chunks",
+            "vector embeddings",
+            "cosine similarity"
+          ]
+        },
+        {
+          "question_id": 28,
+          "coverage_pct": 33.3,
+          "found": 1,
+          "total": 3,
+          "missing": [
+            "Transformer",
+            "feed-forward"
+          ]
+        },
+        {
+          "question_id": 29,
+          "coverage_pct": 40.0,
+          "found": 2,
+          "total": 5,
+          "missing": [
+            "vanishing gradient",
+            "self-attention",
+            "parallel"
+          ]
+        },
+        {
+          "question_id": 30,
+          "coverage_pct": 25.0,
+          "found": 1,
+          "total": 4,
+          "missing": [
+            "AdamW",
+            "Loshchilov",
+            "Hutter"
+          ]
+        },
+        {
+          "question_id": 31,
+          "coverage_pct": 50.0,
+          "found": 2,
+          "total": 4,
+          "missing": [
+            "graph traversal",
+            "single database"
+          ]
+        },
+        {
+          "question_id": 32,
+          "coverage_pct": 50.0,
+          "found": 3,
+          "total": 6,
+          "missing": [
+            "training data",
+            "model size",
+            "tokens"
+          ]
+        },
+        {
+          "question_id": 33,
+          "coverage_pct": 75.0,
+          "found": 3,
+          "total": 4,
+          "missing": [
+            "graph traversal"
+          ]
+        },
+        {
+          "question_id": 34,
+          "coverage_pct": 40.0,
+          "found": 2,
+          "total": 5,
+          "missing": [
+            "tokens",
+            "entities",
+            "edges"
+          ]
+        },
+        {
+          "question_id": 35,
+          "coverage_pct": 80.0,
+          "found": 4,
+          "total": 5,
+          "missing": [
+            "batch normalization"
+          ]
+        },
+        {
+          "question_id": 36,
+          "coverage_pct": 83.3,
+          "found": 5,
+          "total": 6,
+          "missing": [
+            "prompting"
+          ]
+        },
+        {
+          "question_id": 37,
+          "coverage_pct": 33.3,
+          "found": 2,
+          "total": 6,
+          "missing": [
+            "chunking",
+            "embedding",
+            "entity extraction",
+            "knowledge graph"
+          ]
+        },
+        {
+          "question_id": 38,
+          "coverage_pct": 33.3,
+          "found": 2,
+          "total": 6,
+          "missing": [
+            "backpropagation",
+            "CNN",
+            "RNN",
+            "Transformer"
+          ]
+        },
+        {
+          "question_id": 39,
+          "coverage_pct": 50.0,
+          "found": 2,
+          "total": 4,
+          "missing": [
+            "Flash Attention",
+            "dropout"
+          ]
+        },
+        {
+          "question_id": 40,
+          "coverage_pct": 100.0,
+          "found": 5,
+          "total": 5,
+          "missing": []
+        }
+      ]
+    },
+    "latency": {
+      "p50_ms": 4629.6,
+      "p95_ms": 9439.9,
+      "mean_ms": 5470.0,
+      "min_ms": 3958.1,
+      "max_ms": 14077.4,
+      "total_queries": 50
+    },
+    "total_questions": 50,
+    "answerable_questions": 40,
+    "unanswerable_questions": 10
+  }
+}

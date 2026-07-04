@@ -1,0 +1,2320 @@
+{
+  "metadata": {
+    "timestamp": "2026-07-14T00:47:16.428107",
+    "mode": "hybrid",
+    "api_url": "http://localhost:8000",
+    "total_questions": 50,
+    "errors": 0
+  },
+  "metrics": {
+    "groundedness": {
+      "groundedness_pct": 100.0,
+      "grounded_count": 40,
+      "total_answerable": 40
+    },
+    "hallucination": {
+      "hallucination_rate_pct": 0.0,
+      "hallucinated_count": 0,
+      "total_unanswerable": 10,
+      "correctly_refused": 10,
+      "hallucination_details": []
+    },
+    "source_precision": {
+      "source_precision_pct": 91.8,
+      "correctly_cited": 78,
+      "total_cited": 85
+    },
+    "source_recall": {
+      "source_recall_pct": 77.4,
+      "sources_found": 41,
+      "total_expected": 53
+    },
+    "keyword_coverage": {
+      "keyword_coverage_pct": 59.4,
+      "found_keywords": 85,
+      "total_keywords": 143,
+      "per_question": [
+        {
+          "question_id": 1,
+          "coverage_pct": 100.0,
+          "found": 5,
+          "total": 5,
+          "missing": []
+        },
+        {
+          "question_id": 2,
+          "coverage_pct": 100.0,
+          "found": 3,
+          "total": 3,
+          "missing": []
+        },
+        {
+          "question_id": 3,
+          "coverage_pct": 100.0,
+          "found": 3,
+          "total": 3,
+          "missing": []
+        },
+        {
+          "question_id": 4,
+          "coverage_pct": 100.0,
+          "found": 1,
+          "total": 1,
+          "missing": []
+        },
+        {
+          "question_id": 5,
+          "coverage_pct": 100.0,
+          "found": 2,
+          "total": 2,
+          "missing": []
+        },
+        {
+          "question_id": 6,
+          "coverage_pct": 80.0,
+          "found": 4,
+          "total": 5,
+          "missing": [
+            "LlamaIndex"
+          ]
+        },
+        {
+          "question_id": 7,
+          "coverage_pct": 100.0,
+          "found": 3,
+          "total": 3,
+          "missing": []
+        },
+        {
+          "question_id": 8,
+          "coverage_pct": 100.0,
+          "found": 3,
+          "total": 3,
+          "missing": []
+        },
+        {
+          "question_id": 9,
+          "coverage_pct": 100.0,
+          "found": 2,
+          "total": 2,
+          "missing": []
+        },
+        {
+          "question_id": 10,
+          "coverage_pct": 0.0,
+          "found": 0,
+          "total": 5,
+          "missing": [
+            "Geoffrey Hinton",
+            "Yann LeCun",
+            "Yoshua Bengio",
+            "Turing Award",
+            "2018"
+          ]
+        },
+        {
+          "question_id": 11,
+          "coverage_pct": 50.0,
+          "found": 1,
+          "total": 2,
+          "missing": [
+            "activation"
+          ]
+        },
+        {
+          "question_id": 12,
+          "coverage_pct": 0.0,
+          "found": 0,
+          "total": 3,
+          "missing": [
+            "forward pass",
+            "loss computation",
+            "backpropagation"
+          ]
+        },
+        {
+          "question_id": 13,
+          "coverage_pct": 100.0,
+          "found": 3,
+          "total": 3,
+          "missing": []
+        },
+        {
+          "question_id": 14,
+          "coverage_pct": 25.0,
+          "found": 1,
+          "total": 4,
+          "missing": [
+            "gradually increases",
+            "preventing",
+            "divergence"
+          ]
+        },
+        {
+          "question_id": 15,
+          "coverage_pct": 100.0,
+          "found": 3,
+          "total": 3,
+          "missing": []
+        },
+        {
+          "question_id": 16,
+          "coverage_pct": 100.0,
+          "found": 4,
+          "total": 4,
+          "missing": []
+        },
+        {
+          "question_id": 17,
+          "coverage_pct": 100.0,
+          "found": 1,
+          "total": 1,
+          "missing": []
+        },
+        {
+          "question_id": 18,
+          "coverage_pct": 100.0,
+          "found": 1,
+          "total": 1,
+          "missing": []
+        },
+        {
+          "question_id": 19,
+          "coverage_pct": 25.0,
+          "found": 1,
+          "total": 4,
+          "missing": [
+            "reorders",
+            "attention computation",
+            "memory reads/writes"
+          ]
+        },
+        {
+          "question_id": 20,
+          "coverage_pct": 100.0,
+          "found": 1,
+          "total": 1,
+          "missing": []
+        },
+        {
+          "question_id": 21,
+          "coverage_pct": 0.0,
+          "found": 0,
+          "total": 5,
+          "missing": [
+            "key-value properties",
+            "nodes",
+            "edges",
+            "Neo4j",
+            "Cypher"
+          ]
+        },
+        {
+          "question_id": 22,
+          "coverage_pct": 100.0,
+          "found": 1,
+          "total": 1,
+          "missing": []
+        },
+        {
+          "question_id": 23,
+          "coverage_pct": 0.0,
+          "found": 0,
+          "total": 1,
+          "missing": [
+            "create-if-not-exists"
+          ]
+        },
+        {
+          "question_id": 24,
+          "coverage_pct": 80.0,
+          "found": 4,
+          "total": 5,
+          "missing": [
+            "prompts"
+          ]
+        },
+        {
+          "question_id": 25,
+          "coverage_pct": 100.0,
+          "found": 1,
+          "total": 1,
+          "missing": []
+        },
+        {
+          "question_id": 26,
+          "coverage_pct": 75.0,
+          "found": 3,
+          "total": 4,
+          "missing": [
+            "knowledge graph"
+          ]
+        },
+        {
+          "question_id": 27,
+          "coverage_pct": 0.0,
+          "found": 0,
+          "total": 5,
+          "missing": [
+            "all-MiniLM-L6-v2",
+            "384",
+            "chunks",
+            "vector embeddings",
+            "cosine similarity"
+          ]
+        },
+        {
+          "question_id": 28,
+          "coverage_pct": 33.3,
+          "found": 1,
+          "total": 3,
+          "missing": [
+            "Transformer",
+            "feed-forward"
+          ]
+        },
+        {
+          "question_id": 29,
+          "coverage_pct": 40.0,
+          "found": 2,
+          "total": 5,
+          "missing": [
+            "vanishing gradient",
+            "self-attention",
+            "parallel"
+          ]
+        },
+        {
+          "question_id": 30,
+          "coverage_pct": 25.0,
+          "found": 1,
+          "total": 4,
+          "missing": [
+            "AdamW",
+            "Loshchilov",
+            "Hutter"
+          ]
+        },
+        {
+          "question_id": 31,
+          "coverage_pct": 50.0,
+          "found": 2,
+          "total": 4,
+          "missing": [
+            "graph traversal",
+            "single database"
+          ]
+        },
+        {
+          "question_id": 32,
+          "coverage_pct": 50.0,
+          "found": 3,
+          "total": 6,
+          "missing": [
+            "training data",
+            "model size",
+            "tokens"
+          ]
+        },
+        {
+          "question_id": 33,
+          "coverage_pct": 75.0,
+          "found": 3,
+          "total": 4,
+          "missing": [
+            "graph traversal"
+          ]
+        },
+        {
+          "question_id": 34,
+          "coverage_pct": 40.0,
+          "found": 2,
+          "total": 5,
+          "missing": [
+            "tokens",
+            "entities",
+            "edges"
+          ]
+        },
+        {
+          "question_id": 35,
+          "coverage_pct": 80.0,
+          "found": 4,
+          "total": 5,
+          "missing": [
+            "batch normalization"
+          ]
+        },
+        {
+          "question_id": 36,
+          "coverage_pct": 83.3,
+          "found": 5,
+          "total": 6,
+          "missing": [
+            "prompting"
+          ]
+        },
+        {
+          "question_id": 37,
+          "coverage_pct": 33.3,
+          "found": 2,
+          "total": 6,
+          "missing": [
+            "chunking",
+            "embedding",
+            "entity extraction",
+            "knowledge graph"
+          ]
+        },
+        {
+          "question_id": 38,
+          "coverage_pct": 33.3,
+          "found": 2,
+          "total": 6,
+          "missing": [
+            "backpropagation",
+            "CNN",
+            "RNN",
+            "Transformer"
+          ]
+        },
+        {
+          "question_id": 39,
+          "coverage_pct": 50.0,
+          "found": 2,
+          "total": 4,
+          "missing": [
+            "Flash Attention",
+            "dropout"
+          ]
+        },
+        {
+          "question_id": 40,
+          "coverage_pct": 100.0,
+          "found": 5,
+          "total": 5,
+          "missing": []
+        }
+      ]
+    },
+    "latency": {
+      "p50_ms": 4629.6,
+      "p95_ms": 9439.9,
+      "mean_ms": 5470.0,
+      "min_ms": 3958.1,
+      "max_ms": 14077.4,
+      "total_queries": 50
+    },
+    "total_questions": 50,
+    "answerable_questions": 40,
+    "unanswerable_questions": 10
+  },
+  "results": [
+    {
+      "id": 1,
+      "question": "What is Retrieval-Augmented Generation?",
+      "category": "single_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "retrieval",
+        "language model",
+        "external knowledge",
+        "Patrick Lewis",
+        "Facebook AI Research"
+      ],
+      "expected_sources": [
+        "Fundamentals_of_RAG.pdf"
+      ],
+      "actual_answer": "Retrieval-Augmented Generation (RAG) is a technique introduced by Patrick Lewis and colleagues at Facebook AI Research (FAIR) in their 2020 paper [Fundamentals_of_RAG.pdf, 2]. It combines a pre-trained language model with a retrieval mechanism that fetches relevant documents from an external knowledge base before generating a response [Fundamentals_of_RAG.pdf, 2].",
+      "actual_sources": [
+        {
+          "filename": "Fundamentals_of_RAG.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nFundamentals of retrieval-augmented generation -> Has page -> Page 1\nFundamentals of retrieval-augmented generation -> Has -> Neurospace evaluati...",
+          "score": 0.787,
+          "page": 1,
+          "timestamp": null
+        },
+        {
+          "filename": "Fundamentals_of_RAG.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nRetrieval-augmented generation -> Introduced by -> Patrick lewis\nRetrieval-augmented generation -> Addresses limitation of -> Large language mode...",
+          "score": 0.741,
+          "page": 2,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 7287.4,
+      "api_latency_ms": 5214.0,
+      "status": "success"
+    },
+    {
+      "id": 2,
+      "question": "What are the three stages of the core RAG pipeline?",
+      "category": "single_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "indexing",
+        "retrieval",
+        "generation"
+      ],
+      "expected_sources": [
+        "Fundamentals_of_RAG.pdf"
+      ],
+      "actual_answer": "The three stages of the core RAG pipeline are: \n(1) Indexing, where documents are split into chunks and converted to vector embeddings; \n(2) Retrieval, where user queries are embedded and compared against the document embeddings using similarity search; \n(3) Generation, where the retrieved context is concatenated with the user query and passed to a language model for answer synthesis. [Fundamentals_of_RAG.pdf, page 2]",
+      "actual_sources": [
+        {
+          "filename": "Fundamentals_of_RAG.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nRag pipeline -> Consists of -> Generation\nRag pipeline -> Consists of -> Indexing\nRag pipeline -> Consists of -> Retrieval\n\nFundamentals of Retri...",
+          "score": 0.712,
+          "page": 2,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 5645.0,
+      "api_latency_ms": 3614.2,
+      "status": "success"
+    },
+    {
+      "id": 3,
+      "question": "How does RAG differ from fine-tuning?",
+      "category": "single_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "weights frozen",
+        "dynamically retrieves",
+        "catastrophic forgetting"
+      ],
+      "expected_sources": [
+        "Fundamentals_of_RAG.pdf"
+      ],
+      "actual_answer": "RAG differs fundamentally from fine-tuning. Fine-tuning modifies the model's weights using task-specific data, which is computationally expensive and can cause catastrophic forgetting. RAG, by contrast, keeps the model weights frozen and dynamically retrieves relevant information at inference time. [Fundamentals_of_RAG.pdf, page 2]",
+      "actual_sources": [
+        {
+          "filename": "Fundamentals_of_RAG.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nRag -> Differs from -> Fine-tuning\n\ndocument embeddings using similarity search; and (3) Generation, where the retrieved context is\nconcatenated ...",
+          "score": 1.0,
+          "page": 2,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 5096.8,
+      "api_latency_ms": 2990.1,
+      "status": "success"
+    },
+    {
+      "id": 4,
+      "question": "What is the dimensionality of all-MiniLM-L6-v2 embeddings?",
+      "category": "single_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "384"
+      ],
+      "expected_sources": [
+        "Fundamentals_of_RAG.pdf"
+      ],
+      "actual_answer": "384 dimensions [Fundamentals_of_RAG.pdf, page 3]",
+      "actual_sources": [
+        {
+          "filename": "Fundamentals_of_RAG.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nAll-minilm-l6-v2 -> Trained on -> 1 billion sentence pairs\nAll-minilm-l6-v2 -> Produces -> 384-dimensional vectors\nAll-minilm-l6-v2 -> Produces -...",
+          "score": 0.709,
+          "page": 3,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 5078.0,
+      "api_latency_ms": 3027.7,
+      "status": "success"
+    },
+    {
+      "id": 5,
+      "question": "What does a cosine similarity of 1.0 indicate?",
+      "category": "single_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "identical direction",
+        "maximum similarity"
+      ],
+      "expected_sources": [
+        "Fundamentals_of_RAG.pdf"
+      ],
+      "actual_answer": "A cosine similarity of 1.0 indicates identical direction (maximum similarity) [Fundamentals_of_RAG.pdf, page 3].",
+      "actual_sources": [
+        {
+          "filename": "Fundamentals_of_RAG.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nCosine similarity -> Measures -> Angle between vectors\nCosine similarity -> Indicates -> Identical direction\nCosine similarity -> Indicates -> Or...",
+          "score": 1.0,
+          "page": 3,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 5320.7,
+      "api_latency_ms": 3237.1,
+      "status": "success"
+    },
+    {
+      "id": 6,
+      "question": "What is recursive chunking and which frameworks use it as default?",
+      "category": "single_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "natural boundaries",
+        "paragraphs",
+        "sentences",
+        "LangChain",
+        "LlamaIndex"
+      ],
+      "expected_sources": [
+        "Fundamentals_of_RAG.pdf"
+      ],
+      "actual_answer": "Recursive chunking is a chunking strategy that attempts to split on natural boundaries (paragraphs, then sentences, then characters) while staying within a size limit. This is the default strategy in LangChain [Fundamentals_of_RAG.pdf, page 4].",
+      "actual_sources": [
+        {
+          "filename": "Fundamentals_of_RAG.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nRecursive chunking -> Is default strategy in -> Langchain\nSemantic chunking -> Groups sentences by -> Semantic similarity\nChunking strategy -> Af...",
+          "score": 0.716,
+          "page": 4,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 5176.7,
+      "api_latency_ms": 3123.2,
+      "status": "success"
+    },
+    {
+      "id": 7,
+      "question": "What chunk size range offers the best trade-off for most RAG applications?",
+      "category": "single_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "512",
+        "1024",
+        "tokens"
+      ],
+      "expected_sources": [
+        "Fundamentals_of_RAG.pdf"
+      ],
+      "actual_answer": "Chunk sizes between 512 and 1024 tokens offer the best trade-off for most RAG applications [Fundamentals_of_RAG.pdf, page 4].",
+      "actual_sources": [
+        {
+          "filename": "Fundamentals_of_RAG.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nGreg kamradt -> Suggests -> Chunk sizes between 512 and 1024 tokens\nRag applications -> Require -> Optimal chunk size\nLarger chunks -> Provide ->...",
+          "score": 0.741,
+          "page": 4,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 5458.8,
+      "api_latency_ms": 3386.0,
+      "status": "success"
+    },
+    {
+      "id": 8,
+      "question": "What is hybrid search in the context of advanced RAG?",
+      "category": "single_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "vector similarity",
+        "keyword matching",
+        "BM25"
+      ],
+      "expected_sources": [
+        "Fundamentals_of_RAG.pdf"
+      ],
+      "actual_answer": "Hybrid search combines vector similarity with keyword matching (BM25) [Fundamentals_of_RAG.pdf, page 5].",
+      "actual_sources": [
+        {
+          "filename": "Fundamentals_of_RAG.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nHybrid search -> Combines -> Vector similarity\nHybrid search -> Combines -> Keyword matching\nBasic rag -> Retrieves -> Top-k chunks\n\nFundamentals...",
+          "score": 0.754,
+          "page": 5,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 5274.3,
+      "api_latency_ms": 3207.7,
+      "status": "success"
+    },
+    {
+      "id": 9,
+      "question": "Who proposed the perceptron and in what year?",
+      "category": "single_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "Frank Rosenblatt",
+        "1958"
+      ],
+      "expected_sources": [
+        "Neural_Networks_Essentials.pdf"
+      ],
+      "actual_answer": "The perceptron was proposed by Frank Rosenblatt in 1958 [Neural_Networks_Essentials.pdf, page 2].",
+      "actual_sources": [
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nPerceptron -> Takes -> Multiple inputs\nPerceptron -> Proposed by -> Frank rosenblatt\n\nNeural Networks and Deep Learning Essentials\nChapter 1: Fou...",
+          "score": 0.706,
+          "page": 2,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 5766.6,
+      "api_latency_ms": 3713.1,
+      "status": "success"
+    },
+    {
+      "id": 10,
+      "question": "Who are called the 'Godfathers of AI' and what award did they receive?",
+      "category": "single_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "Geoffrey Hinton",
+        "Yann LeCun",
+        "Yoshua Bengio",
+        "Turing Award",
+        "2018"
+      ],
+      "expected_sources": [
+        "Neural_Networks_Essentials.pdf"
+      ],
+      "actual_answer": "The uploaded documents do not contain information about the 'Godfathers of AI' or the award they received.",
+      "actual_sources": [
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nLlama -> Released by -> Meta ai\n\nPositional Encoding is necessary because self-attention is permutation-invariant -- it has no inherent notion of...",
+          "score": 0.658,
+          "page": 3,
+          "timestamp": null
+        },
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nKnowledge graphs -> Used in -> Ai systems\nKnowledge graphs in ai systems -> Has page -> 1\n\nKnowledge Graphs in AI Systems\nKnowledge Graphs in AI ...",
+          "score": 0.646,
+          "page": 1,
+          "timestamp": null
+        },
+        {
+          "filename": "Fundamentals_of_RAG.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nRetrieval-augmented generation -> Introduced at -> Facebook ai research\n\nFundamentals of Retrieval-Augmented Generation\nChapter 1: What is Retrie...",
+          "score": 0.646,
+          "page": 2,
+          "timestamp": null
+        },
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nEntity resolution -> Merges -> 'machine learning'\n\n(Person, Organization, Concept, Event, Place) and relationship types (MENTIONS, RELATED_TO,\nPA...",
+          "score": 0.628,
+          "page": 5,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 4527.8,
+      "api_latency_ms": 2461.3,
+      "status": "success"
+    },
+    {
+      "id": 11,
+      "question": "What is the dying ReLU problem?",
+      "category": "single_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "ReLU",
+        "activation"
+      ],
+      "expected_sources": [
+        "Neural_Networks_Essentials.pdf"
+      ],
+      "actual_answer": "The dying ReLU problem is caused by 'Fast to compute and mitigates vanishing gradients, but can cause 'dying ReLU' problems.' [Neural_Networks_Essentials.pdf, page 2]",
+      "actual_sources": [
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nRelu -> Mitigates -> Vanishing gradients\n\nAward.\nActivation functions introduce non-linearity into the network. Common activation functions inclu...",
+          "score": 1.0,
+          "page": 2,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 5705.0,
+      "api_latency_ms": 3566.7,
+      "status": "success"
+    },
+    {
+      "id": 12,
+      "question": "What are the three steps of training a neural network?",
+      "category": "single_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "forward pass",
+        "loss computation",
+        "backpropagation"
+      ],
+      "expected_sources": [
+        "Neural_Networks_Essentials.pdf"
+      ],
+      "actual_answer": "The uploaded documents do not contain information about the three steps of training a neural network.",
+      "actual_sources": [
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nBatch normalization -> Accelerates -> Training\n\nNeural Networks and Deep Learning Essentials\nChapter 4: Regularization and Generalization\nRegular...",
+          "score": 0.721,
+          "page": 5,
+          "timestamp": null
+        },
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nNeural network -> Is -> Computational model\n\nNeural Networks and Deep Learning Essentials\nChapter 1: Foundations of Neural Networks\nA neural netw...",
+          "score": 0.714,
+          "page": 2,
+          "timestamp": null
+        },
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nNeural networks -> Have -> Deep learning essentials\nNeural networks -> Trained using -> Gradient descent\nNeural networks -> Involve -> Minimizing...",
+          "score": 0.711,
+          "page": 1,
+          "timestamp": null
+        },
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nRecurrent neural networks -> Are designed for -> Sequential data\n\nNeural Networks and Deep Learning Essentials\nChapter 3: Convolutional and Recur...",
+          "score": 0.694,
+          "page": 4,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 7655.6,
+      "api_latency_ms": 5551.3,
+      "status": "success"
+    },
+    {
+      "id": 13,
+      "question": "Who published the Adam optimizer and in what year?",
+      "category": "single_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "Kingma",
+        "Ba",
+        "2014"
+      ],
+      "expected_sources": [
+        "Neural_Networks_Essentials.pdf"
+      ],
+      "actual_answer": "Adam was published by Kingma and Ba in 2014 [Neural_Networks_Essentials.pdf, page 3].",
+      "actual_sources": [
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nAdam -> Combines -> Momentum\nAdam -> Published by -> Kingma and ba\n\n- SGD (Stochastic Gradient Descent): Updates weights using gradients from a m...",
+          "score": 1.0,
+          "page": 3,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 4812.5,
+      "api_latency_ms": 2734.2,
+      "status": "success"
+    },
+    {
+      "id": 14,
+      "question": "What is the purpose of the warmup phase in learning rate scheduling?",
+      "category": "single_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "gradually increases",
+        "learning rate",
+        "preventing",
+        "divergence"
+      ],
+      "expected_sources": [
+        "Neural_Networks_Essentials.pdf"
+      ],
+      "actual_answer": "The uploaded documents do not contain information about the purpose of the warmup phase in learning rate scheduling.",
+      "actual_sources": [
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nTransfer learning -> Reduces -> Amount of labeled data needed\n\nNormalization is preferred for Transformer models because it normalizes across fea...",
+          "score": 0.587,
+          "page": 5,
+          "timestamp": null
+        },
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nNeural networks -> Trained using -> Gradient descent\n\nNeural Networks and Deep Learning Essentials\nNeural Networks and Deep Learning Essentials\nN...",
+          "score": 0.581,
+          "page": 1,
+          "timestamp": null
+        },
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nSgd -> Updates weights using -> Gradients from mini-batch\n\nNeural Networks and Deep Learning Essentials\nChapter 2: Training Neural Networks\nTrain...",
+          "score": 0.579,
+          "page": 3,
+          "timestamp": null
+        },
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nGpt-3 -> Demonstrated -> Few-shot learning abilities\n\nThe Transformer Architecture\nChapter 3: Modern Transformer Variants\nBERT (Bidirectional Enc...",
+          "score": 0.577,
+          "page": 4,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 11779.5,
+      "api_latency_ms": 9673.8,
+      "status": "success"
+    },
+    {
+      "id": 15,
+      "question": "Which model won the ImageNet competition and reignited interest in deep learning?",
+      "category": "single_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "AlexNet",
+        "Alex Krizhevsky",
+        "2012"
+      ],
+      "expected_sources": [
+        "Neural_Networks_Essentials.pdf"
+      ],
+      "actual_answer": "AlexNet, which was introduced by Alex Krizhevsky in 2012, won the ImageNet competition and reignited interest in deep learning [Neural_Networks_Essentials.pdf, page 4].",
+      "actual_sources": [
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nAlexnet -> Won -> Imagenet competition\nResnet -> Introduced -> Skip connections\nConvolutional neural networks -> Are specialized for -> Grid-stru...",
+          "score": 1.0,
+          "page": 4,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 7315.0,
+      "api_latency_ms": 5266.5,
+      "status": "success"
+    },
+    {
+      "id": 16,
+      "question": "What is the attention formula in Transformers?",
+      "category": "single_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "softmax",
+        "QK^T",
+        "sqrt(d_k)",
+        "V"
+      ],
+      "expected_sources": [
+        "Transformer_Architecture.pdf"
+      ],
+      "actual_answer": "The attention formula in Transformers is: Attention(Q, K, V) = softmax(QK^T / sqrt(d_k)) * V [Transformer_Architecture.pdf, 2]",
+      "actual_sources": [
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nAttention -> Calculated by -> Softmax function\nAttention -> Depends on -> V\nAttention -> Depends on -> K\nAttention -> Computed by -> Softmax\nAtte...",
+          "score": 1.0,
+          "page": 2,
+          "timestamp": null
+        },
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nTransformer architecture -> Is -> Architecture\n\nThe Transformer Architecture\nThe Transformer Architecture\nNeuroSpace Evaluation Test Corpus\nAuto-...",
+          "score": 1.0,
+          "page": 1,
+          "timestamp": null
+        },
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nEfficient attention mechanisms -> Address -> Quadratic memory cost\n\nThe Transformer Architecture\nChapter 4: Scaling Laws and Efficiency\nThe Chinc...",
+          "score": 0.73,
+          "page": 5,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 9439.9,
+      "api_latency_ms": 7365.0,
+      "status": "success"
+    },
+    {
+      "id": 17,
+      "question": "How many attention heads does the original Transformer use?",
+      "category": "single_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "8"
+      ],
+      "expected_sources": [
+        "Transformer_Architecture.pdf"
+      ],
+      "actual_answer": "The original Transformer uses 8 attention heads [Transformer_Architecture.pdf, 2].",
+      "actual_sources": [
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nTransformer architecture -> Is -> Architecture\nTransformer architecture -> Is described in -> Transformer_architecture.pdf\nTransformer architectu...",
+          "score": 1.0,
+          "page": 1,
+          "timestamp": null
+        },
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nVaswani et al. -> Introduced -> Transformer architecture\n\nThe Transformer Architecture\nChapter 1: The Attention Mechanism\nThe Transformer archite...",
+          "score": 1.0,
+          "page": 2,
+          "timestamp": null
+        },
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nLayer -> Has -> Multi-head self-attention\n\nThe Transformer Architecture\nChapter 2: Transformer Architecture Details\nThe original Transformer foll...",
+          "score": 0.751,
+          "page": 3,
+          "timestamp": null
+        },
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nEfficient attention mechanisms -> Address -> Quadratic memory cost\n\nThe Transformer Architecture\nChapter 4: Scaling Laws and Efficiency\nThe Chinc...",
+          "score": 0.745,
+          "page": 5,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 14077.4,
+      "api_latency_ms": 11985.2,
+      "status": "success"
+    },
+    {
+      "id": 18,
+      "question": "How many parameters does BERT-base have?",
+      "category": "single_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "110 million"
+      ],
+      "expected_sources": [
+        "Transformer_Architecture.pdf"
+      ],
+      "actual_answer": "BERT has 110 million parameters [Knowledge_Graphs_in_AI.pdf, page 5].",
+      "actual_sources": [
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nBert -> Uses -> Transformer\nBert -> Developed_by -> Google\nBert -> Has parameters -> 110 million\nBert -> Published by -> Devlin et al.\n\nKnowledge...",
+          "score": 0.784,
+          "page": 5,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 8286.3,
+      "api_latency_ms": 6244.4,
+      "status": "success"
+    },
+    {
+      "id": 19,
+      "question": "What is Flash Attention and what speedup does it achieve?",
+      "category": "single_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "reorders",
+        "attention computation",
+        "memory reads/writes",
+        "2-4x speedup"
+      ],
+      "expected_sources": [
+        "Transformer_Architecture.pdf"
+      ],
+      "actual_answer": "Flash Attention achieves a 2-4x speedup [Transformer_Architecture.pdf, 5].",
+      "actual_sources": [
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nAttention -> Calculated by -> Softmax function\nAttention -> Depends on -> V\nAttention -> Depends on -> K\nAttention -> Computed by -> Softmax\nAtte...",
+          "score": 1.0,
+          "page": 2,
+          "timestamp": null
+        },
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nFlash attention -> Achieves -> 2-4x speedup\nEfficient attention mechanisms -> Address -> Quadratic memory cost\n\nThe Transformer Architecture\nChap...",
+          "score": 0.719,
+          "page": 5,
+          "timestamp": null
+        },
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nTransformer architecture -> Uses -> Self-attention mechanisms\n\nThe Transformer Architecture\nThe Transformer Architecture\nNeuroSpace Evaluation Te...",
+          "score": 0.66,
+          "page": 1,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 4593.3,
+      "api_latency_ms": 2517.4,
+      "status": "success"
+    },
+    {
+      "id": 20,
+      "question": "When was the Google Knowledge Graph launched?",
+      "category": "single_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "2012"
+      ],
+      "expected_sources": [
+        "Knowledge_Graphs_in_AI.pdf"
+      ],
+      "actual_answer": "The Google Knowledge Graph was launched in 2012 [Knowledge_Graphs_in_AI.pdf, page 2].",
+      "actual_sources": [
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nGoogle -> Launched -> Google knowledge graph\nGoogle knowledge graph -> Launched in -> 2012\n\nKnowledge Graphs in AI Systems\nChapter 1: Introductio...",
+          "score": 1.0,
+          "page": 2,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 4507.4,
+      "api_latency_ms": 2463.5,
+      "status": "success"
+    },
+    {
+      "id": 21,
+      "question": "What is the difference between RDF triple stores and property graphs?",
+      "category": "single_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "key-value properties",
+        "nodes",
+        "edges",
+        "Neo4j",
+        "Cypher"
+      ],
+      "expected_sources": [
+        "Knowledge_Graphs_in_AI.pdf"
+      ],
+      "actual_answer": "Property graphs are generally considered more intuitive and performant for application developers than RDF triple stores [Knowledge_Graphs_in_AI.pdf, page 2].",
+      "actual_sources": [
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nRdf -> Is -> W3c standard\nRdf -> Represents -> Knowledge graph data\nNeo4j -> Is -> Property graph database\nNeo4j -> Uses -> Property graph model\n...",
+          "score": 0.727,
+          "page": 2,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 4484.9,
+      "api_latency_ms": 2431.2,
+      "status": "success"
+    },
+    {
+      "id": 22,
+      "question": "When did Neo4j introduce native vector search indexes?",
+      "category": "single_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "5.11"
+      ],
+      "expected_sources": [
+        "Knowledge_Graphs_in_AI.pdf"
+      ],
+      "actual_answer": "Neo4j introduced native vector search indexes in Neo4j 5.11 [Knowledge_Graphs_in_AI.pdf, page 3].",
+      "actual_sources": [
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nNeo4j 5.11 -> Introduced -> Native vector search indexes\nNeo4j 5.11 -> Introduced -> Native vector search indexes\nNeo4j 5.11 -> Allows -> Vector ...",
+          "score": 0.739,
+          "page": 3,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 4089.8,
+      "api_latency_ms": 2045.8,
+      "status": "success"
+    },
+    {
+      "id": 23,
+      "question": "What does the Cypher MERGE clause do?",
+      "category": "single_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "create-if-not-exists"
+      ],
+      "expected_sources": [
+        "Knowledge_Graphs_in_AI.pdf"
+      ],
+      "actual_answer": "The uploaded documents do not contain information about the Cypher MERGE clause.",
+      "actual_sources": [
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nCypher -> Is -> Query language\nNeo4j -> Is -> Property graph database\nNeo4j -> Is -> Graph database\nNeo4j -> Introduced -> Native vector search i...",
+          "score": 0.663,
+          "page": 2,
+          "timestamp": null
+        },
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nNeo4j 5.11 -> Allows -> Vector similarity queries\nNeo4j 5.11 -> Introduced -> Native vector search indexes\n\n(create-if-not-exists), WHERE (filter...",
+          "score": 0.609,
+          "page": 3,
+          "timestamp": null
+        },
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nEntity resolution -> Merges -> 'ml'\nEntity resolution -> Merges -> 'machine learning'\n\n(Person, Organization, Concept, Event, Place) and relation...",
+          "score": 0.579,
+          "page": 5,
+          "timestamp": null
+        },
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nKnowledge graphs -> Related to -> Entity resolution\n\nKnowledge Graphs in AI Systems\nKnowledge Graphs in AI Systems\nNeuroSpace Evaluation Test Cor...",
+          "score": 0.579,
+          "page": 1,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 4474.1,
+      "api_latency_ms": 2429.7,
+      "status": "success"
+    },
+    {
+      "id": 24,
+      "question": "What is SimpleLLMPathExtractor in LlamaIndex?",
+      "category": "single_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "prompts",
+        "LLM",
+        "extract",
+        "triples",
+        "text chunk"
+      ],
+      "expected_sources": [
+        "Knowledge_Graphs_in_AI.pdf"
+      ],
+      "actual_answer": "SimpleLLMPathExtractor is a component provided by LlamaIndex that extracts knowledge graph triples from text chunks. [Knowledge_Graphs_in_AI.pdf, 5]",
+      "actual_sources": [
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nGraphrag pipeline -> Consists of -> Retrieval\n\nKnowledge Graphs in AI Systems\nChapter 3: GraphRAG -- Combining Graphs with RAG\nGraphRAG integrate...",
+          "score": 1.0,
+          "page": 4,
+          "timestamp": null
+        },
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nLlamaindex -> Provides -> Simplellmpathextractor\n\nbut is slower and more expensive due to LLM inference costs.\nLlamaIndex provides the SimpleLLMP...",
+          "score": 1.0,
+          "page": 5,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 4673.3,
+      "api_latency_ms": 2575.6,
+      "status": "success"
+    },
+    {
+      "id": 25,
+      "question": "What Llama model variant extended the context window to 128K tokens?",
+      "category": "single_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "Llama 3.1"
+      ],
+      "expected_sources": [
+        "Transformer_Architecture.pdf"
+      ],
+      "actual_answer": "Llama 3.1 extended the context window to 128K tokens [Transformer_Architecture.pdf, page 4].",
+      "actual_sources": [
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nLlama models -> Use -> Grouped query attention\n\nbillion parameters and demonstrated remarkable few-shot learning abilities. GPT-4 (2023) is a mul...",
+          "score": 0.657,
+          "page": 4,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 4360.4,
+      "api_latency_ms": 2272.0,
+      "status": "success"
+    },
+    {
+      "id": 26,
+      "question": "How does GraphRAG improve upon traditional RAG for multi-hop questions?",
+      "category": "multi_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "knowledge graph",
+        "entity relationships",
+        "graph traversal",
+        "multi-hop"
+      ],
+      "expected_sources": [
+        "Fundamentals_of_RAG.pdf",
+        "Knowledge_Graphs_in_AI.pdf"
+      ],
+      "actual_answer": "GraphRAG improves upon traditional RAG for multi-hop questions by modeling the relationships between concepts, enabling answers that require connecting information across multiple documents [Knowledge_Graphs_in_AI.pdf, page 4]. This is achieved through graph traversal, which follows entity relationships to find structurally connected information [Knowledge_Graphs_in_AI.pdf, page 4].",
+      "actual_sources": [
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nGraphrag -> Used for -> Multi-hop question answering\n\nKnowledge Graphs in AI Systems\nChapter 3: GraphRAG -- Combining Graphs with RAG\nGraphRAG in...",
+          "score": 1.0,
+          "page": 4,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 4252.7,
+      "api_latency_ms": 2170.6,
+      "status": "success"
+    },
+    {
+      "id": 27,
+      "question": "How does the embedding model used in Neo4j's vector search relate to the chunking process used in RAG systems?",
+      "category": "multi_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "all-MiniLM-L6-v2",
+        "384",
+        "chunks",
+        "vector embeddings",
+        "cosine similarity"
+      ],
+      "expected_sources": [
+        "Fundamentals_of_RAG.pdf",
+        "Knowledge_Graphs_in_AI.pdf"
+      ],
+      "actual_answer": "The uploaded documents do not contain information about Neo4j's vector search.",
+      "actual_sources": [
+        {
+          "filename": "Fundamentals_of_RAG.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nRag -> Relies on -> Vector embeddings\n\ndocument embeddings using similarity search; and (3) Generation, where the retrieved context is\nconcatenat...",
+          "score": 0.709,
+          "page": 2,
+          "timestamp": null
+        },
+        {
+          "filename": "Fundamentals_of_RAG.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nFundamentals of retrieval-augmented generation -> Has chapter -> Chapter 3: chunking strategies\n\nFundamentals of Retrieval-Augmented Generation\nF...",
+          "score": 0.698,
+          "page": 1,
+          "timestamp": null
+        },
+        {
+          "filename": "Fundamentals_of_RAG.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nAll-minilm-l6-v2 -> Produces -> 384-dimensional vectors\n\nFundamentals of Retrieval-Augmented Generation\nChapter 2: Vector Embeddings and Similari...",
+          "score": 0.684,
+          "page": 3,
+          "timestamp": null
+        },
+        {
+          "filename": "Fundamentals_of_RAG.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nChunk overlap -> Ensures -> Information at chunk boundaries is not lost\n\ntopically related. More computationally expensive but produces the most ...",
+          "score": 0.669,
+          "page": 4,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 4345.6,
+      "api_latency_ms": 2282.0,
+      "status": "success"
+    },
+    {
+      "id": 28,
+      "question": "What activation function replaced sigmoid in modern networks and is also used in the Transformer feed-forward layers?",
+      "category": "multi_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "ReLU",
+        "Transformer",
+        "feed-forward"
+      ],
+      "expected_sources": [
+        "Neural_Networks_Essentials.pdf",
+        "Transformer_Architecture.pdf"
+      ],
+      "actual_answer": "ReLU (Rectified Linear Unit) is currently the most widely used activation function [Neural_Networks_Essentials.pdf, page 2].",
+      "actual_sources": [
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nGelu -> Used in -> Transformer models\n\nAward.\nActivation functions introduce non-linearity into the network. Common activation functions include:...",
+          "score": 1.0,
+          "page": 2,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 7634.0,
+      "api_latency_ms": 5571.9,
+      "status": "success"
+    },
+    {
+      "id": 29,
+      "question": "How did the transition from RNNs to Transformers relate to the vanishing gradient problem?",
+      "category": "multi_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "RNN",
+        "vanishing gradient",
+        "Transformer",
+        "self-attention",
+        "parallel"
+      ],
+      "expected_sources": [
+        "Neural_Networks_Essentials.pdf",
+        "Transformer_Architecture.pdf"
+      ],
+      "actual_answer": "The uploaded documents do not contain information about the transition from RNNs to Transformers.",
+      "actual_sources": [
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nRelu -> Mitigates -> Vanishing gradients\nGelu -> Used in -> Transformer models\nTransformer models -> Prefer -> Normalization\n\nAward.\nActivation f...",
+          "score": 0.722,
+          "page": 2,
+          "timestamp": null
+        },
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nSgd -> Updates weights using -> Gradients from mini-batch\nSgd -> Updates using -> Gradients\n\nNeural Networks and Deep Learning Essentials\nChapter...",
+          "score": 0.698,
+          "page": 3,
+          "timestamp": null
+        },
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nNeural networks -> Trained using -> Gradient descent\n\nNeural Networks and Deep Learning Essentials\nNeural Networks and Deep Learning Essentials\nN...",
+          "score": 0.657,
+          "page": 1,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 4555.8,
+      "api_latency_ms": 2455.0,
+      "status": "success"
+    },
+    {
+      "id": 30,
+      "question": "What optimizer is recommended for training Llama models and who created it?",
+      "category": "multi_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "AdamW",
+        "Loshchilov",
+        "Hutter",
+        "Llama"
+      ],
+      "expected_sources": [
+        "Neural_Networks_Essentials.pdf",
+        "Transformer_Architecture.pdf"
+      ],
+      "actual_answer": "The uploaded documents do not contain information about the optimizer recommended for training Llama models.",
+      "actual_sources": [
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nLlama -> Uses -> Rotary position embedding\nLlama -> Released by -> Meta ai\nLlama -> Released by -> Meta ai\n\nPositional Encoding is necessary beca...",
+          "score": 1.0,
+          "page": 3,
+          "timestamp": null
+        },
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nLlama models -> Use -> Grouped query attention\nLlama 3 -> Improved upon -> Llama 2\n\nbillion parameters and demonstrated remarkable few-shot learn...",
+          "score": 0.695,
+          "page": 4,
+          "timestamp": null
+        },
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nPre-trained models -> Serve as -> Foundations for downstream tasks\n\nNormalization is preferred for Transformer models because it normalizes acros...",
+          "score": 0.657,
+          "page": 5,
+          "timestamp": null
+        },
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nLlamaindex -> Provides -> Simplellmpathextractor\n\nbut is slower and more expensive due to LLM inference costs.\nLlamaIndex provides the SimpleLLMP...",
+          "score": 0.646,
+          "page": 5,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 4489.9,
+      "api_latency_ms": 2404.1,
+      "status": "success"
+    },
+    {
+      "id": 31,
+      "question": "How does Neo4j's native vector search enable the hybrid retrieval pipeline in GraphRAG?",
+      "category": "multi_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "vector similarity",
+        "graph traversal",
+        "db.index.vector.queryNodes",
+        "single database"
+      ],
+      "expected_sources": [
+        "Fundamentals_of_RAG.pdf",
+        "Knowledge_Graphs_in_AI.pdf"
+      ],
+      "actual_answer": "Neo4j's native vector search enables the hybrid retrieval pipeline in GraphRAG by allowing vector similarity queries alongside traditional graph pattern matching [Knowledge_Graphs_in_AI.pdf, page 3]. This is done via the CALL db.index.vector.queryNodes(indexName, k, queryVector) function [Knowledge_Graphs_in_AI.pdf, page 3].",
+      "actual_sources": [
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nNeo4j 5.11 -> Introduced -> Native vector search indexes\nNeo4j 5.11 -> Introduced -> Native vector search indexes\nNeo4j 5.11 -> Allows -> Vector ...",
+          "score": 0.72,
+          "page": 3,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 4070.0,
+      "api_latency_ms": 2009.5,
+      "status": "success"
+    },
+    {
+      "id": 32,
+      "question": "What is the relationship between the Chinchilla scaling laws and the design of Llama models?",
+      "category": "multi_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "Chinchilla",
+        "scaling",
+        "training data",
+        "model size",
+        "Llama",
+        "tokens"
+      ],
+      "expected_sources": [
+        "Transformer_Architecture.pdf"
+      ],
+      "actual_answer": "The Chinchilla scaling laws were published by Hoffmann et al. [Transformer_Architecture.pdf, 5]. However, there is no information in the provided context about the relationship between the Chinchilla scaling laws and the design of Llama models.",
+      "actual_sources": [
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nLlama -> Uses -> Rotary position embedding\nLlama -> Released by -> Meta ai\n\nPositional Encoding is necessary because self-attention is permutatio...",
+          "score": 1.0,
+          "page": 3,
+          "timestamp": null
+        },
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nTransformer -> Uses -> Multi-head attention\nTransformer -> Has -> 8 attention heads\nTransformer -> Follows -> Encoder-decoder structure\nTransform...",
+          "score": 1.0,
+          "page": 2,
+          "timestamp": null
+        },
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nChinchilla -> Trained on -> 1.4 trillion tokens\nChinchilla -> Outperformed -> Gopher model\n\nThe Transformer Architecture\nChapter 4: Scaling Laws ...",
+          "score": 1.0,
+          "page": 5,
+          "timestamp": null
+        },
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nTransformer architecture -> Is -> Architecture\n\nThe Transformer Architecture\nThe Transformer Architecture\nNeuroSpace Evaluation Test Corpus\nAuto-...",
+          "score": 1.0,
+          "page": 1,
+          "timestamp": null
+        },
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nLlama models -> Use -> Grouped query attention\nLlama 3 -> Improved upon -> Llama 2\n\nbillion parameters and demonstrated remarkable few-shot learn...",
+          "score": 0.702,
+          "page": 4,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 4665.8,
+      "api_latency_ms": 2622.5,
+      "status": "success"
+    },
+    {
+      "id": 33,
+      "question": "How does query decomposition in advanced RAG relate to multi-hop graph traversal?",
+      "category": "multi_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "sub-queries",
+        "multi-hop",
+        "graph traversal",
+        "combining information"
+      ],
+      "expected_sources": [
+        "Fundamentals_of_RAG.pdf",
+        "Knowledge_Graphs_in_AI.pdf"
+      ],
+      "actual_answer": "Query decomposition in advanced RAG breaks complex questions into simpler sub-queries, retrieves context for each, and synthesizes a final answer [Fundamentals_of_RAG.pdf, 5]. This is particularly effective for multi-hop questions that require combining information from multiple sources [Fundamentals_of_RAG.pdf, 5].",
+      "actual_sources": [
+        {
+          "filename": "Fundamentals_of_RAG.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nQuery decomposition -> Breaks -> Complex questions\n\nFundamentals of Retrieval-Augmented Generation\nChapter 4: Advanced RAG Techniques\nBasic RAG r...",
+          "score": 0.667,
+          "page": 5,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 4410.0,
+      "api_latency_ms": 2314.9,
+      "status": "success"
+    },
+    {
+      "id": 34,
+      "question": "How does the attention mechanism in Transformers compare to the way knowledge graphs represent relationships?",
+      "category": "multi_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "attention",
+        "relationships",
+        "tokens",
+        "entities",
+        "edges"
+      ],
+      "expected_sources": [
+        "Transformer_Architecture.pdf",
+        "Knowledge_Graphs_in_AI.pdf"
+      ],
+      "actual_answer": "The attention mechanism in Transformers computes relationships between all positions in a sequence simultaneously [Transformer_Architecture.pdf, page 2]. It uses three vectors: Query (Q), Key (K), and Value (V), to compute attention scores, which are then passed through a softmax function to obtain attention weights [Transformer_Architecture.pdf, page 2]. \n\nIn contrast, knowledge graphs represent relationships between concepts using GraphRAG, which integrates knowledge graph structure into the Retrieval-Augmented Generation pipeline [Knowledge_Graphs_in_AI.pdf, page 4]. GraphRAG models the relationships between concepts, enabling answers that require connecting information across multiple documents [Knowledge_Graphs_in_AI.pdf, page 4].",
+      "actual_sources": [
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nAttention -> Calculated by -> Softmax function\nAttention -> Depends on -> V\nAttention -> Depends on -> K\nAttention -> Computed by -> Softmax\nAtte...",
+          "score": 1.0,
+          "page": 2,
+          "timestamp": null
+        },
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nGraphrag -> Models -> Relationships between concepts\nGraphrag -> Integrates -> Knowledge graph structure\nGraphrag -> Incorporates -> Knowledge gr...",
+          "score": 0.718,
+          "page": 4,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 4304.8,
+      "api_latency_ms": 2165.9,
+      "status": "success"
+    },
+    {
+      "id": 35,
+      "question": "What role does layer normalization play in Transformers and why is it preferred over batch normalization?",
+      "category": "multi_hop",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "layer normalization",
+        "batch normalization",
+        "features",
+        "batch size",
+        "Transformer"
+      ],
+      "expected_sources": [
+        "Neural_Networks_Essentials.pdf",
+        "Transformer_Architecture.pdf"
+      ],
+      "actual_answer": "Layer normalization normalizes across features rather than across the batch, making it independent of batch size [Neural_Networks_Essentials.pdf, 5]. It is preferred for Transformer models because of this property [Neural_Networks_Essentials.pdf, 5].",
+      "actual_sources": [
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nBatch normalization -> Accelerates -> Training\nBatch normalization -> Proposed by -> Ioffe and szegedy\n\nNeural Networks and Deep Learning Essenti...",
+          "score": 1.0,
+          "page": 5,
+          "timestamp": null
+        },
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nTransformer models -> Prefer -> Normalization\n\nAward.\nActivation functions introduce non-linearity into the network. Common activation functions ...",
+          "score": 0.678,
+          "page": 2,
+          "timestamp": null
+        },
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nSgd -> Updates weights using -> Gradients from mini-batch\n\nNeural Networks and Deep Learning Essentials\nChapter 2: Training Neural Networks\nTrain...",
+          "score": 0.625,
+          "page": 3,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 4506.0,
+      "api_latency_ms": 2460.6,
+      "status": "success"
+    },
+    {
+      "id": 36,
+      "question": "How do LLM-based entity extractors compare to traditional NER for knowledge graph construction?",
+      "category": "cross_document",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "NER",
+        "spaCy",
+        "LLM",
+        "prompting",
+        "flexible",
+        "domain-specific"
+      ],
+      "expected_sources": [
+        "Knowledge_Graphs_in_AI.pdf"
+      ],
+      "actual_answer": "LLM-based entity extractors are more flexible than traditional Named Entity Recognition (NER) models, but are slower and more expensive due to LLM inference costs [Knowledge_Graphs_in_AI.pdf, 5]. Traditional NER models, like spaCy's en_core_web_trf, are limited to predefined entity types and cannot identify domain-specific concepts [Knowledge_Graphs_in_AI.pdf, 5].",
+      "actual_sources": [
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nEntity extraction -> Uses -> Named entity recognition\n\nKnowledge Graphs in AI Systems\nChapter 4: Entity Extraction and Graph Construction\nAutomat...",
+          "score": 1.0,
+          "page": 5,
+          "timestamp": null
+        },
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nKnowledge graphs -> Require -> Entity extraction\nKnowledge graphs in ai systems -> Has page -> 1\n\nKnowledge Graphs in AI Systems\nKnowledge Graphs...",
+          "score": 0.715,
+          "page": 1,
+          "timestamp": null
+        },
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nKnowledge graph -> Is -> Structured representation of real-world entities\n\nKnowledge Graphs in AI Systems\nChapter 1: Introduction to Knowledge Gr...",
+          "score": 0.714,
+          "page": 2,
+          "timestamp": null
+        },
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nGraphrag -> Models -> Relationships between concepts\n\nKnowledge Graphs in AI Systems\nChapter 3: GraphRAG -- Combining Graphs with RAG\nGraphRAG in...",
+          "score": 0.684,
+          "page": 4,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 4629.6,
+      "api_latency_ms": 2526.6,
+      "status": "success"
+    },
+    {
+      "id": 37,
+      "question": "Trace the complete pipeline from uploading a PDF to getting a graph-grounded answer in a GraphRAG system.",
+      "category": "cross_document",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "chunking",
+        "embedding",
+        "entity extraction",
+        "knowledge graph",
+        "retrieval",
+        "generation"
+      ],
+      "expected_sources": [
+        "Fundamentals_of_RAG.pdf",
+        "Knowledge_Graphs_in_AI.pdf"
+      ],
+      "actual_answer": "The complete pipeline from uploading a PDF to getting a graph-grounded answer in a GraphRAG system is as follows:\n\n1. Ingestion: Documents are processed into text chunks [Knowledge_Graphs_in_AI.pdf, page 3].\n2. Indexing: Text chunks are embedded as vectors and stored alongside graph nodes [Knowledge_Graphs_in_AI.pdf, page 3].\n3. Retrieval: Queries trigger two parallel retrieval paths:\n   a. Vector search: Finds the most semantically similar chunks [Knowledge_Graphs_in_AI.pdf, page 4].\n   b. Graph traversal: Follows entity relationships to find structurally connected information [Knowledge_Graphs_in_AI.pdf, page 4].\n4. Generation: Retrieved context from both paths is merged, deduplicated, and passed to the LLM [Knowledge_Graphs_in_AI.pdf, page 4].\n5. Post-processing steps (optional): Improve graph quality [Knowledge_Graphs_in_AI.pdf, page 5].\n\nNote: The uploaded documents do not explicitly mention the step of uploading a PDF, but it is implied as the starting point of the pipeline.",
+      "actual_sources": [
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nGraphrag pipeline -> Consists of -> Ingestion\nGraphrag pipeline -> Consists of -> Retrieval\nGraphrag pipeline -> Consists of -> Indexing\n\nKnowled...",
+          "score": 1.0,
+          "page": 4,
+          "timestamp": null
+        },
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nGraphrag applications -> Benefit from -> Combination of graph structure and vector search\n\n(create-if-not-exists), WHERE (filtering), and RETURN ...",
+          "score": 0.751,
+          "page": 3,
+          "timestamp": null
+        },
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nPost-processing steps -> Improve -> Graph quality\n\n(Person, Organization, Concept, Event, Place) and relationship types (MENTIONS, RELATED_TO,\nPA...",
+          "score": 0.729,
+          "page": 5,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 5039.7,
+      "api_latency_ms": 2939.8,
+      "status": "success"
+    },
+    {
+      "id": 38,
+      "question": "How did deep learning evolve from perceptrons to modern LLMs like GPT-4?",
+      "category": "cross_document",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "perceptron",
+        "backpropagation",
+        "CNN",
+        "RNN",
+        "Transformer",
+        "GPT"
+      ],
+      "expected_sources": [
+        "Neural_Networks_Essentials.pdf",
+        "Transformer_Architecture.pdf"
+      ],
+      "actual_answer": "Deep learning evolved from perceptrons to modern LLMs like GPT-4 through the development of neural networks with multiple layers. Perceptrons, proposed by Frank Rosenblatt in 1958, take multiple inputs and apply an activation function to produce an output [Neural_Networks_Essentials.pdf, page 2]. Modern neural networks stack multiple layers of neurons, including input, hidden, and output layers, and are called deep neural networks when they have two or more hidden layers [Neural_Networks_Essentials.pdf, page 2].\n\nThe field of training deep neural networks is called deep learning, which was popularized by Geoffrey Hinton, Yann LeCun, and Yoshua Bengio [Neural_Networks_Essentials.pdf, page 2]. Over time, deep learning has led to the development of modern LLMs like GPT-4, which has 1.76 trillion parameters [Neural_Networks_Essentials.pdf, page 3].\n\nAdamW, a variant of Adam, is commonly used to train most modern LLMs, including GPT-4 [Neural_Networks_Essentials.pdf, page 3].",
+      "actual_sources": [
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nPerceptron -> Takes -> Multiple inputs\nPerceptron -> Proposed by -> Frank rosenblatt\n\nNeural Networks and Deep Learning Essentials\nChapter 1: Fou...",
+          "score": 1.0,
+          "page": 2,
+          "timestamp": null
+        },
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nAdamw -> Used to train -> Gpt-4\nGpt-4 -> Has parameters -> 1.76 trillion\n\n- SGD (Stochastic Gradient Descent): Updates weights using gradients fr...",
+          "score": 0.666,
+          "page": 3,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 4569.4,
+      "api_latency_ms": 2513.1,
+      "status": "success"
+    },
+    {
+      "id": 39,
+      "question": "What are the computational efficiency techniques used across modern AI systems from model training to inference?",
+      "category": "cross_document",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "Flash Attention",
+        "quantization",
+        "MoE",
+        "dropout"
+      ],
+      "expected_sources": [
+        "Neural_Networks_Essentials.pdf",
+        "Transformer_Architecture.pdf"
+      ],
+      "actual_answer": "Quantization reduces model size by representing weights in lower precision [Transformer_Architecture.pdf, 5]. This technique achieves a 2-4x speedup without approximation [Transformer_Architecture.pdf, 5].\n\nSparse Attention: Only computes attention over a subset of token pairs, reducing complexity to O(n * sqrt(n)) or O(n * log(n)) [Transformer_Architecture.pdf, 5].\n\nSliding Window Attention: Used in Mistral models, limits attention to a fixed window of neighboring tokens [Transformer_Architecture.pdf, 5].\n\nMixture of Experts (MoE): Routes each token to a subset of specialized 'expert' sub-networks. Only a fraction of the total parameters are active for any given input, enabling models with trillions of total parameters to have inference costs comparable to much smaller dense models [Transformer_Architecture.pdf, 5].\n\nData Augmentation: Artificially increases training data variety through transformations like rotation, flipping, and color jittering (for images) or synonym replacement and back-translation (for text) [Neural_Networks_Essentials.pdf, 5].\n\nTransfer Learning: Pre-trains a model on a large general dataset, then fine-tunes on a smaller task-specific dataset [Neural_Networks_Essentials.pdf, 5].",
+      "actual_sources": [
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nQuantization -> Reduces model size by -> Representing weights in lower precision\n\nreads/writes, achieving 2-4x speedup without approximation.\n- S...",
+          "score": 1.0,
+          "page": 5,
+          "timestamp": null
+        },
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nNeural network -> Is -> Computational model\n\nNeural Networks and Deep Learning Essentials\nChapter 1: Foundations of Neural Networks\nA neural netw...",
+          "score": 0.644,
+          "page": 2,
+          "timestamp": null
+        },
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nPre-trained models -> Serve as -> Foundations for downstream tasks\n\nNormalization is preferred for Transformer models because it normalizes acros...",
+          "score": 0.637,
+          "page": 5,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 5579.5,
+      "api_latency_ms": 3458.4,
+      "status": "success"
+    },
+    {
+      "id": 40,
+      "question": "How do the concepts of transfer learning and RAG relate to each other as strategies for adapting language models?",
+      "category": "cross_document",
+      "answerable": true,
+      "expected_answer_keywords": [
+        "transfer learning",
+        "fine-tuning",
+        "RAG",
+        "retrieval",
+        "pre-trained"
+      ],
+      "expected_sources": [
+        "Neural_Networks_Essentials.pdf",
+        "Fundamentals_of_RAG.pdf"
+      ],
+      "actual_answer": "Transfer learning and RAG are two distinct strategies for adapting language models. Transfer learning reduces the amount of labeled data needed by pre-training a model on a large general dataset and then fine-tuning on a smaller task-specific dataset [Fundamentals_of_RAG.pdf, page 5]. On the other hand, RAG combines a pre-trained language model with a retrieval mechanism that fetches relevant documents from an external knowledge base before generating a response [Fundamentals_of_RAG.pdf, page 2]. While transfer learning focuses on fine-tuning a pre-trained model, RAG addresses a fundamental limitation of large language models by allowing their knowledge to be updated without expensive retraining through the retrieval of relevant documents [Fundamentals_of_RAG.pdf, page 2].",
+      "actual_sources": [
+        {
+          "filename": "Fundamentals_of_RAG.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nRag -> Differs from -> Fine-tuning\nRag -> Suitable for -> Knowledge-intensive tasks\nRag -> Keeps -> Model weights frozen\nRag -> Retrieves -> Rele...",
+          "score": 1.0,
+          "page": 2,
+          "timestamp": null
+        },
+        {
+          "filename": "Fundamentals_of_RAG.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nRe-ranking -> Applies -> Cross-encoder model\nBasic rag -> Retrieves -> Top-k chunks\n\nFundamentals of Retrieval-Augmented Generation\nChapter 4: Ad...",
+          "score": 0.65,
+          "page": 5,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 4553.5,
+      "api_latency_ms": 2455.6,
+      "status": "success"
+    },
+    {
+      "id": 41,
+      "question": "What is the capital of Sri Lanka?",
+      "category": "unanswerable",
+      "answerable": false,
+      "expected_answer_keywords": [
+        "do not contain"
+      ],
+      "expected_sources": [],
+      "actual_answer": "The uploaded documents do not contain information about the capital of Sri Lanka.",
+      "actual_sources": [
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nDropout -> Proposed by -> Srivastava et al.\n\nNeural Networks and Deep Learning Essentials\nChapter 4: Regularization and Generalization\nRegulariza...",
+          "score": 0.616,
+          "page": 5,
+          "timestamp": null
+        },
+        {
+          "filename": "Fundamentals_of_RAG.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nRecursive chunking -> Is default strategy in -> Langchain\n\nFundamentals of Retrieval-Augmented Generation\nChapter 3: Chunking Strategies\nBefore e...",
+          "score": 0.588,
+          "page": 4,
+          "timestamp": null
+        },
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nGpt-2 -> Has parameters -> 1.5 billion\n\nThe Transformer Architecture\nChapter 3: Modern Transformer Variants\nBERT (Bidirectional Encoder Represent...",
+          "score": 0.57,
+          "page": 4,
+          "timestamp": null
+        },
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nCypher -> Is -> Query language\n\nover time.\nThe Resource Description Framework (RDF) is a W3C standard for representing knowledge graph data. In\nR...",
+          "score": 0.57,
+          "page": 2,
+          "timestamp": null
+        },
+        {
+          "filename": "Fundamentals_of_RAG.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nRetrieval-augmented generation -> Combines -> Language model\n\nFundamentals of Retrieval-Augmented Generation\nChapter 1: What is Retrieval-Augment...",
+          "score": 0.566,
+          "page": 2,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 8563.5,
+      "api_latency_ms": 6513.7,
+      "status": "success"
+    },
+    {
+      "id": 42,
+      "question": "What programming language is TensorFlow written in?",
+      "category": "unanswerable",
+      "answerable": false,
+      "expected_answer_keywords": [
+        "do not contain"
+      ],
+      "expected_sources": [],
+      "actual_answer": "The uploaded documents do not contain information about the programming language TensorFlow is written in.",
+      "actual_sources": [
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nNeural networks and deep learning essentials -> Stored in -> Neural_networks_essentials.pdf\nNeural networks and deep learning essentials -> Has p...",
+          "score": 0.682,
+          "page": 1,
+          "timestamp": null
+        },
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nRecurrent neural networks -> Are designed for -> Sequential data\n\nNeural Networks and Deep Learning Essentials\nChapter 3: Convolutional and Recur...",
+          "score": 0.681,
+          "page": 4,
+          "timestamp": null
+        },
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nDeep neural networks -> Have -> Two or more hidden layers\nNeural network -> Is -> Computational model\n\nNeural Networks and Deep Learning Essentia...",
+          "score": 0.675,
+          "page": 2,
+          "timestamp": null
+        },
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nPre-trained models -> Serve as -> Foundations for downstream tasks\n\nNormalization is preferred for Transformer models because it normalizes acros...",
+          "score": 0.674,
+          "page": 5,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 4851.5,
+      "api_latency_ms": 2760.9,
+      "status": "success"
+    },
+    {
+      "id": 43,
+      "question": "How much does a Groq API subscription cost per month?",
+      "category": "unanswerable",
+      "answerable": false,
+      "expected_answer_keywords": [
+        "do not contain"
+      ],
+      "expected_sources": [],
+      "actual_answer": "The uploaded documents do not contain information about this topic.",
+      "actual_sources": [
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nGrus -> Proposed by -> Cho et al.\n\nRecurrent Neural Networks (RNNs) are designed for sequential data like text and time series. Standard\nRNNs suf...",
+          "score": 0.606,
+          "page": 4,
+          "timestamp": null
+        },
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nChinchilla -> Trained on -> 1.4 trillion tokens\n\nThe Transformer Architecture\nChapter 4: Scaling Laws and Efficiency\nThe Chinchilla scaling laws,...",
+          "score": 0.604,
+          "page": 5,
+          "timestamp": null
+        },
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nGpt-4 -> Has parameters -> 1.76 trillion\n\n- SGD (Stochastic Gradient Descent): Updates weights using gradients from a mini-batch. Simple\nbut can ...",
+          "score": 0.595,
+          "page": 3,
+          "timestamp": null
+        },
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nBert -> Has parameters -> 110 million\n\nKnowledge Graphs in AI Systems\nChapter 4: Entity Extraction and Graph Construction\nAutomated knowledge gra...",
+          "score": 0.591,
+          "page": 5,
+          "timestamp": null
+        },
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nOriginal transformer -> Has -> 65 million parameters\n\nPositional Encoding is necessary because self-attention is permutation-invariant -- it has ...",
+          "score": 0.589,
+          "page": 3,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 4361.5,
+      "api_latency_ms": 2312.4,
+      "status": "success"
+    },
+    {
+      "id": 44,
+      "question": "What is the latest version of Python as of 2026?",
+      "category": "unanswerable",
+      "answerable": false,
+      "expected_answer_keywords": [
+        "do not contain"
+      ],
+      "expected_sources": [],
+      "actual_answer": "The uploaded documents do not contain information about this topic.",
+      "actual_sources": [
+        {
+          "filename": "Fundamentals_of_RAG.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nRetrieval-augmented generation -> Introduced in -> 2020\n\nFundamentals of Retrieval-Augmented Generation\nChapter 1: What is Retrieval-Augmented Ge...",
+          "score": 0.635,
+          "page": 2,
+          "timestamp": null
+        },
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nLenet-5 -> Developed by -> Yann lecun\n\nNeural Networks and Deep Learning Essentials\nChapter 3: Convolutional and Recurrent Networks\nConvolutional...",
+          "score": 0.634,
+          "page": 4,
+          "timestamp": null
+        },
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nGpt-2 -> Has parameters -> 1.5 billion\n\nThe Transformer Architecture\nChapter 3: Modern Transformer Variants\nBERT (Bidirectional Encoder Represent...",
+          "score": 0.63,
+          "page": 4,
+          "timestamp": null
+        },
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nEntity resolution -> Merges -> 'machine learning'\n\n(Person, Organization, Concept, Event, Place) and relationship types (MENTIONS, RELATED_TO,\nPA...",
+          "score": 0.614,
+          "page": 5,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 3958.1,
+      "api_latency_ms": 1888.6,
+      "status": "success"
+    },
+    {
+      "id": 45,
+      "question": "Who is the CEO of OpenAI?",
+      "category": "unanswerable",
+      "answerable": false,
+      "expected_answer_keywords": [
+        "do not contain"
+      ],
+      "expected_sources": [],
+      "actual_answer": "The uploaded documents do not contain information about the CEO of OpenAI.",
+      "actual_sources": [
+        {
+          "filename": "Fundamentals_of_RAG.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nOpenai -> Developed -> Text-embedding-ada-002\n\nFundamentals of Retrieval-Augmented Generation\nChapter 2: Vector Embeddings and Similarity Search\n...",
+          "score": 0.695,
+          "page": 3,
+          "timestamp": null
+        },
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nGpt -> Developed by -> Openai\n\nPositional Encoding is necessary because self-attention is permutation-invariant -- it has no inherent notion of\nt...",
+          "score": 0.695,
+          "page": 3,
+          "timestamp": null
+        },
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nGrus -> Proposed by -> Cho et al.\n\nRecurrent Neural Networks (RNNs) are designed for sequential data like text and time series. Standard\nRNNs suf...",
+          "score": 0.601,
+          "page": 4,
+          "timestamp": null
+        },
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nAdam -> Combines -> Momentum\nAdam -> Published by -> Kingma and ba\n\n- SGD (Stochastic Gradient Descent): Updates weights using gradients from a m...",
+          "score": 0.593,
+          "page": 3,
+          "timestamp": null
+        },
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nTransformers -> Trained with -> Adam\n\na. Vector search: Finds the most semantically similar chunks.\nb. Graph traversal: Follows entity relationsh...",
+          "score": 0.593,
+          "page": 4,
+          "timestamp": null
+        },
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nDropout -> Proposed by -> Srivastava et al.\n\nNeural Networks and Deep Learning Essentials\nChapter 4: Regularization and Generalization\nRegulariza...",
+          "score": 0.591,
+          "page": 5,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 4360.1,
+      "api_latency_ms": 2297.5,
+      "status": "success"
+    },
+    {
+      "id": 46,
+      "question": "What is reinforcement learning from human feedback (RLHF)?",
+      "category": "unanswerable",
+      "answerable": false,
+      "expected_answer_keywords": [
+        "do not contain"
+      ],
+      "expected_sources": [],
+      "actual_answer": "The uploaded documents do not contain information about this topic.",
+      "actual_sources": [
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nTransfer learning -> Reduces -> Amount of labeled data needed\n\nNormalization is preferred for Transformer models because it normalizes across fea...",
+          "score": 0.607,
+          "page": 5,
+          "timestamp": null
+        },
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nEntity resolution -> Merges -> 'machine learning'\n\n(Person, Organization, Concept, Event, Place) and relationship types (MENTIONS, RELATED_TO,\nPA...",
+          "score": 0.604,
+          "page": 5,
+          "timestamp": null
+        },
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nBackpropagation -> Popularized by -> Hinton\nBackpropagation -> Popularized by -> Rumelhart\n\nNeural Networks and Deep Learning Essentials\nChapter ...",
+          "score": 0.6,
+          "page": 3,
+          "timestamp": null
+        },
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nGpt-3 -> Demonstrated -> Few-shot learning abilities\n\nThe Transformer Architecture\nChapter 3: Modern Transformer Variants\nBERT (Bidirectional Enc...",
+          "score": 0.599,
+          "page": 4,
+          "timestamp": null
+        },
+        {
+          "filename": "Fundamentals_of_RAG.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nFundamentals of retrieval-augmented generation -> Has page -> Page 1\nFundamentals of retrieval-augmented generation -> Has -> Neurospace evaluati...",
+          "score": 0.596,
+          "page": 1,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 4168.2,
+      "api_latency_ms": 2102.4,
+      "status": "success"
+    },
+    {
+      "id": 47,
+      "question": "How does Docker containerization work?",
+      "category": "unanswerable",
+      "answerable": false,
+      "expected_answer_keywords": [
+        "do not contain"
+      ],
+      "expected_sources": [],
+      "actual_answer": "The uploaded documents do not contain information about Docker containerization.",
+      "actual_sources": [
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nGpt -> Uses -> Learned positional embeddings\nLlama -> Uses -> Rotary position embedding\n\nPositional Encoding is necessary because self-attention ...",
+          "score": 0.531,
+          "page": 3,
+          "timestamp": null
+        },
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nScaling factor -> Prevents -> Large dot products\n\nweights, which are then used to compute a weighted sum of the value vectors.\nThe mathematical f...",
+          "score": 0.522,
+          "page": 2,
+          "timestamp": null
+        },
+        {
+          "filename": "Fundamentals_of_RAG.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nRag -> Relies on -> Vector embeddings\n\ndocument embeddings using similarity search; and (3) Generation, where the retrieved context is\nconcatenat...",
+          "score": 0.521,
+          "page": 2,
+          "timestamp": null
+        },
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nQuantization -> Reduces model size by -> Representing weights in lower precision\n\nreads/writes, achieving 2-4x speedup without approximation.\n- S...",
+          "score": 0.52,
+          "page": 5,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 4269.3,
+      "api_latency_ms": 2204.4,
+      "status": "success"
+    },
+    {
+      "id": 48,
+      "question": "What are the system requirements for running Stable Diffusion locally?",
+      "category": "unanswerable",
+      "answerable": false,
+      "expected_answer_keywords": [
+        "do not contain"
+      ],
+      "expected_sources": [],
+      "actual_answer": "The uploaded documents do not contain information about this topic.",
+      "actual_sources": [
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nPre-trained models -> Serve as -> Foundations for downstream tasks\n\nNormalization is preferred for Transformer models because it normalizes acros...",
+          "score": 0.573,
+          "page": 5,
+          "timestamp": null
+        },
+        {
+          "filename": "Fundamentals_of_RAG.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nImportant metrics -> Include -> End-to-end latency\n\nimportant metrics include retrieval precision (are the retrieved documents relevant?), retrie...",
+          "score": 0.57,
+          "page": 2,
+          "timestamp": null
+        },
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nSgd -> Updates weights using -> Gradients from mini-batch\n\nNeural Networks and Deep Learning Essentials\nChapter 2: Training Neural Networks\nTrain...",
+          "score": 0.562,
+          "page": 3,
+          "timestamp": null
+        },
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nFlash attention -> Achieves -> 2-4x speedup\n\nThe Transformer Architecture\nChapter 4: Scaling Laws and Efficiency\nThe Chinchilla scaling laws, pub...",
+          "score": 0.558,
+          "page": 5,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 4055.6,
+      "api_latency_ms": 1983.8,
+      "status": "success"
+    },
+    {
+      "id": 49,
+      "question": "Explain the MapReduce algorithm used in distributed computing.",
+      "category": "unanswerable",
+      "answerable": false,
+      "expected_answer_keywords": [
+        "do not contain"
+      ],
+      "expected_sources": [],
+      "actual_answer": "The uploaded documents do not contain information about the MapReduce algorithm used in distributed computing.",
+      "actual_sources": [
+        {
+          "filename": "Transformer_Architecture.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nChinchilla -> Trained on -> 1.4 trillion tokens\n\nThe Transformer Architecture\nChapter 4: Scaling Laws and Efficiency\nThe Chinchilla scaling laws,...",
+          "score": 0.586,
+          "page": 5,
+          "timestamp": null
+        },
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nGraphrag pipeline -> Consists of -> Ingestion\nGraphrag pipeline -> Consists of -> Retrieval\nGraphrag pipeline -> Consists of -> Indexing\nGraphrag...",
+          "score": 0.586,
+          "page": 4,
+          "timestamp": null
+        },
+        {
+          "filename": "Neural_Networks_Essentials.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nGpt-4 -> Has parameters -> 1.76 trillion\n\n- SGD (Stochastic Gradient Descent): Updates weights using gradients from a mini-batch. Simple\nbut can ...",
+          "score": 0.578,
+          "page": 3,
+          "timestamp": null
+        },
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nGraphrag applications -> Benefit from -> Combination of graph structure and vector search\n\n(create-if-not-exists), WHERE (filtering), and RETURN ...",
+          "score": 0.577,
+          "page": 3,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 4256.6,
+      "api_latency_ms": 2206.0,
+      "status": "success"
+    },
+    {
+      "id": 50,
+      "question": "What is the difference between SQL and NoSQL databases?",
+      "category": "unanswerable",
+      "answerable": false,
+      "expected_answer_keywords": [
+        "do not contain"
+      ],
+      "expected_sources": [],
+      "actual_answer": "The uploaded documents do not contain information about the difference between SQL and NoSQL databases.",
+      "actual_sources": [
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nKnowledge graphs -> Differ from -> Relational databases\n\nKnowledge Graphs in AI Systems\nKnowledge Graphs in AI Systems\nNeuroSpace Evaluation Test...",
+          "score": 0.641,
+          "page": 1,
+          "timestamp": null
+        },
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nNeo4j -> Enables -> Hybrid queries\nNeo4j -> Is -> Graph database\n\nover time.\nThe Resource Description Framework (RDF) is a W3C standard for repre...",
+          "score": 0.626,
+          "page": 2,
+          "timestamp": null
+        },
+        {
+          "filename": "Fundamentals_of_RAG.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nVector databases -> Include -> Pinecone\n\nhigh-dimensional space. A cosine similarity of 1.0 indicates identical direction (maximum similarity), w...",
+          "score": 0.624,
+          "page": 3,
+          "timestamp": null
+        },
+        {
+          "filename": "Knowledge_Graphs_in_AI.pdf",
+          "text_snippet": "Here are some facts extracted from the provided text:\n\nGraph traversal queries -> Excel at -> Multi-hop reasoning\n\n(create-if-not-exists), WHERE (filtering), and RETURN (projecting results).\nNeo4j 5.1...",
+          "score": 0.596,
+          "page": 3,
+          "timestamp": null
+        }
+      ],
+      "latency_ms": 4162.1,
+      "api_latency_ms": 2114.2,
+      "status": "success"
+    }
+  ]
+}
