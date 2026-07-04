@@ -15,10 +15,18 @@
 
 ## 🎬 Demo
 
-<!-- TODO: Replace with your YouTube/Loom link after recording -->
-> **▶️ [Watch the 90-second walkthrough →](YOUR_LINK_HERE)**
->
-> *Covers the problem, a live GraphRAG query, and what's happening under the hood.*
+<div align="center">
+  <img src="assets/screenshots/dashboard_overview.png" alt="NeuroSpace Dashboard" width="100%" />
+  <p><em>NeuroSpace Dashboard — Knowledge Graph, Chat Assistant & Ingestion Pipeline in one view</em></p>
+</div>
+
+This project runs locally via Docker. To try it:
+
+```bash
+git clone https://github.com/Diluksha-Upeka/Neurospace.git
+cd Neurospace && docker compose up --build -d
+# Open http://localhost:3000
+```
 
 ---
 
@@ -115,7 +123,7 @@ graph LR
 | **Frontend** | React, Next.js 14, TypeScript, TailwindCSS |
 | **Backend API** | Python 3.11+, FastAPI, Uvicorn |
 | **Data & Storage** | Neo4j (Property Graph + Vector Index), MinIO (S3 Object Storage) |
-| **AI / ML** | LlamaIndex (GraphRAG), Groq Llama 3.1 70B, Faster-Whisper, HuggingFace `all-MiniLM-L6-v2` |
+| **AI / ML** | LlamaIndex (GraphRAG), Groq Llama 3.3 70B, Faster-Whisper, HuggingFace `all-MiniLM-L6-v2` |
 | **Infrastructure** | Docker, Docker Compose |
 
 ---
@@ -125,29 +133,58 @@ graph LR
 ### 🎥 Multi-Modal Ingestion
 Process PDFs into recursive text chunks and MP4 videos into time-aligned, transcribed knowledge graph nodes.
 
-<!-- Screenshot: Upload flow showing a PDF or video being ingested -->
-<!-- ![Upload Flow](assets/screenshots/upload_flow.png) -->
+<div align="center">
+  <img src="assets/screenshots/upload_flow.png" alt="Upload Flow" width="90%" />
+  <p><em>Upload PDFs or MP4 videos — NeuroSpace handles the rest</em></p>
+</div>
 
 ### 🧠 Hybrid GraphRAG Retrieval
 Combines **Vector Similarity Search** (cosine distance on embeddings) with **LLM Synonym Graph Traversal** for pinpoint, context-aware answers with inline source citations.
 
-<!-- Screenshot: Chat interface showing a query, AI response, and cited sources -->
-<!-- ![Chat Interface](assets/screenshots/chat_interface.png) -->
+<div align="center">
+  <img src="assets/screenshots/chat_indexing_algorithms.png" alt="Chat — Indexing Algorithms" width="350" />
+  <p><em>Ask a question → get a cited, graph-grounded answer</em></p>
+</div>
+
+<details>
+<summary>More chat examples</summary>
+<br />
+<div align="center">
+  <img src="assets/screenshots/chat_language_model_problems.png" alt="Chat — Language Model Problems" width="350" />
+  <br /><br />
+  <img src="assets/screenshots/chat_language_model_types.png" alt="Chat — Language Model Types" width="350" />
+</div>
+</details>
 
 ### 🖥️ Interactive Knowledge Graph
 Explore the generated knowledge graph visually. Click on nodes and edges to inspect concepts. Open in a dedicated full-screen tab for deep exploration.
 
-<!-- Screenshot: Interactive graph visualization -->
-<!-- ![Knowledge Graph](assets/screenshots/knowledge_graph.png) -->
+<div align="center">
+  <img src="assets/screenshots/fullscreen_graph.png" alt="Full-Screen Knowledge Graph" width="90%" />
+  <p><em>Full-screen graph explorer — 223 nodes, 414 edges, all interconnected</em></p>
+</div>
+
+### 📄 Integrated Document Viewer
+View ingested PDFs and documents directly inside NeuroSpace while querying the knowledge graph and chatting with the assistant.
+
+<div align="center">
+  <img src="assets/screenshots/document_viewer.png" alt="Document Viewer" width="90%" />
+  <p><em>Built-in PDF viewer with synchronized chat and graph panels</em></p>
+</div>
 
 ### ⚡ Blazing Fast Inference
 Groq's Llama 3.1 70B delivers instant responses. Local HuggingFace embeddings (`all-MiniLM-L6-v2`) keep vector search zero-cost with no API calls.
 
 ### 🛡️ Anti-Hallucination Guardrails
-A strict prompt template forces the LLM to cite exact sources (`[filename, page X]` or `[filename, Xs-Ys]`). A post-processing citation filter strips any uncited sources from the response.
+A strict prompt template + post-processing citation filter grounds every answer in retrieved context. The system cites exact sources (`[filename, page X]` or `[filename, Xs-Ys]`) and strips uncited claims. See [EVALUATION.md](EVALUATION.md) for measured hallucination rejection rates.
 
 ### 📦 Fully Containerized
 One `docker compose up` sets up the entire pipeline — Frontend, Backend API, MinIO Storage, and Neo4j Database.
+
+<div align="center">
+  <img src="assets/screenshots/neo4j_browser.png" alt="Neo4j Browser" width="90%" />
+  <p><em>Neo4j Browser — 563 nodes, 971 relationships powering the knowledge graph</em></p>
+</div>
 
 ---
 
@@ -229,15 +266,9 @@ npm run dev
 
 ---
 
-## 🔗 Demo
+## 📊 Evaluation
 
-This project runs locally via Docker. To try it:
-
-```bash
-git clone https://github.com/Diluksha-Upeka/Neurospace.git
-cd Neurospace && docker compose up --build -d
-# Open http://localhost:3000
-```
+NeuroSpace includes a built-in evaluation framework that measures retrieval quality, hallucination rates, and latency across 50 test questions. See [EVALUATION.md](EVALUATION.md) for detailed results and methodology.
 
 ---
 
