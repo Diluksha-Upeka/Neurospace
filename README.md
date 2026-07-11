@@ -1,6 +1,6 @@
 <div align="center">
   <img src="assets/logo.png" alt="NeuroSpace Logo" width="300" />
-  <h1>🪐 NeuroSpace</h1>
+  <!-- <h1>🪐 NeuroSpace</h1> -->
   <p><strong>A Multi-Modal GraphRAG Engine That Turns Lectures Into Queryable Knowledge Graphs</strong></p>
 
   [![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
