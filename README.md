@@ -16,6 +16,13 @@
 ## 🎬 Demo
 
 <div align="center">
+  <video src="assets/neurospace_demo.mp4" width="100%" controls autoplay muted>
+    Your browser does not support the video tag.
+  </video>
+  <p><em>60-second walkthrough — problem statement, live GraphRAG query, knowledge graph exploration</em></p>
+</div>
+
+<div align="center">
   <img src="assets/screenshots/dashboard_overview.png" alt="NeuroSpace Dashboard" width="100%" />
   <p><em>NeuroSpace Dashboard — Knowledge Graph, Chat Assistant & Ingestion Pipeline in one view</em></p>
 </div>
@@ -134,7 +141,7 @@ graph LR
 Process PDFs into recursive text chunks and MP4 videos into time-aligned, transcribed knowledge graph nodes.
 
 <div align="center">
-  <img src="assets/screenshots/upload_flow.png" alt="Upload Flow" width="90%" />
+  <img src="assets/screenshots/upload_flow.png" alt="Upload Flow — drag-and-drop PDF/MP4 ingestion with real-time processing" width="90%" />
   <p><em>Upload PDFs or MP4 videos — NeuroSpace handles the rest</em></p>
 </div>
 
@@ -142,7 +149,7 @@ Process PDFs into recursive text chunks and MP4 videos into time-aligned, transc
 Combines **Vector Similarity Search** (cosine distance on embeddings) with **LLM Synonym Graph Traversal** for pinpoint, context-aware answers with inline source citations.
 
 <div align="center">
-  <img src="assets/screenshots/chat_indexing_algorithms.png" alt="Chat — Indexing Algorithms" width="350" />
+  <img src="assets/screenshots/chat_indexing_algorithms.png" alt="Chat — graph-aware response with inline citations" width="350" />
   <p><em>Ask a question → get a cited, graph-grounded answer</em></p>
 </div>
 
@@ -150,7 +157,7 @@ Combines **Vector Similarity Search** (cosine distance on embeddings) with **LLM
 <summary>More chat examples</summary>
 <br />
 <div align="center">
-  <img src="assets/screenshots/chat_language_model_problems.png" alt="Chat — Language Model Problems" width="350" />
+  <img src="assets/screenshots/chat_language_model_problems.png" alt="Chat — follow-up query with page-level citations" width="350" />
   <br /><br />
   <img src="assets/screenshots/chat_language_model_types.png" alt="Chat — Language Model Types" width="350" />
 </div>
@@ -160,15 +167,15 @@ Combines **Vector Similarity Search** (cosine distance on embeddings) with **LLM
 Explore the generated knowledge graph visually. Click on nodes and edges to inspect concepts. Open in a dedicated full-screen tab for deep exploration.
 
 <div align="center">
-  <img src="assets/screenshots/fullscreen_graph.png" alt="Full-Screen Knowledge Graph" width="90%" />
+  <img src="assets/screenshots/fullscreen_graph.png" alt="Full-screen knowledge graph — 223 nodes, 414 edges" width="90%" />
   <p><em>Full-screen graph explorer — 223 nodes, 414 edges, all interconnected</em></p>
 </div>
 
-### 📄 Integrated Document Viewer
-View ingested PDFs and documents directly inside NeuroSpace while querying the knowledge graph and chatting with the assistant.
+### 📄 In-App Document Viewer
+Click any citation to jump directly to the referenced page inside the embedded PDF viewer — no context-switching.
 
 <div align="center">
-  <img src="assets/screenshots/document_viewer.png" alt="Document Viewer" width="90%" />
+  <img src="assets/screenshots/document_viewer.png" alt="Document Viewer — PDF rendered inline with page navigation" width="90%" />
   <p><em>Built-in PDF viewer with synchronized chat and graph panels</em></p>
 </div>
 
@@ -181,8 +188,11 @@ A strict prompt template + post-processing citation filter grounds every answer 
 ### 📦 Fully Containerized
 One `docker compose up` sets up the entire pipeline — Frontend, Backend API, MinIO Storage, and Neo4j Database.
 
+### 🕸️ Neo4j Graph Database
+579 nodes and 1,000+ semantic relationships stored in Neo4j. The full entity-relationship schema is explorable via the Neo4j Browser.
+
 <div align="center">
-  <img src="assets/screenshots/neo4j_browser.png" alt="Neo4j Browser" width="90%" />
+  <img src="assets/screenshots/neo4j_browser.png" alt="Neo4j Browser — full knowledge graph with entity labels and relationship types" width="90%" />
   <p><em>Neo4j Browser — 563 nodes, 971 relationships powering the knowledge graph</em></p>
 </div>
 
