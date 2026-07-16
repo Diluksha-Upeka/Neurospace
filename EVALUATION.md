@@ -54,18 +54,6 @@
 
 ---
 
-## CV Rewrite (Before & After)
-
-**Old Bullet**:
-> "Engineered a hybrid query pipeline combining vector search with graph traversal, to minimize AI hallucinations."
-
-**New Actionable Bullets**:
-> - "Engineered a GraphRAG retrieval pipeline combining Neo4j graph traversal with vector search, increasing source retrieval precision by 5.6% over vector-only baselines."
-> - "Benchmarked LLM answer groundedness across 50 multi-hop questions, achieving a 0% hallucination rate on out-of-domain queries by enforcing strict context-bounding."
-> - "Optimized hybrid retrieval latency, maintaining a median query response time of 4.6s while simultaneously traversing knowledge graphs and embedding spaces."
-
----
-
 ## Graph Statistics
 
 | Metric | Value |
@@ -101,13 +89,3 @@ Results are saved to `eval/results/`.
 
 ---
 
-## CV-Ready Metrics
-
-After running the evaluation, use these metrics in your CV bullets:
-
-> "Engineered a hybrid query pipeline combining vector search with Neo4j graph traversal,
->  improving answer groundedness by **X%** on multi-hop questions vs. vector-only retrieval
->  (evaluated on a 50-question test set)."
-
-> "Built anti-hallucination guardrails achieving **X%** rejection rate on unanswerable
->  questions, with median query latency of **X ms**."
