@@ -25,6 +25,12 @@ from datetime import datetime
 
 import requests
 
+# Force UTF-8 output on Windows to avoid cp1252 emoji encoding errors
+if sys.stdout.encoding != "utf-8":
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if sys.stderr.encoding != "utf-8":
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 # Add project root to path for imports
 sys.path.insert(0, os.path.dirname(__file__))
 from metrics import compute_all_metrics
